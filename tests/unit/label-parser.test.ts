@@ -132,3 +132,28 @@ describe("release form", () => {
     expect(formulationMismatch(null, "delayed")).toBe(false);
   });
 });
+
+describe("route of administration", () => {
+  it("prefers by-mouth labels unless the entry names another route", async () => {
+    const { routeHint, routeMismatch, filterOrder } = await import("@/lib/labels/openfda");
+    expect(routeHint("Furosemide 20 mg tablet")).toBe("oral");
+    expect(routeHint("Insulin glargine pen, 10 units at bedtime")).toBe("other");
+    expect(routeHint("albuterol inhaler 2 puffs")).toBe("other");
+    expect(routeHint("timolol eye drops")).toBe("other");
+    expect(routeHint("Lisinopril 10 mg; take with water")).toBe("oral");
+    expect(routeMismatch("oral", ["INTRAMUSCULAR", "INTRAVENOUS"])).toBe(true);
+    expect(routeMismatch("oral", ["ORAL"])).toBe(false);
+    expect(routeMismatch("other", ["ORAL"])).toBe(true);
+    expect(routeMismatch("oral", [])).toBe(false);
+    expect(filterOrder("ir", true)).toEqual([
+      { form: "ir", oral: true },
+      { form: null, oral: true },
+      { form: "ir", oral: false },
+      { form: null, oral: false },
+    ]);
+    expect(filterOrder("er", false)).toEqual([
+      { form: "er", oral: false },
+      { form: null, oral: false },
+    ]);
+  });
+});

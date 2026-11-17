@@ -37,12 +37,13 @@ AI models sometimes state things that are not true, in a confident voice. With m
 
 Take these from `eval/results.md` after the latest run; do not round them up.
 
-- On 10 common medicines, every kept sentence's quote was found word for word in the label (the eval re-checks this against the raw FDA text, not the app's copy). Some sentences failed the first check and were fixed or removed; the eval says how many.
+- On 10 common medicines, every kept sentence's quote was found word for word in the label: 132 of 132 (the eval re-checks this against the raw FDA text, not the app's copy). 12 of 135 drafted sentences failed the first check; 10 were fixed on a second try and the rest removed.
+- A second model then judged whether each sentence says what its own quote says: 109 of 132 fully, the other 23 partly (usually an extra detail). None were judged unsupported. That is a model's opinion, which is why the quote is always shown.
 - The interaction finder, tested on 10 pairs checked by hand from the label text: 5 of its 6 flags were right, and it found 5 of the 6 real ones. It missed one because the label said "beta-adrenergic antagonists" instead of a phrase it knows, and it raised one false alarm.
 
 ## Questions judges ask
 
-**"What if the AI makes something up?"** It can, and sometimes it does on the first try. The checker deletes any sentence whose quote is not really in the label. What the checker cannot do is understand meaning, so the quote is always one click away and you can compare.
+**"What if the AI makes something up?"** It can, and sometimes it does on the first try. The checker deletes any sentence whose quote is not really in the label. What the checker cannot do is understand meaning. I measured that separately: about one sentence in six adds a small detail its quote does not state, so the quote is always one click away and you can compare.
 
 **"Is this medical advice?"** No. It shows what the FDA label says, in plainer words, and every screen says to confirm with a pharmacist or doctor. It never tells anyone to start, stop or change a medicine, and never shows a dose that you did not type.
 

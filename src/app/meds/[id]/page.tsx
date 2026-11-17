@@ -79,6 +79,13 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
         </Card>
       ) : (
         <>
+          {card.label.route_mismatch ? (
+            <div role="alert" className="rounded-xl border border-amber-300 bg-warn-soft p-3 text-sm text-warn" data-testid="route-warning">
+              <strong>Check the bottle.</strong> The FDA label found is for a medicine given by {card.label.routes.join(" or ").toLowerCase() || "another route"}, which may not be
+              how this one is taken. Instructions can differ between forms. If the name or dose says how it is given (tablet, injection, inhaler, cream), keep that in the entry
+              and remake the card.
+            </div>
+          ) : null}
           {card.label.formulation_mismatch ? (
             <div role="alert" className="rounded-xl border border-amber-300 bg-warn-soft p-3 text-sm text-warn" data-testid="formulation-warning">
               <strong>Check the bottle.</strong>{" "}

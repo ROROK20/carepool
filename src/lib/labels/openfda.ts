@@ -20,8 +20,12 @@ import { parseLabel, stripClassSuffix, type Formulation, type ParsedLabel } from
  *     2026-11-17 the newest "METFORMIN HYDROCHLORIDE" label was extended-release
  *     (whose card says "take with the evening meal"). So unless the family
  *     typed ER/XR/XL/SR/"extended", the query excludes extended-release labels;
- *     if they did, it asks for one. Either falls back to any label, and the
- *     card warns when the label's form does not match what was typed.
+ *     if they did, it asks for one. The route is handled the same way: the
+ *     newest immediate-release furosemide label was the injection, so the
+ *     query asks for openfda.route "ORAL" unless the entry names another route
+ *     (injection, inhaler, patch, cream, drops, ...). Each filter falls back
+ *     to a looser query, and the card warns when the label's release form or
+ *     route does not match what was typed.
  *  3. Classes. Most labels in the label endpoint carry no
  *     `openfda.pharm_class_epc` (none of 154 lisinopril labels did on
  *     2026-11-17), so when the label has none we ask openFDA's NDC directory,
@@ -81,6 +85,23 @@ export interface ResolvedLabel {
   formulation_wanted: "extended" | null;
   /** True when the label's release form differs from what was typed (shown as a warning). */
   formulation_mismatch: boolean;
+  /** "oral" unless the typed entry names another route. */
+  route_wanted: "oral" | "other";
+  /** True when an oral medicine got a non-oral label or the reverse (shown as a warning). */
+  route_mismatch: boolean;
+}
+
+/** The entry names a route other than by mouth: the family typed an injection, inhaler, patch, cream, drops... */
+export function routeHint(text: string): "oral" | "other" {
+  return /\b(?:inject\w*|shots?|IV|IM|intravenous|intramuscular|subcutaneous\w*|sub-?q|pens?|inhal\w*|puffs?|nebuli\w*|patch(?:es)?|transdermal|creams?|ointments?|gels?|lotions?|topical\w*|eye|ophthalmic|ear|otic|nasal|sprays?|suppositor\w*|rectal|vaginal|drops)\b/i.test(text)
+    ? "other"
+    : "oral";
+}
+
+export function routeMismatch(wanted: "oral" | "other", routes: string[]): boolean {
+  if (routes.length === 0) return false;
+  const oral = routes.includes("ORAL");
+  return wanted === "oral" ? !oral : oral && routes.length === 1;
 }
 
 /** "ER", "XR", "XL", "SR", "CR", "LA", "extended", "24 hr", "sustained": the family typed an extended-release form. */
@@ -203,14 +224,30 @@ function countUrl(field: "generic_name" | "brand_name", query: string): string {
   return `${BASE}?search=${q(`openfda.${field}`, query)}&count=openfda.${field}.exact&limit=100`;
 }
 
-type Variant = "ir" | "er" | "any";
+interface Filters {
+  form: "ir" | "er" | null;
+  oral: boolean;
+}
 
-function labelUrl(field: "generic_name" | "brand_name", term: string, variant: Variant): string {
+function variantName(f: Filters): string {
+  return [f.form, f.oral ? "oral" : null].filter(Boolean).join("-");
+}
+
+function labelUrl(field: "generic_name" | "brand_name", term: string, f: Filters): string {
   const parts = [q(`openfda.${field}.exact`, term), "_exists_:indications_and_usage"];
   const er = encodeURIComponent('"extended-release"');
-  if (variant === "ir") parts.push(`NOT+description:${er}`, `NOT+indications_and_usage:${er}`);
-  if (variant === "er") parts.push(`description:${er}`);
+  if (f.form === "ir") parts.push(`NOT+description:${er}`, `NOT+indications_and_usage:${er}`);
+  if (f.form === "er") parts.push(`description:${er}`);
+  if (f.oral) parts.push(`openfda.route:${encodeURIComponent('"ORAL"')}`);
   return `${BASE}?search=${parts.join("+AND+")}&sort=effective_time:desc&limit=1`;
+}
+
+/** Queries from strictest to loosest: form and route, route only, form only, anything. */
+export function filterOrder(form: "ir" | "er", oral: boolean): Filters[] {
+  const all: Filters[] = oral
+    ? [{ form, oral: true }, { form: null, oral: true }, { form, oral: false }, { form: null, oral: false }]
+    : [{ form, oral: false }, { form: null, oral: false }];
+  return all;
 }
 
 const NDC = "https://api.fda.gov/drug/ndc.json";
@@ -262,6 +299,7 @@ function firstResult(res: CachedResponse): Record<string, unknown> | null {
 export async function resolveLabel(query: string, opts: { formulationText?: string } = {}): Promise<ResolvedLabel> {
   const name = baseName(query);
   const wanted = formulationHint(`${query} ${opts.formulationText ?? ""}`);
+  const route = routeHint(`${query} ${opts.formulationText ?? ""}`);
   if (!name) throw new LabelNotFoundError(query);
   const files: string[] = [];
 
@@ -275,10 +313,11 @@ export async function resolveLabel(query: string, opts: { formulationText?: stri
 
     let res: CachedResponse | null = null;
     let raw: Record<string, unknown> | null = null;
-    for (const variant of [wanted === "extended" ? "er" : "ir", "any"] as Variant[]) {
-      const labelFile = `label-${kind}${variant === "any" ? "" : `-${variant}`}__${slug(term)}.json`;
+    for (const filters of filterOrder(wanted === "extended" ? "er" : "ir", route === "oral")) {
+      const variant = variantName(filters);
+      const labelFile = `label-${kind}${variant ? `-${variant}` : ""}__${slug(term)}.json`;
       files.push(labelFile);
-      res = await cachedGet(labelFile, labelUrl(field, term, variant));
+      res = await cachedGet(labelFile, labelUrl(field, term, filters));
       raw = firstResult(res);
       if (raw) break;
     }
@@ -303,6 +342,8 @@ export async function resolveLabel(query: string, opts: { formulationText?: stri
       class_source: classSource,
       formulation_wanted: wanted,
       formulation_mismatch: formulationMismatch(wanted, label.formulation),
+      route_wanted: route,
+      route_mismatch: routeMismatch(route, label.routes),
     };
   }
   throw new LabelNotFoundError(query);

@@ -35,6 +35,8 @@ export interface ParsedLabel {
   pharm_classes: string[];
   /** Release form, read from the label's description, indications and package panel. */
   formulation: Formulation;
+  /** Routes of administration from openFDA, e.g. ["ORAL"] or ["INTRAMUSCULAR", "INTRAVENOUS"]. */
+  routes: string[];
   sections: Record<string, LabelSection>;
 }
 
@@ -105,6 +107,7 @@ export function parseLabel(raw: unknown): ParsedLabel {
     manufacturer: strings(openfda.manufacturer_name)[0] ?? null,
     pharm_classes: uniq(strings(openfda.pharm_class_epc).map(stripClassSuffix)),
     formulation: labelFormulation(r),
+    routes: uniq(strings(openfda.route)).map((x) => x.toUpperCase()),
     sections,
   };
 }

@@ -33,6 +33,8 @@ const resolved: ResolvedLabel = {
   class_source: "ndc",
   formulation_wanted: null,
   formulation_mismatch: false,
+  route_wanted: "oral",
+  route_mismatch: false,
 };
 const resolve = async () => resolved;
 

@@ -58,6 +58,8 @@ export interface CardLabelInfo {
   formulation: "extended" | "delayed" | "immediate";
   formulation_wanted: "extended" | null;
   formulation_mismatch: boolean;
+  routes: string[];
+  route_mismatch: boolean;
   dailymed_url: string;
   cache_files: string[];
   fetched_at: string;
@@ -123,6 +125,8 @@ function labelInfo(r: ResolvedLabel): CardLabelInfo {
     formulation: l.formulation,
     formulation_wanted: r.formulation_wanted,
     formulation_mismatch: r.formulation_mismatch,
+    routes: l.routes,
+    route_mismatch: r.route_mismatch,
     dailymed_url: dailyMedUrl(l.set_id),
     cache_files: r.cache_files,
     fetched_at: r.fetched_at,

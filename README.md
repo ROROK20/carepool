@@ -10,7 +10,7 @@
 
 | | |
 |---|---|
-| **Real FDA labels** | Each medicine's label comes from the [openFDA drug label API](https://open.fda.gov/apis/drug/label/) (free, no key). Carepool picks the exact single-ingredient label in the release form you have (a plain `limit=1` search returned the lisinopril + hydrochlorothiazide combination label, and the newest "metformin" label was extended-release). Every response is cached in `data/label-cache/`, so the demo is reproducible and works offline. Each card shows the label's version and effective date and links to DailyMed. |
+| **Real FDA labels** | Each medicine's label comes from the [openFDA drug label API](https://open.fda.gov/apis/drug/label/) (free, no key). Carepool picks the exact single-ingredient label, in the release form and route you have (a plain `limit=1` search returned the lisinopril + hydrochlorothiazide combination label, the newest "metformin" label was extended-release, and the newest immediate-release "furosemide" label was the injection). If it has to fall back, the card says "Check the bottle". Every response is cached in `data/label-cache/`, so the demo is reproducible and works offline. Each card shows the label's version and effective date and links to DailyMed. |
 | **Cards that cite** | Four parts: what it is for, how to take it, common side effects, warnings. Every sentence names a label section and quotes it. The checker removes a sentence if the quote is not in that section word for word, if the section does not fit that part of the card, if a number in the sentence is not in its quote, if it makes more than one statement, or if it mentions a dose amount or how often to take it. Failed sentences get one repair round, then a review pass may only reword (each reworded sentence is checked again). |
 | **Interaction flags** | Code, not the model, reads each label's Drug Interactions, Boxed Warning, Contraindications and Warnings sections for every other medicine's name, brand or drug class, and quotes the sentence it found. The model may explain a flag in plain words (each sentence with its own checked quote); it cannot create one. |
 | **Schedule from your words** | The schedule builder's only input is what you typed. It never takes a dose from a label, never suggests one, and never picks a time: a medicine with no clock time goes to "no time entered". |
@@ -85,15 +85,15 @@ Latest run (2026-11-17, `claude-sonnet-5-5` writes, `claude-opus-5-5` reviews, l
 
 | | Result |
 |---|---|
-| Medicines | 10 common medicines for older adults; 10 of 10 cards produced in 1.6 min |
-| Sentences drafted / kept | 135 / 133 |
-| Kept sentences whose quote is word for word in the label | **133 / 133**. That is 100% by construction (the checker removes anything else); the eval re-checks it against the raw openFDA field in the cache file, and all 133 are also byte-exact. |
-| Failed the first check | 13: 12 cited a label section that does not fit that part of the card, 1 carried a dose. One repair round fixed 11; 2 were removed. |
-| Review pass | 94 rewordings accepted, 3 reverted because the reworded sentence failed the checker |
+| Medicines | 10 common medicines for older adults; 10 of 10 cards produced in 3.0 min |
+| Sentences drafted / kept | 135 / 132 |
+| Kept sentences whose quote is word for word in the label | **132 / 132**. That is 100% by construction (the checker removes anything else); the eval re-checks it against the raw openFDA field in the cache file, and all 132 are also byte-exact. |
+| Failed the first check | 12: 10 cited a label section that does not fit that part of the card, 1 carried a dose, 1 had a number its quote did not. One repair round fixed 10; 2 were removed, plus 1 duplicate of another sentence's quote. |
+| Review pass | 103 rewordings accepted, 1 reverted because the reworded sentence failed the checker |
+| Meaning check (a second model judges each sentence against its own quote) | **109 / 132 (83%) fully supported**, 23 partly supported (the sentence adds a detail, cause or condition its quote does not state), 0 unsupported. Every partial one is listed with the reason in `eval/results.md`. A model's opinion, not a pharmacist's. |
 | Interaction matcher, 10 hand-checked pairs | **precision 5/6 (83%), recall 5/6 (83%)**. One miss (the label said "beta-adrenergic antagonists"), one false alarm ("increase diuretics" in heart-failure advice). |
-| Not measured yet | Whether each plain sentence means exactly what its quote says |
 
-The real end-to-end run on the Nana Rosa household (`npm run live`, recorded in `data/demo/live-run-nana-rosa.json`): 5 of 5 cards, 66 of 66 kept quotes verbatim, 2 sentences removed by the checker (both on metformin: one quoted the label's starting-dose sentence, one cited the wrong section), the 3 label-stated pairs flagged, 5 flag explanations kept, 89 seconds.
+The real end-to-end run on the Nana Rosa household (`npm run live`, recorded in `data/demo/live-run-nana-rosa.json`): 5 of 5 cards, 65 of 65 kept quotes verbatim, 3 sentences removed by the checker (all on metformin: two cited a section that does not fit their part of the card, one repeated another sentence's quote), the 3 label-stated pairs flagged, 5 flag explanations kept, 87 seconds.
 
 ## AI disclosure
 
@@ -129,9 +129,9 @@ Everything else (label lookup and caching, label parser, interaction matcher, sc
 
 ## Limits
 
-- **Meaning is not machine-checked.** The checker proves each quote is real, in the right section, carries no dose, and contains every number the sentence uses. It cannot prove the plain sentence means exactly what its quote says. That is why the quote is one click away on every sentence.
+- **Meaning is not machine-proved.** The checker proves each quote is real, in the right section, carries no dose, and contains every number the sentence uses. It cannot prove the plain sentence means exactly what its quote says: in the evaluation a second model judged 23 of 132 kept sentences (17%) only partly supported, usually an added detail or reason, such as "because chest pain or a heart attack can happen" next to a quote that only says not to stop without the doctor's advice. That is why the quote is one click away on every sentence, and why the next step is pharmacist raters.
 - **The interaction matcher finds words, not pharmacology.** It can miss an interaction a label describes in other words (it missed "beta-adrenergic antagonists" in the evaluation), and it can flag a mention that is not about using two medicines together (the word "diuretics" in heart-failure advice). The broadest class phrase, "diuretic", produces the most unverified flags. A flag is a question for the pharmacist.
 - **Labels are not complete.** No flag does not mean safe together. Only the label's text is used: no clinical databases, no dosing logic.
-- **Label choice is automatic.** Carepool picks the newest single-ingredient label in the release form you typed. Generic labels from different manufacturers usually match, but not always word for word; the card shows which label it used.
+- **Label choice is automatic.** Carepool picks the newest single-ingredient label in the release form and route you typed (by mouth unless the entry says injection, inhaler, patch, cream or drops). Generic labels from different manufacturers usually match, but not always word for word; the card shows which label it used.
 - **Local and single-household.** No accounts, no sync between phones; "each person's today page" means each person opens it on this computer or local network. The model step needs a signed-in Claude Code CLI on this computer; without it, use the recorded cards or mock mode.
 - **The evaluation is small.** Ten medicines and ten hand-checked pairs, checked by the build agent reading label text, not by a pharmacist.
