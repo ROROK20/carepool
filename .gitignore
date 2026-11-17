@@ -1,0 +1,42 @@
+# dependencies
+node_modules/
+
+# next.js
+.next/
+out/
+
+# build output
+build/
+dist/
+*.tsbuildinfo
+
+# env files (never commit secrets; .env.example is the template)
+.env
+.env.*
+!.env.example
+
+# local databases (rebuilt by `npm run setup`)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/*.db-journal
+
+# tests
+coverage/
+test-results/
+playwright-report/
+blob-report/
+playwright/.cache/
+
+# demo recording work files (the final cut lives in demo/out and is not committed either)
+demo/work/
+demo/out/
+
+# logs
+npm-debug.log*
+*.log
+
+# os / editor
+.DS_Store
+.vscode/
+.idea/
