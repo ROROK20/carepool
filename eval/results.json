@@ -1,11 +1,11 @@
 {
- "generated_at": "2026-11-17T15:37:25.030Z",
+ "generated_at": "2026-11-17T15:59:57.322Z",
  "provider": "claude-cli",
  "models": [
   "claude-sonnet-5-5",
   "claude-opus-5-5"
  ],
- "minutes": 1.8,
+ "minutes": 1.6,
  "cards": [
   {
    "name": "lisinopril",
@@ -31,22 +31,26 @@
      "Angiotensin Converting Enzyme Inhibitor"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=bf59ff89-a9fa-4fe3-b167-a5d0cba9e438",
     "cache_files": [
      "count-generic__lisinopril.json",
-     "label-generic__lisinopril.json",
+     "label-generic-ir__lisinopril.json",
      "ndc-names__lisinopril.json",
      "ndc-classes__lisinopril.json"
     ],
-    "fetched_at": "2026-11-17T15:08:57.318Z"
+    "fetched_at": "2026-11-17T15:57:44.850Z"
    },
    "stats": {
-    "generated": 14,
-    "passed_first_check": 14,
+    "generated": 13,
+    "passed_first_check": 13,
+    "first_check_failures": {},
     "recovered_by_repair": 0,
     "repair_rounds": 0,
-    "kept": 14,
-    "verbatim_kept": 14
+    "kept": 13,
+    "verbatim_kept": 13
    },
    "review": {
     "status": "applied",
@@ -60,35 +64,35 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "Lisinopril is used to lower high blood pressure.",
+     "text": "Lisinopril is used to treat high blood pressure.",
      "section": "indications_and_usage",
      "quote": "Lowering blood pressure lowers the risk of fatal and non-fatal cardiovascular events, primarily strokes and myocardial infarctions."
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used to ease signs and symptoms of heart failure.",
+     "text": "It is also used to ease the signs and symptoms of systolic heart failure.",
      "section": "indications_and_usage",
      "quote": "Lisinopril tablets, USP, are indicated to reduce signs and symptoms of systolic heart failure"
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "It is also used to lower the risk of death after a heart attack in patients who are stable.",
+     "text": "After a heart attack, it is used to lower the risk of death in patients whose condition is stable.",
      "section": "indications_and_usage",
      "quote": "Lisinopril tablets, USP, are indicated for the reduction of mortality in treatment of hemodynamically stable patients within 24 hours of acute myocardial infarction."
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "The doctor adjusts the amount based on how blood pressure responds.",
+     "text": "The doctor sets the dose based on how the blood pressure responds.",
      "section": "dosage_and_administration",
      "quote": "Dosage should be adjusted according to blood pressure response."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Do not use salt substitutes that contain potassium unless the doctor says it is okay.",
+     "text": "Please ask the doctor before using salt substitutes that contain potassium.",
      "section": "information_for_patients",
      "quote": "Tell patients not to use salt substitutes containing potassium without consulting their physician."
     },
@@ -102,68 +106,61 @@
     {
      "id": "s7",
      "part": "side_effects",
-     "text": "For high blood pressure, common side effects were headache, dizziness, and cough.",
+     "text": "People taking it for high blood pressure may get a headache, feel dizzy, or have a cough.",
      "section": "adverse_reactions",
-     "quote": "Hypertension: headache, dizziness and cough"
+     "quote": "Hypertension: headache, dizziness and cough (6.1)"
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "For heart failure, common side effects were low blood pressure and chest pain.",
+     "text": "People taking it for heart failure may have low blood pressure or chest pain.",
      "section": "adverse_reactions",
-     "quote": "Heart Failure: hypotension and chest pain"
+     "quote": "Heart Failure: hypotension and chest pain (6.1)"
     },
     {
      "id": "s9",
-     "part": "side_effects",
-     "text": "Feeling tired or weak can also happen.",
-     "section": "adverse_reactions",
-     "quote": "Body as a whole : Fatigue, asthenia, orthostatic effects."
-    },
-    {
-     "id": "s10",
      "part": "side_effects",
      "text": "Tell the doctor about any light-headedness, especially in the first few days.",
      "section": "information_for_patients",
      "quote": "Tell patients to report light-headedness especially during the first few days of therapy."
     },
     {
-     "id": "s11",
+     "id": "s10",
      "part": "warnings",
-     "text": "Lisinopril can seriously harm an unborn baby, so pregnancy matters.",
+     "text": "This medicine can seriously harm or kill an unborn baby, so tell the doctor right away about a pregnancy.",
      "section": "boxed_warning",
      "quote": "Drugs that act directly on the renin-angiotensin system can cause injury and death to the developing fetus"
     },
     {
-     "id": "s12",
+     "id": "s11",
      "part": "warnings",
-     "text": "Tell the doctor right away about swelling of the face, lips, or tongue, or trouble swallowing or breathing.",
+     "text": "Get help right away for swelling of the face, lips, or tongue, or for trouble swallowing or breathing.",
      "section": "information_for_patients",
      "quote": "Tell patients to report immediately any signs or symptoms suggesting angioedema (swelling of face, extremities, eyes, lips, tongue, difficulty in swallowing or breathing)"
     },
     {
-     "id": "s13",
+     "id": "s12",
      "part": "warnings",
      "text": "Tell the doctor soon about signs of infection, like a sore throat or fever.",
      "section": "information_for_patients",
-     "quote": "Tell patients to report promptly any indication of infection (e.g., sore throat, fever), which may be a sign of leukopenia/neutropenia."
+     "quote": "Tell patients to report promptly any indication of infection (e.g., sore throat, fever)"
     },
     {
-     "id": "s14",
+     "id": "s13",
      "part": "warnings",
-     "text": "If fainting happens, talk with the prescribing doctor.",
-     "section": "information_for_patients",
-     "quote": "If actual syncope occurs, tell the patient to discontinue the drug until they have consulted with the prescribing physician."
+     "text": "Some older people may be more sensitive to this medicine.",
+     "section": "geriatric_use",
+     "quote": "greater sensitivity of some older individuals cannot be ruled out."
     }
    ],
-   "verbatim_raw": 14,
-   "byte_exact_raw": 14,
+   "verbatim_raw": 13,
+   "byte_exact_raw": 13,
    "flagged_partners": [
     "furosemide",
     "metformin",
     "spironolactone"
    ],
-   "seconds": 64.552
+   "seconds": 56.529
   },
   {
    "name": "spironolactone",
@@ -189,26 +186,32 @@
      "Aldosterone Antagonist"
     ],
     "class_source": "label",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=37066684-5b63-4d3e-ae6a-08c4b3edd7aa",
     "cache_files": [
      "count-generic__spironolactone.json",
-     "label-generic__spironolactone.json"
+     "label-generic-ir__spironolactone.json"
     ],
-    "fetched_at": "2026-11-17T15:08:58.439Z"
+    "fetched_at": "2026-11-17T15:57:45.043Z"
    },
    "stats": {
-    "generated": 13,
-    "passed_first_check": 13,
+    "generated": 14,
+    "passed_first_check": 14,
+    "first_check_failures": {},
     "recovered_by_repair": 0,
     "repair_rounds": 0,
-    "kept": 13,
-    "verbatim_kept": 13
+    "kept": 14,
+    "verbatim_kept": 14
    },
    "review": {
     "status": "applied",
-    "changed": 12,
-    "reverted": 0,
-    "reverted_ids": [],
+    "changed": 10,
+    "reverted": 1,
+    "reverted_ids": [
+     "s10"
+    ],
     "note": null
    },
    "removed": [],
@@ -216,56 +219,56 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "This medicine is used to treat serious heart failure.",
+     "text": "Spironolactone is used to treat serious heart failure.",
      "section": "indications_and_usage",
      "quote": "The treatment of NYHA Class III-IV heart failure and reduced ejection fraction to increase survival, manage edema, and to reduce the need for hospitalization for heart failure"
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It can also be added to other medicines to help lower high blood pressure.",
+     "text": "It is also used along with other medicines to lower high blood pressure.",
      "section": "indications_and_usage",
      "quote": "Use as an add-on therapy for the treatment of hypertension, to lower blood pressure."
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "It can help with swelling in some adults who have liver problems.",
+     "text": "It can help with swelling from fluid build-up in some adults with liver problems.",
      "section": "indications_and_usage",
      "quote": "The management of edema in adult patients who are cirrhotic when edema is not responsive to fluid and sodium restrictions"
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "It can be taken with or without food, but take it the same way each time.",
+     "text": "It can be taken with or without food, but it should be taken the same way each time.",
      "section": "dosage_and_administration",
      "quote": "Spironolactone tablets can be taken with or without food, but should be taken consistently with respect to food"
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Avoid potassium supplements and foods high in potassium, including salt substitutes.",
+     "text": "Your relative should avoid potassium supplements and foods high in potassium, including salt substitutes.",
      "section": "information_for_patients",
-     "quote": "should be advised to avoid potassium supplements and foods containing high levels of potassium, including salt substitutes."
+     "quote": "Patients who receive spironolactone tablets should be advised to avoid potassium supplements and foods containing high levels of potassium, including salt substitutes."
     },
     {
      "id": "s6",
      "part": "side_effects",
-     "text": "The most common side effect is breast growth in men, called gynecomastia.",
+     "text": "The most common side effect is breast growth, called gynecomastia.",
      "section": "adverse_reactions",
      "quote": "The most common adverse reaction with spironolactone treatment is gynecomastia"
     },
     {
      "id": "s7",
      "part": "side_effects",
-     "text": "It may cause an upset stomach, such as nausea, vomiting, or diarrhea.",
+     "text": "Upset stomach, such as nausea, vomiting and diarrhea, can happen.",
      "section": "adverse_reactions",
      "quote": "Digestive: Gastric bleeding, ulceration, gastritis, diarrhea and cramping, nausea, vomiting."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "Some people may feel dizzy, sleepy, or confused, or have a headache.",
+     "text": "Your relative may feel dizzy, sleepy or confused, or have a headache.",
      "section": "adverse_reactions",
      "quote": "Nervous system/psychiatric: Lethargy, mental confusion, ataxia, dizziness, headache, drowsiness."
     },
@@ -279,39 +282,46 @@
     {
      "id": "s10",
      "part": "warnings",
-     "text": "This medicine can raise the potassium level in the blood.",
+     "text": "Spironolactone can raise potassium in the blood, which is called hyperkalemia.",
      "section": "warnings_and_cautions",
      "quote": "Spironolactone can cause hyperkalemia."
     },
     {
      "id": "s11",
      "part": "warnings",
-     "text": "Losing too much fluid can cause dehydration, low blood pressure, and worse kidney function.",
+     "text": "High potassium is more likely with kidney problems or with salt substitutes that contain potassium.",
      "section": "warnings_and_cautions",
-     "quote": "Excessive diuresis may cause symptomatic dehydration, hypotension and worsening renal function"
+     "quote": "This risk is increased by impaired renal function or concomitant potassium supplementation, potassium-containing salt substitutes"
     },
     {
      "id": "s12",
      "part": "warnings",
-     "text": "People with high potassium or Addison's disease should not take it.",
-     "section": "contraindications",
-     "quote": "Spironolactone is contraindicated in the patients with: Hyperkalemia Addison’s disease Concomitant use of eplerenone"
+     "text": "Losing too much fluid can cause dehydration, low blood pressure and worse kidney function.",
+     "section": "warnings_and_cautions",
+     "quote": "Excessive diuresis may cause symptomatic dehydration, hypotension and worsening renal function"
     },
     {
      "id": "s13",
      "part": "warnings",
-     "text": "Older adults are more likely to have kidney problems, so their kidneys should be checked.",
+     "text": "Older adults are more likely to have weaker kidneys, so their kidneys should be checked.",
      "section": "geriatric_use",
      "quote": "Because elderly patients are more likely to have decreased renal function, monitor renal function."
+    },
+    {
+     "id": "s14",
+     "part": "warnings",
+     "text": "It should not be used by people who have high potassium or Addison's disease, or who take eplerenone.",
+     "section": "contraindications",
+     "quote": "Spironolactone is contraindicated in the patients with: Hyperkalemia Addison’s disease Concomitant use of eplerenone"
     }
    ],
-   "verbatim_raw": 13,
-   "byte_exact_raw": 13,
+   "verbatim_raw": 14,
+   "byte_exact_raw": 14,
    "flagged_partners": [
     "furosemide",
     "lisinopril"
    ],
-   "seconds": 59.669
+   "seconds": 50.843
   },
   {
    "name": "warfarin",
@@ -337,26 +347,30 @@
      "Vitamin K Antagonist"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=61ab23a7-bc67-4777-854a-bf43c788a69a",
     "cache_files": [
      "count-generic__warfarin.json",
-     "label-generic__warfarin-sodium.json",
+     "label-generic-ir__warfarin-sodium.json",
      "ndc-names__warfarin.json",
      "ndc-classes__warfarin-sodium.json"
     ],
-    "fetched_at": "2026-11-17T15:08:58.676Z"
+    "fetched_at": "2026-11-17T15:57:45.414Z"
    },
    "stats": {
-    "generated": 15,
-    "passed_first_check": 13,
-    "recovered_by_repair": 2,
-    "repair_rounds": 1,
-    "kept": 15,
-    "verbatim_kept": 15
+    "generated": 14,
+    "passed_first_check": 14,
+    "first_check_failures": {},
+    "recovered_by_repair": 0,
+    "repair_rounds": 0,
+    "kept": 14,
+    "verbatim_kept": 14
    },
    "review": {
     "status": "applied",
-    "changed": 13,
+    "changed": 12,
     "reverted": 0,
     "reverted_ids": [],
     "note": null
@@ -366,118 +380,111 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "Warfarin is a blood thinner. It helps prevent and treat blood clots in the veins and lungs.",
+     "text": "Warfarin helps prevent and treat blood clots in the veins and lungs.",
      "section": "indications_and_usage",
      "quote": "Prophylaxis and treatment of venous thrombosis and its extension, pulmonary embolism (PE)."
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used for clot problems linked to atrial fibrillation (an uneven heartbeat) or a heart valve replacement.",
+     "text": "It is also used for clot problems linked to atrial fibrillation or a heart valve replacement.",
      "section": "indications_and_usage",
      "quote": "Prophylaxis and treatment of thromboembolic complications associated with atrial fibrillation (AF) and/or cardiac valve replacement."
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "After a heart attack, it helps lower the risk of death, another heart attack, and stroke.",
+     "text": "After a heart attack, it helps lower the risk of death, another heart attack, and clots such as stroke.",
      "section": "indications_and_usage",
      "quote": "Reduction in the risk of death, recurrent myocardial infarction (MI), and thromboembolic events such as stroke or systemic embolization after myocardial infarction."
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "Take it exactly the way the doctor prescribed.",
+     "text": "Take warfarin exactly as the doctor prescribed.",
      "section": "spl_medguide",
      "quote": "Take warfarin sodium exactly as prescribed."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Regular blood tests and doctor visits are needed to see how the medicine is working.",
+     "text": "Regular blood tests and visits with the healthcare provider are needed to see how the medicine is working.",
      "section": "spl_medguide",
      "quote": "You must have regular blood tests and visits with your healthcare provider to monitor your condition."
     },
     {
      "id": "s6",
      "part": "how_to_take",
-     "text": "If a dose is missed, the label says to call the healthcare provider.",
-     "section": "spl_medguide",
-     "quote": "If you miss a dose of warfarin sodium, call your healthcare provider."
+     "text": "If a dose is missed, take it as soon as possible that same day, but do not take a double dose the next day.",
+     "section": "information_for_patients",
+     "quote": "If the prescribed dose of warfarin sodium is missed, take the dose as soon as possible on the same day but do not take a double dose of warfarin sodium the next day to make up for missed doses"
     },
     {
      "id": "s7",
      "part": "how_to_take",
-     "text": "Do not take a double dose the next day to make up for a missed dose.",
-     "section": "spl_medguide",
-     "quote": "Do nottake a double dose of warfarin sodium the next day to make up for a missed dose."
-    },
-    {
-     "id": "s8",
-     "part": "how_to_take",
-     "text": "Eat a normal, balanced diet so you get about the same amount of vitamin K each day.",
+     "text": "Keep eating a normal, balanced diet so the amount of vitamin K stays steady.",
      "section": "information_for_patients",
      "quote": "Eat a normal, balanced diet to maintain a consistent intake of vitamin K."
     },
     {
-     "id": "s9",
+     "id": "s8",
      "part": "side_effects",
      "text": "The most common side effect is bleeding, and it can be serious.",
      "section": "adverse_reactions",
      "quote": "Most common adverse reactions to warfarin sodium are fatal and nonfatal hemorrhage from any tissue or organ."
     },
     {
+     "id": "s9",
+     "part": "side_effects",
+     "text": "Watch for signs of bleeding, like nosebleeds, bleeding gums, unusual bruising, red or dark urine, or black stools.",
+     "section": "information_for_patients",
+     "quote": "nosebleeds, bleeding of gums from brushing, unusual bleeding or bruising, red or dark brown urine, red or tar black stools, headache, dizziness, or weakness"
+    },
+    {
      "id": "s10",
      "part": "side_effects",
-     "text": "Some people get an upset stomach, such as nausea, vomiting, diarrhea, or belly pain.",
+     "text": "Some people may get an upset stomach, like nausea, vomiting, diarrhea, or bloating.",
      "section": "adverse_reactions",
      "quote": "Gastrointestinal disorders: nausea, vomiting, diarrhea, taste perversion, abdominal pain, flatulence, bloating"
     },
     {
      "id": "s11",
-     "part": "side_effects",
-     "text": "Skin problems like rash, itching, or hair loss can also happen.",
-     "section": "adverse_reactions",
-     "quote": "Skin disorders: rash, dermatitis (including bullous eruptions), pruritus, alopecia"
-    },
-    {
-     "id": "s12",
      "part": "warnings",
-     "text": "Warfarin can cause major bleeding that may lead to death.",
+     "text": "Warfarin can cause major bleeding that may be fatal.",
      "section": "boxed_warning",
      "quote": "Warfarin sodium can cause major or fatal bleeding"
     },
     {
+     "id": "s12",
+     "part": "warnings",
+     "text": "Older adults with a higher risk of bleeding should be checked for bleeding more often.",
+     "section": "geriatric_use",
+     "quote": "Conduct more frequent monitoring for bleeding with administration of warfarin sodium to elderly patients in any situation or with any physical condition where added risk of hemorrhage is present."
+    },
+    {
      "id": "s13",
      "part": "warnings",
-     "text": "Tell the doctor right away about signs of bleeding, like nosebleeds, gums that bleed when brushing, or red or tar black stools.",
+     "text": "Tell all healthcare providers and dentists that the person takes warfarin.",
      "section": "information_for_patients",
-     "quote": "nosebleeds, bleeding of gums from brushing, unusual bleeding or bruising, red or dark brown urine, red or tar black stools"
+     "quote": "To tell all of their healthcare professionals and dentists that they are taking warfarin sodium."
     },
     {
      "id": "s14",
      "part": "warnings",
-     "text": "Avoid activities or sports that could cause an injury.",
-     "section": "information_for_patients",
-     "quote": "Avoid any activity or sport that may result in traumatic injury"
-    },
-    {
-     "id": "s15",
-     "part": "warnings",
-     "text": "Older adults may need closer checks for bleeding, especially when their bleeding risk is higher.",
-     "section": "geriatric_use",
-     "quote": "Conduct more frequent monitoring for bleeding with administration of warfarin sodium to elderly patients in any situation or with any physical condition where added risk of hemorrhage is present."
+     "text": "Warfarin is generally not for use during pregnancy, except for some women with mechanical heart valves.",
+     "section": "contraindications",
+     "quote": "Warfarin sodium tablets, USP are contraindicated in women who are pregnant except in pregnant women with mechanical heart valves, who are at high risk of thromboembolism"
     }
    ],
-   "verbatim_raw": 15,
-   "byte_exact_raw": 15,
+   "verbatim_raw": 14,
+   "byte_exact_raw": 14,
    "flagged_partners": [
     "atorvastatin",
     "levothyroxine",
     "omeprazole",
     "sertraline"
    ],
-   "seconds": 92.827
+   "seconds": 58.689
   },
   {
    "name": "sertraline",
@@ -503,22 +510,28 @@
      "Serotonin Reuptake Inhibitor"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
     "cache_files": [
      "count-generic__sertraline.json",
-     "label-generic__sertraline-hydrochloride.json",
+     "label-generic-ir__sertraline-hydrochloride.json",
      "ndc-names__sertraline.json",
      "ndc-classes__sertraline-hydrochloride.json"
     ],
-    "fetched_at": "2026-11-17T15:09:01.820Z"
+    "fetched_at": "2026-11-17T15:57:46.600Z"
    },
    "stats": {
-    "generated": 13,
-    "passed_first_check": 9,
-    "recovered_by_repair": 4,
+    "generated": 12,
+    "passed_first_check": 10,
+    "first_check_failures": {
+     "WRONG_PART": 2
+    },
+    "recovered_by_repair": 2,
     "repair_rounds": 1,
-    "kept": 13,
-    "verbatim_kept": 13
+    "kept": 12,
+    "verbatim_kept": 12
    },
    "review": {
     "status": "applied",
@@ -532,104 +545,97 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "Sertraline is a kind of medicine called an SSRI.",
+     "text": "Sertraline is an SSRI, which is a type of antidepressant medicine.",
      "section": "indications_and_usage",
-     "quote": "Sertraline hydrochloride tablets are a selective serotonin reuptake inhibitor (SSRI) indicated for the treatment of ( 1 )"
+     "quote": "Sertraline hydrochloride tablets are a selective serotonin reuptake inhibitor (SSRI)"
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is used to treat major depressive disorder.",
+     "text": "It is used for depression, OCD, panic disorder, PTSD and social anxiety disorder.",
      "section": "indications_and_usage",
-     "quote": "Major depressive disorder (MDD) Obsessive-compulsive disorder (OCD) Panic disorder (PD)"
+     "quote": "Major depressive disorder (MDD) Obsessive-compulsive disorder (OCD) Panic disorder (PD) Posttraumatic stress disorder (PTSD) Social anxiety disorder (SAD)"
     },
     {
      "id": "s3",
-     "part": "uses",
-     "text": "It is also used for panic disorder, social anxiety disorder and posttraumatic stress disorder.",
-     "section": "indications_and_usage",
-     "quote": "Panic disorder (PD) Posttraumatic stress disorder (PTSD) Social anxiety disorder (SAD)"
-    },
-    {
-     "id": "s4",
      "part": "how_to_take",
-     "text": "When possible, this medicine should be lowered slowly instead of stopped all at once.",
+     "text": "The label says to lower the dose slowly, when possible, instead of stopping all at once.",
      "section": "dosage_and_administration",
      "quote": "Gradually reduce the dosage rather than stopping sertraline hydrochloride tablets abruptly whenever possible."
     },
     {
-     "id": "s5",
+     "id": "s4",
      "part": "how_to_take",
-     "text": "Talk with the healthcare provider about any plan to lower the medicine.",
+     "text": "The label says to talk with the healthcare provider about any plan to taper this medicine.",
      "section": "information_for_patients",
      "quote": "Advise patients not to abruptly discontinue sertraline hydrochloride and to discuss any tapering regimen with their healthcare provider."
     },
     {
-     "id": "s6",
+     "id": "s5",
      "part": "how_to_take",
-     "text": "Tell the doctor about any medicines that can raise the risk of bleeding, including ones bought without a prescription.",
+     "text": "The label asks that the care team be told about any medicines that raise the risk of bleeding.",
      "section": "information_for_patients",
      "quote": "Advise patients to inform their health care providers if they are taking or planning to take any prescription or over-the-counter medications that increase the risk of bleeding"
     },
     {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Common side effects include nausea, loose stools, tremor, upset stomach, less appetite, sweating and lower sex drive.",
+     "section": "adverse_reactions",
+     "quote": "nausea, diarrhea/loose stool, tremor, dyspepsia, decreased appetite, hyperhidrosis, ejaculation failure, and decreased libido"
+    },
+    {
      "id": "s7",
      "part": "side_effects",
-     "text": "The most common side effects include nausea and diarrhea or loose stool.",
-     "section": "adverse_reactions",
-     "quote": "were nausea, diarrhea/loose stool, tremor, dyspepsia, decreased appetite, hyperhidrosis, ejaculation failure, and decreased libido"
+     "text": "Sertraline may cause sexual problems.",
+     "section": "spl_medguide",
+     "quote": "Taking selective serotonin reuptake inhibitors (SSRIs), including Sertraline hydrochloride tablets, may cause sexual problems."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "Some people may also feel sleepy, dizzy or tired, or have trouble sleeping.",
-     "section": "adverse_reactions",
-     "quote": "MDD: somnolence; OCD: insomnia, agitation; PD: constipation, agitation; PTSD: fatigue;"
+     "text": "Stopping too quickly may cause symptoms like anxiety, irritability, restlessness or changes in sleep.",
+     "section": "spl_medguide",
+     "quote": "Stopping sertraline hydrochloride tablets too quickly may cause serious symptoms including: anxiety, irritability, high or low mood, feeling restless or changes in sleep habits"
     },
     {
      "id": "s9",
-     "part": "side_effects",
-     "text": "It may cause sexual problems, and the doctor can talk about ways to manage them.",
-     "section": "information_for_patients",
-     "quote": "Advise patients that use of sertraline hydrochloride may cause symptoms of sexual dysfunction in both male and female patients."
+     "part": "warnings",
+     "text": "In short-term studies, antidepressants raised the risk of suicidal thoughts and behavior in children and young adults.",
+     "section": "boxed_warning",
+     "quote": "Antidepressants increased the risk of suicidal thoughts and behavior in pediatric and young adult patients in short-term studies."
     },
     {
      "id": "s10",
      "part": "warnings",
-     "text": "Watch for new or worse suicidal thoughts or actions, especially early in treatment or when the dose changes, and tell the provider.",
+     "text": "If signs of serotonin syndrome appear, tell the healthcare provider or go to the emergency room.",
      "section": "information_for_patients",
-     "quote": "Advise patients and caregivers to look for the emergence of suicidality, especially early during treatment and when the dosage is adjusted up or down"
+     "quote": "Patients should contact their health care provider or report to the emergency room if they experience signs or symptoms of serotonin syndrome"
     },
     {
      "id": "s11",
      "part": "warnings",
-     "text": "Serotonin syndrome can be life-threatening, and signs can include agitation, hallucinations and coma.",
-     "section": "warnings_and_cautions",
-     "quote": "can precipitate serotonin syndrome, a potentially life-threatening condition."
-    },
-    {
-     "id": "s12",
-     "part": "warnings",
-     "text": "It may raise the risk of bleeding, especially when taken with aspirin, NSAIDs or warfarin.",
+     "text": "Sertraline may raise the risk of bleeding, especially when taken with aspirin, NSAIDs, or a blood thinner like warfarin.",
      "section": "warnings_and_cautions",
      "quote": "Concomitant use of aspirin, nonsteroidal anti-inflammatory drugs (NSAIDs), other antiplatelet drugs, warfarin, and other anticoagulants may add to this risk."
     },
     {
-     "id": "s13",
+     "id": "s12",
      "part": "warnings",
-     "text": "Older adults may have a higher chance of low sodium in the blood.",
+     "text": "Older people may have a greater risk of low blood sodium with this medicine.",
      "section": "geriatric_use",
      "quote": "have been associated with cases of clinically significant hyponatremia in elderly patients, who may be at greater risk for this adverse reaction"
     }
    ],
-   "verbatim_raw": 13,
-   "byte_exact_raw": 13,
+   "verbatim_raw": 12,
+   "byte_exact_raw": 12,
    "flagged_partners": [
     "furosemide",
     "levothyroxine",
     "metoprolol",
     "warfarin"
    ],
-   "seconds": 95.907
+   "seconds": 86.463
   },
   {
    "name": "metformin",
@@ -639,134 +645,166 @@
     "query": "metformin",
     "matched_by": "generic",
     "term": "METFORMIN HYDROCHLORIDE",
-    "id": "5fec4220-70f4-b97f-e063-6394a90ad557",
-    "set_id": "ec43efb2-8a50-4bac-9576-f4303841a497",
-    "version": "2",
-    "effective_time": "20261110",
-    "effective_date": "2026-11-10",
+    "id": "5fdea826-dae7-66ee-e063-6294a90af0db",
+    "set_id": "0230a3c3-34cf-478b-88c3-4d96e5300018",
+    "version": "20",
+    "effective_time": "20261109",
+    "effective_date": "2026-11-09",
     "generic_names": [
      "METFORMIN HYDROCHLORIDE"
     ],
     "brand_names": [
      "Metformin Hydrochloride"
     ],
-    "manufacturer": "REMEDYREPACK INC.",
+    "manufacturer": "PD-Rx Pharmaceuticals, Inc.",
     "classes": [
      "Biguanide"
     ],
     "class_source": "ndc",
-    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=ec43efb2-8a50-4bac-9576-f4303841a497",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=0230a3c3-34cf-478b-88c3-4d96e5300018",
     "cache_files": [
      "count-generic__metformin.json",
-     "label-generic__metformin-hydrochloride.json",
+     "label-generic-ir__metformin-hydrochloride.json",
      "ndc-names__metformin.json",
      "ndc-classes__metformin-hydrochloride.json"
     ],
-    "fetched_at": "2026-11-17T15:08:59.473Z"
+    "fetched_at": "2026-11-17T15:57:45.703Z"
    },
    "stats": {
-    "generated": 11,
-    "passed_first_check": 11,
-    "recovered_by_repair": 0,
-    "repair_rounds": 0,
-    "kept": 11,
-    "verbatim_kept": 11
+    "generated": 14,
+    "passed_first_check": 7,
+    "first_check_failures": {
+     "WRONG_PART": 6,
+     "DOSE_MENTION": 1
+    },
+    "recovered_by_repair": 6,
+    "repair_rounds": 1,
+    "kept": 13,
+    "verbatim_kept": 13
    },
    "review": {
     "status": "applied",
-    "changed": 9,
+    "changed": 7,
     "reverted": 0,
     "reverted_ids": [],
     "note": null
    },
-   "removed": [],
+   "removed": [
+    {
+     "id": "s3",
+     "part": "uses",
+     "text": "It is not meant for people with type 1 diabetes.",
+     "section": "spl_patient_package_insert",
+     "quote": "Metformin hydrochloride tablets are not for people with type 1 diabetes.",
+     "reason": "WRONG_PART",
+     "token": "spl_patient_package_insert",
+     "detail": "A \"uses\" sentence cannot cite the spl_patient_package_insert section; allowed: indications_and_usage, purpose."
+    }
+   ],
    "sentences": [
     {
      "id": "s1",
      "part": "uses",
-     "text": "This medicine is used along with diet and exercise to help control blood sugar in people with diabetes.",
+     "text": "Metformin helps control blood sugar in people with type 2 diabetes.",
      "section": "indications_and_usage",
-     "quote": "indicated as an adjunct to diet and exercise to improve glycemic control"
+     "quote": "indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus"
     },
     {
      "id": "s2",
-     "part": "how_to_take",
-     "text": "Swallow the tablets whole. Never crush, cut or chew them.",
-     "section": "dosage_and_administration",
-     "quote": "Swallow metformin hydrochloride extended-release tablets whole and never crush, cut or chew"
-    },
-    {
-     "id": "s3",
-     "part": "how_to_take",
-     "text": "The label says to take this medicine with the evening meal.",
-     "section": "dosage_and_administration",
-     "quote": "with the evening meal"
+     "part": "uses",
+     "text": "It works along with diet and exercise to help control blood sugar in type 2 diabetes.",
+     "section": "indications_and_usage",
+     "quote": "indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus."
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "If a dose is missed, the label says not to take two doses on the same day. Instead, take the usual dose at the next scheduled time.",
+     "text": "The label says to take metformin with meals.",
      "section": "dosage_and_administration",
-     "quote": "instruct patients not to take two doses the same day and to resume their usual dose of metformin hydrochloride extended-release tablets with the next schedule dose"
+     "quote": "given with meals."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Sometimes you may see a soft lump in the stool that looks like the tablet. This can happen because the inactive ingredients can pass out of the body.",
-     "section": "information_for_patients",
-     "quote": "the inactive ingredients may occasionally be eliminated in the feces as a soft mass that may resemble the original tablet"
+     "text": "Doctors should check how well the kidneys work before the medicine is started, and from time to time after that.",
+     "section": "dosage_and_administration",
+     "quote": "Assess renal function prior to initiation of metformin hydrochloride tablets and periodically thereafter."
     },
     {
      "id": "s6",
-     "part": "side_effects",
-     "text": "The most common side effects are diarrhea, nausea or vomiting, gas, weakness, indigestion, stomach discomfort and headache.",
-     "section": "adverse_reactions",
-     "quote": "diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache"
+     "part": "how_to_take",
+     "text": "Before any surgery or x-ray procedure, tell the doctor about metformin, because it may need to be paused for a while.",
+     "section": "information_for_patients",
+     "quote": "Instruct patients to inform their doctor that they are taking metformin hydrochloride tablets prior to any surgical or radiological procedure, as temporary discontinuation may be required"
     },
     {
      "id": "s7",
-     "part": "side_effects",
-     "text": "Low blood sugar may happen when this medicine is taken with certain diabetes pills or insulin.",
+     "part": "how_to_take",
+     "text": "The label advises against drinking too much alcohol while taking it.",
      "section": "information_for_patients",
-     "quote": "hypoglycemia may occur when metformin hydrochloride extended-release tablets are coadministered with oral sulfonylureas and insulin"
+     "quote": "Counsel patients against excessive alcohol intake"
     },
     {
      "id": "s8",
-     "part": "warnings",
-     "text": "A rare but serious problem called lactic acidosis has led to deaths in some people taking metformin.",
-     "section": "boxed_warning",
-     "quote": "Postmarketing cases of metformin-associated lactic acidosis have resulted in death, hypothermia, hypotension, and resistant bradyarrhythmias."
+     "part": "side_effects",
+     "text": "The most common side effects are stomach and digestion problems, tiredness, and headache.",
+     "section": "adverse_reactions",
+     "quote": "the most common adverse reactions (> 5.0%) are diarrhea, nausea/vomiting, flatulence, asthenia, indigestion, abdominal discomfort, and headache."
     },
     {
      "id": "s9",
-     "part": "warnings",
-     "text": "The label says to stop this medicine right away and tell the healthcare provider quickly if there is unexplained fast breathing, muscle pain, feeling unwell or unusual sleepiness.",
-     "section": "information_for_patients",
-     "quote": "Advise patients to discontinue metformin hydrochloride extended-release tablets immediately and to promptly notify their healthcare provider if unexplained hyperventilation, myalgias, malaise, unusual somnolence or other nonspecific symptoms occur."
+     "part": "side_effects",
+     "text": "In studies, vitamin B 12 levels dropped below normal in about 7% of patients.",
+     "section": "adverse_reactions",
+     "quote": "a decrease to subnormal levels of previously normal serum vitamin B 12 levels was observed in approximately 7% of patients."
     },
     {
      "id": "s10",
-     "part": "warnings",
-     "text": "Kidney problems raise the risk of lactic acidosis. The label says older adults should have their kidneys checked more often.",
-     "section": "geriatric_use",
-     "quote": "Assess renal function more frequently in elderly patients"
+     "part": "side_effects",
+     "text": "Low blood sugar can happen if metformin is used with insulin or certain other diabetes pills.",
+     "section": "information_for_patients",
+     "quote": "Inform patients that hypoglycemia may occur when metformin hydrochloride tablets are co-administered with oral sulfonylureas and insulin."
     },
     {
      "id": "s11",
      "part": "warnings",
-     "text": "Before any surgery or x-ray procedure, tell the doctor about this medicine, because it may need to be paused for a while.",
+     "text": "Metformin can cause lactic acidosis, a serious problem that has led to death in some cases.",
+     "section": "boxed_warning",
+     "quote": "Postmarketing cases of metformin-associated lactic acidosis have resulted in death, hypothermia, hypotension, and resistant bradyarrhythmias."
+    },
+    {
+     "id": "s12",
+     "part": "warnings",
+     "text": "Warning signs can include feeling unwell, muscle pain, trouble breathing, unusual sleepiness, and belly pain.",
+     "section": "boxed_warning",
+     "quote": "nonspecific symptoms such as malaise, myalgias, respiratory distress, somnolence, and abdominal pain."
+    },
+    {
+     "id": "s13",
+     "part": "warnings",
+     "text": "If these signs appear, the label says to stop the medicine and tell the healthcare provider right away.",
      "section": "information_for_patients",
-     "quote": "Instruct patients to inform their doctor that they are taking metformin hydrochloride extended-release tablets prior to any surgical or radiological procedure, as temporary discontinuation may be required"
+     "quote": "Advise patients to discontinue metformin hydrochloride tablets immediately and to promptly notify their healthcare provider if unexplained hyperventilation, myalgias, malaise, unusual somnolence or other nonspecific symptoms occur."
+    },
+    {
+     "id": "s14",
+     "part": "warnings",
+     "text": "Older adults have a higher risk of lactic acidosis, so their kidneys should be checked more often.",
+     "section": "geriatric_use",
+     "quote": "Assess renal function more frequently in elderly patients"
     }
    ],
-   "verbatim_raw": 11,
-   "byte_exact_raw": 11,
+   "verbatim_raw": 13,
+   "byte_exact_raw": 13,
    "flagged_partners": [
     "furosemide",
     "levothyroxine",
     "lisinopril"
    ],
-   "seconds": 68.905
+   "seconds": 94.308
   },
   {
    "name": "atorvastatin",
@@ -792,130 +830,142 @@
      "HMG-CoA Reductase Inhibitor"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=4e06b20d-cc5d-46eb-991b-5972248de3af",
     "cache_files": [
      "count-generic__atorvastatin.json",
-     "label-generic__atorvastatin-calcium.json",
+     "label-generic-ir__atorvastatin-calcium.json",
      "ndc-names__atorvastatin.json",
      "ndc-classes__atorvastatin-calcium.json"
     ],
-    "fetched_at": "2026-11-17T15:09:00.260Z"
+    "fetched_at": "2026-11-17T15:57:45.908Z"
    },
    "stats": {
     "generated": 13,
-    "passed_first_check": 11,
-    "recovered_by_repair": 2,
+    "passed_first_check": 9,
+    "first_check_failures": {
+     "WRONG_PART": 4
+    },
+    "recovered_by_repair": 3,
     "repair_rounds": 1,
-    "kept": 13,
-    "verbatim_kept": 13
+    "kept": 12,
+    "verbatim_kept": 12
    },
    "review": {
     "status": "applied",
-    "changed": 10,
-    "reverted": 0,
-    "reverted_ids": [],
+    "changed": 8,
+    "reverted": 1,
+    "reverted_ids": [
+     "s1"
+    ],
     "note": null
    },
-   "removed": [],
+   "removed": [
+    {
+     "id": "s13",
+     "part": "warnings",
+     "text": "Swelling of the face, lips or tongue, or trouble breathing, needs medical help right away.",
+     "section": "spl_patient_package_insert",
+     "quote": "Stop using atorvastatin calcium tablets and get medical help right away if you have symptoms of a serious allergic reaction including: swelling of your face, lips, tongue or throat problems breathing or swallowing",
+     "reason": "WRONG_PART",
+     "token": "spl_patient_package_insert",
+     "detail": "A \"warnings\" sentence cannot cite the spl_patient_package_insert section; allowed: boxed_warning, warnings_and_cautions, warnings, precautions, general_precautions, contraindications, geriatric_use, do_not_use, ask_doctor, ask_doctor_or_pharmacist, stop_use, when_using, information_for_patients."
+    }
+   ],
    "sentences": [
     {
      "id": "s1",
      "part": "uses",
-     "text": "This medicine can lower the chance of heart attack and stroke in adults who have several risk factors for heart disease.",
+     "text": "This medicine is a statin, which is used with diet to lower cholesterol.",
      "section": "indications_and_usage",
-     "quote": "To reduce the risk of: Myocardial infarction (MI), stroke, revascularization procedures, and angina in adults with multiple risk factors for coronary heart disease (CHD) but without clinically evident CHD"
+     "quote": "Atorvastatin calcium tablets are an HMG-CoA reductase inhibitor (statin) indicated ( 1 ): To reduce the risk of:"
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used along with diet to lower LDL cholesterol in adults with primary hyperlipidemia.",
+     "text": "It helps lower the risk of heart attack and stroke in adults who have several risk factors for heart disease.",
+     "section": "indications_and_usage",
+     "quote": "Myocardial infarction (MI), stroke, revascularization procedures, and angina in adults with multiple risk factors for coronary heart disease (CHD) but without clinically evident CHD"
+    },
+    {
+     "id": "s3",
+     "part": "uses",
+     "text": "It is also used with diet to lower LDL cholesterol in adults with high cholesterol.",
      "section": "indications_and_usage",
      "quote": "As an adjunct to diet to reduce low-density lipoprotein cholesterol (LDL-C) in: Adults with primary hyperlipidemia."
     },
     {
-     "id": "s3",
-     "part": "how_to_take",
-     "text": "The tablets can be taken with or without food.",
-     "section": "spl_patient_package_insert",
-     "quote": "Atorvastatin calcium tablets can be taken with or without food."
-    },
-    {
      "id": "s4",
      "part": "how_to_take",
-     "text": "Give it exactly as the doctor says.",
+     "text": "It can be taken at any time of day, with or without food.",
      "section": "spl_patient_package_insert",
-     "quote": "Take atorvastatin calcium tablets exactly as your healthcare provider tells you to take it."
+     "quote": "Take atorvastatin calcium tablets each day at any time of day. Atorvastatin calcium tablets can be taken with or without food."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "If a dose is missed, just wait and take the next dose at the usual time.",
+     "text": "If a dose is missed, wait and take the next dose at the usual time.",
      "section": "spl_patient_package_insert",
      "quote": "If you miss a dose of atorvastatin calcium tablets, wait and take the next dose at your regular time."
     },
     {
      "id": "s6",
      "part": "how_to_take",
-     "text": "Drinking large amounts of grapefruit juice can raise the risk of muscle problems with this medicine.",
-     "section": "information_for_patients",
-     "quote": "Inform patients that the risk is also increased when taking certain types of medication or consuming large quantities of grapefruit juice"
+     "text": "Please talk to the healthcare provider before changing the dose or stopping this medicine.",
+     "section": "spl_patient_package_insert",
+     "quote": "Do not change your dose or stop atorvastatin calcium tablets without talking to your healthcare provider."
     },
     {
      "id": "s7",
-     "part": "side_effects",
-     "text": "Common side effects are cold-like symptoms, joint pain, diarrhea, arm or leg pain, and urinary tract infection.",
-     "section": "adverse_reactions",
-     "quote": "Most common adverse reactions (incidence ≥5%) are nasopharyngitis, arthralgia, diarrhea, pain in extremity, and urinary tract infection"
+     "part": "how_to_take",
+     "text": "The label says to avoid drinking large amounts of grapefruit juice.",
+     "section": "spl_patient_package_insert",
+     "quote": "Avoid drinking more than 1.2 liters of grapefruit juice each day."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "Blood sugar tests may show higher levels while taking this medicine.",
-     "section": "information_for_patients",
-     "quote": "Inform patients that increases in HbA1c and fasting serum glucose levels may occur with atorvastatin calcium tablets."
+     "text": "The most common side effects are a stuffy or sore nose and throat, joint pain, and diarrhea.",
+     "section": "adverse_reactions",
+     "quote": "Most common adverse reactions (incidence ≥5%) are nasopharyngitis, arthralgia, diarrhea, pain in extremity, and urinary tract infection ( 6.1 )."
     },
     {
      "id": "s9",
      "part": "side_effects",
-     "text": "Please report these quickly: tiredness, loss of appetite, pain in the upper right belly, dark urine, or yellow skin or eyes.",
-     "section": "information_for_patients",
-     "quote": "Advise patients to promptly report fatigue, anorexia, right upper abdominal discomfort, dark urine or jaundice"
+     "text": "Some people may have an upset stomach or feel sick to their stomach.",
+     "section": "adverse_reactions",
+     "quote": "Dyspepsia 4.3 5.9 3.2 6.0 3.3 4.7 Nausea 3.5 3.7 3.7 7.1 3.8 4.0"
     },
     {
      "id": "s10",
      "part": "warnings",
-     "text": "Please report muscle pain, tenderness, or weakness with no clear cause quickly, especially with fever or feeling unwell.",
+     "text": "Report any muscle pain, soreness or weakness that has no clear cause right away, especially with a fever or feeling unwell.",
      "section": "information_for_patients",
      "quote": "Instruct patients to promptly report any unexplained muscle pain, tenderness or weakness particularly if accompanied by malaise or fever"
     },
     {
      "id": "s11",
      "part": "warnings",
-     "text": "Older age raises the risk of serious muscle problems with this medicine.",
-     "section": "geriatric_use",
-     "quote": "Advanced age (≥65 years) is a risk factor for atorvastatin calcium tablets -associated myopathy and rhabdomyolysis."
+     "text": "Report tiredness, dark urine, or yellow skin or eyes quickly, because the medicine may affect the liver.",
+     "section": "information_for_patients",
+     "quote": "Advise patients to promptly report fatigue, anorexia, right upper abdominal discomfort, dark urine or jaundice"
     },
     {
      "id": "s12",
      "part": "warnings",
-     "text": "People with severe liver problems must not use this medicine.",
-     "section": "contraindications",
-     "quote": "Acute liver failure or decompensated cirrhosis"
-    },
-    {
-     "id": "s13",
-     "part": "warnings",
-     "text": "Anyone who is allergic to this medicine or its ingredients must not use it.",
-     "section": "contraindications",
-     "quote": "Hypersensitivity to atorvastatin or any excipients in atorvastatin calcium tablets."
+     "text": "Being 65 or older raises the risk of serious muscle problems, so older adults should be watched closely.",
+     "section": "geriatric_use",
+     "quote": "Advanced age (≥65 years) is a risk factor for atorvastatin calcium tablets -associated myopathy and rhabdomyolysis."
     }
    ],
-   "verbatim_raw": 13,
-   "byte_exact_raw": 13,
+   "verbatim_raw": 12,
+   "byte_exact_raw": 12,
    "flagged_partners": [
     "warfarin"
    ],
-   "seconds": 107.518
+   "seconds": 87.201
   },
   {
    "name": "omeprazole",
@@ -941,26 +991,32 @@
      "Proton Pump Inhibitor"
     ],
     "class_source": "label",
+    "formulation": "delayed",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5fecd5fd-fac7-8fc7-e063-6394a90a09a0",
     "cache_files": [
      "count-generic__omeprazole.json",
-     "label-generic__omeprazole.json"
+     "label-generic-ir__omeprazole.json"
     ],
-    "fetched_at": "2026-11-17T15:09:06.022Z"
+    "fetched_at": "2026-11-17T15:57:47.134Z"
    },
    "stats": {
-    "generated": 13,
-    "passed_first_check": 12,
-    "recovered_by_repair": 1,
-    "repair_rounds": 1,
-    "kept": 13,
-    "verbatim_kept": 13
+    "generated": 14,
+    "passed_first_check": 14,
+    "first_check_failures": {},
+    "recovered_by_repair": 0,
+    "repair_rounds": 0,
+    "kept": 14,
+    "verbatim_kept": 14
    },
    "review": {
     "status": "applied",
-    "changed": 9,
-    "reverted": 0,
-    "reverted_ids": [],
+    "changed": 12,
+    "reverted": 1,
+    "reverted_ids": [
+     "s5"
+    ],
     "note": null
    },
    "removed": [],
@@ -968,23 +1024,23 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "Omeprazole is part of a group of medicines called proton pump inhibitors.",
+     "text": "Omeprazole is a kind of medicine called a proton pump inhibitor, or PPI.",
      "section": "indications_and_usage",
      "quote": "Omeprazole delayed-release capsules are a proton pump inhibitor (PPI) indicated for the:"
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is used to treat heartburn and other signs of acid reflux (GERD).",
+     "text": "In adults, it is used for a short time to treat active ulcers in the first part of the intestine.",
      "section": "indications_and_usage",
-     "quote": "indicated for the treatment of heartburn and other symptoms associated with GERD"
+     "quote": "Omeprazole delayed-release capsules are indicated for short-term treatment of active duodenal ulcer in adults."
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "It is also used to treat active ulcers in the stomach or the first part of the intestine in adults.",
+     "text": "It is also used to treat heartburn and other signs of acid reflux (GERD).",
      "section": "indications_and_usage",
-     "quote": "Treatment of active benign gastric ulcer in adults"
+     "quote": "Omeprazole delayed-release capsules are indicated for the treatment of heartburn and other symptoms associated with GERD"
     },
     {
      "id": "s4",
@@ -996,75 +1052,82 @@
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Swallow the capsule whole. Do not chew it.",
+     "text": "The capsule should be swallowed whole and not chewed.",
      "section": "information_for_patients",
      "quote": "Swallow omeprazole delayed-release capsules whole; do not chew."
     },
     {
      "id": "s6",
      "part": "how_to_take",
-     "text": "If a dose is missed, the label says to give it as soon as you can.",
+     "text": "If a person cannot swallow the capsule, it can be opened and given in applesauce.",
      "section": "information_for_patients",
-     "quote": "If a dose is missed, administer as soon as possible."
+     "quote": "omeprazole delayed-release capsules can be opened and administered in applesauce, as described in the Medication Guide."
     },
     {
      "id": "s7",
      "part": "how_to_take",
-     "text": "The label says not to take two doses at once to make up for a missed dose.",
+     "text": "If a dose is missed, take it as soon as possible.",
      "section": "information_for_patients",
-     "quote": "Do not take two doses at one time to make up for a missed dose."
+     "quote": "If a dose is missed, administer as soon as possible."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "Common side effects are headache, stomach pain, nausea, diarrhea, vomiting, and gas.",
+     "text": "Common side effects are headache, belly pain, upset stomach (nausea), diarrhea, throwing up, and gas.",
      "section": "adverse_reactions",
      "quote": "Most common adverse reactions in adults (incidence ≥2%) are Headache, abdominal pain, nausea, diarrhea, vomiting, and flatulence."
     },
     {
      "id": "s9",
      "part": "side_effects",
-     "text": "Call the doctor right away if there is watery stool, stomach pain, and a fever that does not go away.",
+     "text": "In studies, people over 65 had side effects much like those of younger people.",
+     "section": "adverse_reactions",
+     "quote": "The clinical trial safety profile in patients greater than 65 years of age was similar to that in patients 65 years of age or less."
+    },
+    {
+     "id": "s10",
+     "part": "side_effects",
+     "text": "Call the doctor right away for watery stool, stomach pain, and fever that do not go away.",
      "section": "spl_medguide",
      "quote": "Call your doctor right away if you have watery stool, stomach pain, and fever that does not go away."
     },
     {
-     "id": "s10",
-     "part": "warnings",
-     "text": "Omeprazole should not be used with clopidogrel.",
-     "section": "warnings_and_cautions",
-     "quote": "Avoid concomitant use of omeprazole with clopidogrel."
-    },
-    {
      "id": "s11",
      "part": "warnings",
-     "text": "People taking medicines that contain rilpivirine should not use it.",
+     "text": "People with a known serious allergy to omeprazole or to similar medicines should not use it.",
      "section": "contraindications",
-     "quote": "Proton pump inhibitors (PPIs), including omeprazole, are contraindicated in patients receiving rilpivirine-containing products"
+     "quote": "Omeprazole delay-release capsules are contraindicated in patients with known hypersensitivity reactions including anaphylaxis to the formulation or any substituted benzimidazol."
     },
     {
      "id": "s12",
      "part": "warnings",
-     "text": "Using it for a long time may raise the risk of broken bones in the hip, wrist, or spine.",
-     "section": "warnings_and_cautions",
-     "quote": "proton pump inhibitor (PPI) therapy may be associated with an increased risk for osteoporosis-related fractures of the hip, wrist, or spine."
+     "text": "People who take medicines with rilpivirine in them should not use it.",
+     "section": "contraindications",
+     "quote": "Proton pump inhibitors (PPIs), including omeprazole, are contraindicated in patients receiving rilpivirine-containing products"
     },
     {
      "id": "s13",
      "part": "warnings",
-     "text": "The label says to use the lowest dose for the shortest time that fits the condition.",
+     "text": "The label says to avoid taking omeprazole with clopidogrel.",
      "section": "warnings_and_cautions",
-     "quote": "Patients should use the lowest dose and shortest duration of PPI therapy appropriate to the condition being treated."
+     "quote": "Avoid concomitant use of omeprazole with clopidogrel."
+    },
+    {
+     "id": "s14",
+     "part": "warnings",
+     "text": "Serious skin reactions have been reported with this kind of medicine.",
+     "section": "warnings_and_cautions",
+     "quote": "Severe cutaneous adverse reactions, including Stevens-Johnson syndrome (SJS) and toxic epidermal necrolysis (TEN),"
     }
    ],
-   "verbatim_raw": 13,
-   "byte_exact_raw": 13,
+   "verbatim_raw": 14,
+   "byte_exact_raw": 14,
    "flagged_partners": [
     "furosemide",
     "levothyroxine",
     "warfarin"
    ],
-   "seconds": 94.226
+   "seconds": 74.915
   },
   {
    "name": "levothyroxine",
@@ -1090,18 +1153,22 @@
      "l-Thyroxine"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=0db62c57-d020-4ddb-b24a-ecb349ce3850",
     "cache_files": [
      "count-generic__levothyroxine.json",
-     "label-generic__levothyroxine-sodium.json",
+     "label-generic-ir__levothyroxine-sodium.json",
      "ndc-names__levothyroxine.json",
      "ndc-classes__levothyroxine-sodium.json"
     ],
-    "fetched_at": "2026-11-17T15:09:04.032Z"
+    "fetched_at": "2026-11-17T15:57:46.791Z"
    },
    "stats": {
     "generated": 14,
     "passed_first_check": 14,
+    "first_check_failures": {},
     "recovered_by_repair": 0,
     "repair_rounds": 0,
     "kept": 14,
@@ -1119,98 +1186,98 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "This medicine replaces thyroid hormone when the body does not make enough. This is called hypothyroidism.",
+     "text": "This medicine replaces thyroid hormone when the body does not make enough.",
      "section": "indications_and_usage",
-     "quote": "Levothyroxine sodium tablets are indicated in adult and pediatric patients, including neonates, as a replacement therapy in primary (thyroidal), secondary (pituitary), and tertiary (hypothalamic) congenital or acquired hypothyroidism."
+     "quote": "as a replacement therapy in primary (thyroidal), secondary (pituitary), and tertiary (hypothalamic) congenital or acquired hypothyroidism."
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used with surgery and radioiodine treatment for certain thyroid cancers.",
+     "text": "It is also used with surgery and radioiodine treatment for some thyroid cancers.",
      "section": "indications_and_usage",
-     "quote": "as an adjunct to surgery and radioiodine therapy in the management of thyrotropin-dependent well-differentiated thyroid cancer"
+     "quote": "as an adjunct to surgery and radioiodine therapy in the management of thyrotropin-dependent well-differentiated thyroid cancer."
     },
     {
      "id": "s3",
-     "part": "how_to_take",
-     "text": "It works best on an empty stomach, about half an hour to an hour before breakfast.",
-     "section": "information_for_patients",
-     "quote": "preferably on an empty stomach, one-half to one hour before breakfast."
+     "part": "uses",
+     "text": "It is not meant for harmless thyroid lumps or simple goiter in people who get enough iodine.",
+     "section": "indications_and_usage",
+     "quote": "are not indicated for suppression of benign thyroid nodules and nontoxic diffuse goiter in iodine-sufficient patients"
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "Iron or calcium supplements and antacids can make it harder for the body to absorb this medicine.",
+     "text": "It works best on an empty stomach, before breakfast.",
      "section": "information_for_patients",
-     "quote": "Inform patients that agents such as iron and calcium supplements and antacids can decrease the absorption of levothyroxine."
+     "quote": "Instruct patients to take levothyroxine sodium tablets as a single dose, preferably on an empty stomach, one-half to one hour before breakfast."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "It should not be taken within 4 hours of those iron, calcium or antacid products.",
+     "text": "Iron, calcium and antacids can make the body take in less of this medicine.",
      "section": "information_for_patients",
-     "quote": "Instruct patients not to take levothyroxine sodium tablets within 4 hours of these agents."
+     "quote": "Inform patients that agents such as iron and calcium supplements and antacids can decrease the absorption of levothyroxine."
     },
     {
      "id": "s6",
      "part": "how_to_take",
-     "text": "Most people take this medicine for life.",
+     "text": "It may take several weeks before your loved one starts to feel better.",
      "section": "information_for_patients",
-     "quote": "Generally, replacement therapy is to be taken for life."
+     "quote": "Inform patients that it may take several weeks before they notice an improvement in symptoms."
     },
     {
      "id": "s7",
-     "part": "side_effects",
-     "text": "Most side effects are signs of too much thyroid hormone in the body.",
-     "section": "adverse_reactions",
-     "quote": "Adverse reactions associated with levothyroxine sodium therapy are primarily those of hyperthyroidism due to therapeutic overdosage"
+     "part": "how_to_take",
+     "text": "Biotin supplements should be stopped before thyroid blood tests, as the doctor directs.",
+     "section": "information_for_patients",
+     "quote": "Instruct patients to discontinue biotin or any biotin-containing supplements for at least 2 days before thyroid function testing is conducted."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "You might notice tiredness, weight loss, sweating, fever or feeling too warm.",
+     "text": "Most side effects are signs of too much thyroid hormone.",
      "section": "adverse_reactions",
-     "quote": "General: fatigue, increased appetite, weight loss, heat intolerance, fever, excessive sweating"
+     "quote": "Adverse reactions associated with levothyroxine sodium therapy are primarily those of hyperthyroidism due to therapeutic overdosage"
     },
     {
      "id": "s9",
      "part": "side_effects",
-     "text": "Mood and sleep may change. This can include feeling nervous, feeling irritable or having trouble sleeping.",
+     "text": "You may notice headache, nervousness, irritability, trouble sleeping or shaky hands.",
      "section": "adverse_reactions",
-     "quote": "Central nervous system: headache, hyperactivity, nervousness, anxiety, irritability, emotional lability, insomnia"
+     "quote": "headache, nervousness, irritability, insomnia, tremors, muscle weakness, increased appetite, weight loss, diarrhea, heat intolerance"
     },
     {
      "id": "s10",
      "part": "side_effects",
-     "text": "Some hair loss may happen early on, but it usually goes away.",
+     "text": "Some hair loss can happen in the first few months, but it usually goes away.",
      "section": "information_for_patients",
      "quote": "Inform patients that partial hair loss may occur rarely during the first few months of levothyroxine sodium tablets therapy, but this is usually temporary."
     },
     {
      "id": "s11",
      "part": "warnings",
-     "text": "This medicine must not be used to treat obesity or to lose weight.",
+     "text": "Larger amounts of this medicine can be very dangerous.",
      "section": "boxed_warning",
-     "quote": "Thyroid hormones, including levothyroxine sodium, either alone or with other therapeutic agents, should not be used for the treatment of obesity or for weight loss."
+     "quote": "Larger doses may produce serious or even life-threatening manifestations of toxicity"
     },
     {
      "id": "s12",
      "part": "warnings",
-     "text": "In older adults, too much of this medicine can cause a heart rhythm problem called atrial fibrillation.",
+     "text": "In older adults, too much of this medicine can cause heart rhythm problems.",
      "section": "geriatric_use",
      "quote": "Atrial fibrillation is the most common of the arrhythmias observed with levothyroxine overtreatment in the elderly."
     },
     {
      "id": "s13",
      "part": "warnings",
-     "text": "Tell the healthcare provider about a fast or uneven heartbeat, chest pain or shortness of breath.",
+     "text": "Tell the doctor about a fast or uneven heartbeat, chest pain or shortness of breath.",
      "section": "information_for_patients",
-     "quote": "Instruct patients to notify their healthcare provider if they experience any of the following symptoms: rapid or irregular heartbeat, chest pain, shortness of breath,"
+     "quote": "rapid or irregular heartbeat, chest pain, shortness of breath, leg cramps, headache, nervousness, irritability, sleeplessness, tremors"
     },
     {
      "id": "s14",
      "part": "warnings",
-     "text": "People whose adrenal insufficiency has not been corrected should not use this medicine.",
+     "text": "People with adrenal insufficiency that has not been treated should not use it.",
      "section": "contraindications",
      "quote": "Levothyroxine sodium tablets are contraindicated in patients with uncorrected adrenal insufficiency"
     }
@@ -1224,7 +1291,7 @@
     "sertraline",
     "warfarin"
    ],
-   "seconds": 79.134
+   "seconds": 77.52
   },
   {
    "name": "metoprolol",
@@ -1250,26 +1317,30 @@
      "beta-Adrenergic Blocker"
     ],
     "class_source": "ndc",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5fdd39b3-5e2f-f17c-e063-6394a90aeac1",
     "cache_files": [
      "count-generic__metoprolol.json",
-     "label-generic__metoprolol-tartrate.json",
+     "label-generic-ir__metoprolol-tartrate.json",
      "ndc-names__metoprolol.json",
      "ndc-classes__metoprolol-tartrate.json"
     ],
-    "fetched_at": "2026-11-17T15:09:06.483Z"
+    "fetched_at": "2026-11-17T15:57:47.611Z"
    },
    "stats": {
-    "generated": 14,
-    "passed_first_check": 14,
+    "generated": 13,
+    "passed_first_check": 13,
+    "first_check_failures": {},
     "recovered_by_repair": 0,
     "repair_rounds": 0,
-    "kept": 14,
-    "verbatim_kept": 14
+    "kept": 13,
+    "verbatim_kept": 13
    },
    "review": {
     "status": "applied",
-    "changed": 12,
+    "changed": 6,
     "reverted": 0,
     "reverted_ids": [],
     "note": null
@@ -1286,102 +1357,95 @@
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used over the long term to treat angina, which is chest pain from the heart.",
+     "text": "It is also used over the long term for angina, which is chest pain that comes from the heart.",
      "section": "indications_and_usage",
      "quote": "Metoprolol tartrate tablets are indicated in the long-term treatment of angina pectoris, to reduce angina attacks and to improve exercise tolerance."
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "It may also be used after a heart attack, or a possible one, to lower the risk of heart-related death.",
+     "text": "It can also be used after a heart attack to lower the risk of heart-related death.",
      "section": "indications_and_usage",
      "quote": "to reduce cardiovascular mortality when used alone or in conjunction with intravenous metoprolol."
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "The tablets should be taken with a meal or right after one.",
+     "text": "Take the tablets with a meal or just after eating.",
      "section": "dosage_and_administration",
      "quote": "Metoprolol tartrate tablets should be taken with or immediately following meals."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "Each person's dose is set just for them, so it can differ from one patient to another.",
+     "text": "Each person's dose is set just for them, so your own prescription is the guide.",
      "section": "dosage_and_administration",
      "quote": "Individualize the dosage of metoprolol tartrate tablets."
     },
     {
      "id": "s6",
      "part": "how_to_take",
-     "text": "If this medicine is going to be stopped, the label says to lower the dose slowly over a period of time.",
+     "text": "If treatment ever ends, the label says the dose is lowered slowly.",
      "section": "dosage_and_administration",
      "quote": "If treatment is to be discontinued, reduce the dosage gradually over a period of 1 to 2 weeks"
     },
     {
      "id": "s7",
      "part": "side_effects",
-     "text": "Feeling tired or dizzy is fairly common.",
+     "text": "Feeling tired or dizzy are common side effects.",
      "section": "adverse_reactions",
      "quote": "Tiredness and dizziness have occurred in about 10% of patients."
     },
     {
      "id": "s8",
      "part": "side_effects",
-     "text": "Some people have had diarrhea.",
+     "text": "Diarrhea, itching, or rash can also happen.",
      "section": "adverse_reactions",
      "quote": "Diarrhea has occurred in about 5% of patients."
     },
     {
      "id": "s9",
      "part": "side_effects",
-     "text": "Itching or a rash may happen.",
-     "section": "adverse_reactions",
-     "quote": "Pruritus or rash have occurred in about 5% of patients."
-    },
-    {
-     "id": "s10",
-     "part": "side_effects",
-     "text": "Some people have also had a slow heartbeat and shortness of breath.",
+     "text": "Shortness of breath and a slow heartbeat have been reported.",
      "section": "adverse_reactions",
      "quote": "Shortness of breath and bradycardia have occurred in approximately 3% of patients."
     },
     {
-     "id": "s11",
+     "id": "s10",
      "part": "warnings",
-     "text": "Patients should not stop this medicine on their own without first asking their doctor.",
+     "text": "Do not stop this medicine suddenly without the doctor's advice, because chest pain or a heart attack can happen.",
      "section": "warnings_and_cautions",
      "quote": "Warn patients not to interrupt therapy without their physician’s advice."
     },
     {
-     "id": "s12",
+     "id": "s11",
      "part": "warnings",
-     "text": "Stopping suddenly has led to worse chest pain and, in some cases, heart attacks.",
-     "section": "warnings_and_cautions",
-     "quote": "Following abrupt cessation of therapy with certain beta-blocking agents, exacerbations of angina pectoris and, in some cases, myocardial infarction have occurred."
-    },
-    {
-     "id": "s13",
-     "part": "warnings",
-     "text": "This medicine can hide the early warning signs of low blood sugar, especially in people with diabetes.",
+     "text": "It can hide warning signs of low blood sugar, especially in people with diabetes or who are not eating.",
      "section": "warnings_and_cautions",
      "quote": "Beta-blockers may prevent early warning signs of hypoglycemia, such as tachycardia"
     },
     {
-     "id": "s14",
+     "id": "s12",
      "part": "warnings",
-     "text": "If very low blood sugar happens, the person should get emergency care.",
+     "text": "If very low blood sugar happens, the label says to get emergency care.",
      "section": "warnings_and_cautions",
      "quote": "If severe hypoglycemia occurs, patients should be instructed to seek emergency treatment."
+    },
+    {
+     "id": "s13",
+     "part": "warnings",
+     "text": "It should not be used in people with certain heart rhythm problems, very slow heartbeat, or decompensated heart failure.",
+     "section": "contraindications",
+     "quote": "Metoprolol tartrate tablets are contraindicated in severe bradycardia, second-or third-degree heart block, cardiogenic shock"
     }
    ],
-   "verbatim_raw": 14,
-   "byte_exact_raw": 14,
+   "verbatim_raw": 13,
+   "byte_exact_raw": 13,
    "flagged_partners": [
     "furosemide",
     "sertraline"
    ],
-   "seconds": 78.675
+   "seconds": 76.232
   },
   {
    "name": "furosemide",
@@ -1407,24 +1471,28 @@
      "Loop Diuretic"
     ],
     "class_source": "label",
+    "formulation": "immediate",
+    "formulation_wanted": null,
+    "formulation_mismatch": false,
     "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=2f547f7c-0322-465c-9764-43f955d98ab2",
     "cache_files": [
      "count-generic__furosemide.json",
-     "label-generic__furosemide.json"
+     "label-generic-ir__furosemide.json"
     ],
-    "fetched_at": "2026-11-17T15:09:07.254Z"
+    "fetched_at": "2026-11-17T15:57:47.945Z"
    },
    "stats": {
-    "generated": 15,
-    "passed_first_check": 15,
+    "generated": 14,
+    "passed_first_check": 14,
+    "first_check_failures": {},
     "recovered_by_repair": 0,
     "repair_rounds": 0,
-    "kept": 15,
-    "verbatim_kept": 15
+    "kept": 14,
+    "verbatim_kept": 14
    },
    "review": {
     "status": "applied",
-    "changed": 12,
+    "changed": 11,
     "reverted": 0,
     "reverted_ids": [],
     "note": null
@@ -1434,111 +1502,104 @@
     {
      "id": "s1",
      "part": "uses",
-     "text": "Furosemide treats swelling caused by extra fluid in people with heart failure, liver disease, or kidney disease.",
+     "text": "Furosemide treats swelling caused by too much fluid in the body.",
      "section": "indications_and_usage",
      "quote": "Furosemide is indicated in adults and pediatric patients for the treatment of edema associated with congestive heart failure, cirrhosis of the liver, and renal disease, including the nephrotic syndrome."
     },
     {
      "id": "s2",
      "part": "uses",
-     "text": "It is also used, along with other care, when fluid builds up suddenly in the lungs.",
+     "text": "It is also used with other treatment when fluid builds up in the lungs suddenly.",
      "section": "indications_and_usage",
      "quote": "Furosemide is indicated as adjunctive therapy in acute pulmonary edema."
     },
     {
      "id": "s3",
      "part": "uses",
-     "text": "The shot form is for emergencies or for people who cannot take medicine by mouth.",
+     "text": "This shot is meant for people who cannot take pills or who are in an emergency.",
      "section": "indications_and_usage",
      "quote": "Parenteral therapy should be reserved for patients unable to take oral medication or for patients in emergency clinical situations."
     },
     {
      "id": "s4",
      "part": "how_to_take",
-     "text": "The label says treatment should be fitted to how each person responds.",
+     "text": "Doctors should switch from the shot to pills as soon as they can.",
      "section": "dosage_and_administration",
-     "quote": "Therapy should be individualized according to patient response to gain maximal therapeutic response and to determine the minimal dose needed to maintain that response."
+     "quote": "should be replaced with oral therapy as soon as practical."
     },
     {
      "id": "s5",
      "part": "how_to_take",
-     "text": "The label says close medical supervision is needed.",
-     "section": "dosage_and_administration",
-     "quote": "Close medical supervision is necessary."
-    },
-    {
-     "id": "s6",
-     "part": "how_to_take",
-     "text": "For older adults, the label says the dose should be chosen with care.",
+     "text": "For an older person, the label says the dose should be chosen with care, starting low.",
      "section": "dosage_and_administration",
      "quote": "In general, dose selection for the elderly patient should be cautious, usually starting at the low end of the dosing range"
     },
     {
-     "id": "s7",
+     "id": "s6",
      "part": "how_to_take",
-     "text": "If you feel dizzy when you stand, getting up slowly can usually help.",
+     "text": "Getting up slowly can help with dizziness from low blood pressure.",
      "section": "information_for_patients",
      "quote": "The postural hypotension that sometimes occurs can usually be managed by getting up slowly."
     },
     {
+     "id": "s7",
+     "part": "how_to_take",
+     "text": "People with high blood pressure should avoid some store-bought products for appetite and colds.",
+     "section": "information_for_patients",
+     "quote": "Hypertensive patients should avoid medications that may increase blood pressure, including over-the-counter products for appetite suppression and cold symptoms."
+    },
+    {
      "id": "s8",
      "part": "side_effects",
-     "text": "Some people may feel sick to their stomach, throw up, or have diarrhea or constipation.",
+     "text": "Upset stomach may happen, such as nausea, vomiting, diarrhea or constipation.",
      "section": "adverse_reactions",
-     "quote": "Anorexia Oral and gastric irritation Cramping Diarrhea Constipation Nausea Vomiting"
+     "quote": "Cramping Diarrhea Constipation Nausea Vomiting"
     },
     {
      "id": "s9",
      "part": "side_effects",
-     "text": "Dizziness, headache, and blurry vision can happen.",
+     "text": "Dizziness, headache and blurry vision may happen.",
      "section": "adverse_reactions",
      "quote": "Vertigo Dizziness Headache Blurred vision"
     },
     {
      "id": "s10",
      "part": "side_effects",
-     "text": "Skin rash or itching can happen, and skin may be more sensitive to sunlight.",
-     "section": "information_for_patients",
-     "quote": "The skin of some patients may be more sensitive to the effects of sunlight while taking furosemide."
-    },
-    {
-     "id": "s11",
-     "part": "side_effects",
-     "text": "Blood pressure may drop when standing up, and alcohol or some strong pain medicines can make this worse.",
+     "text": "Alcohol can make dizziness when standing worse.",
      "section": "adverse_reactions",
      "quote": "Orthostatic hypotension may occur and be aggravated by alcohol, barbiturates or narcotics."
     },
     {
-     "id": "s12",
+     "id": "s11",
      "part": "warnings",
-     "text": "Furosemide is a strong diuretic, and too much of it can cause a serious loss of water and salts.",
+     "text": "This is a strong water pill, and too much can drain the body of water and salts.",
      "section": "boxed_warning",
      "quote": "Furosemide is a potent diuretic which, if given in excessive amounts, can lead to a profound diuresis with water and electrolyte depletion."
     },
     {
-     "id": "s13",
+     "id": "s12",
      "part": "warnings",
-     "text": "Losing too much fluid can cause dehydration and a dangerous drop in blood flow, especially in older people.",
+     "text": "Losing too much urine can cause dehydration and poor blood flow, mostly in older people.",
      "section": "precautions",
      "quote": "Excessive diuresis may cause dehydration and blood volume reduction with circulatory collapse and possibly vascular thrombosis and embolism, particularly in elderly patients."
     },
     {
-     "id": "s14",
+     "id": "s13",
      "part": "warnings",
      "text": "Ringing in the ears and hearing loss have been reported.",
      "section": "warnings",
      "quote": "Cases of tinnitus and reversible or irreversible hearing impairment and deafness have been reported."
     },
     {
-     "id": "s15",
+     "id": "s14",
      "part": "warnings",
-     "text": "People who cannot make urine, or who have had an allergic reaction to it, should not use it.",
-     "section": "contraindications",
-     "quote": "Furosemide is contraindicated in patients with anuria and in patients with a history of hypersensitivity to furosemide."
+     "text": "In older people, kidney problems may raise the risk of harmful effects.",
+     "section": "geriatric_use",
+     "quote": "the risk of toxic reactions to this drug may be greater in patients with impaired renal function."
     }
    ],
-   "verbatim_raw": 15,
-   "byte_exact_raw": 15,
+   "verbatim_raw": 14,
+   "byte_exact_raw": 14,
    "flagged_partners": [
     "levothyroxine",
     "lisinopril",
@@ -1548,7 +1609,7 @@
     "sertraline",
     "spironolactone"
    ],
-   "seconds": 81.924
+   "seconds": 83.495
   }
  ],
  "interactions": [
@@ -1677,7 +1738,7 @@
    "flagged": true,
    "flags": [
     {
-     "id": "metformin>furosemide:drug_interactions:2373",
+     "id": "metformin>furosemide:drug_interactions:2148",
      "a": "metformin",
      "b": "furosemide",
      "section": "drug_interactions",

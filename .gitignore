@@ -40,3 +40,6 @@ npm-debug.log*
 .DS_Store
 .vscode/
 .idea/
+
+# offline mock eval output (npm run eval with CAREPOOL_PROVIDER=mock)
+eval/results-mock.*
