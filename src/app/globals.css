@@ -1,0 +1,54 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1c2430;
+  --color-muted: #5b6573;
+  --color-line: #e5e1d8;
+  --color-paper: #faf8f4;
+  --color-card: #ffffff;
+  --color-accent: #0f766e;
+  --color-accent-strong: #0b5c56;
+  --color-accent-soft: #e3f2ef;
+  --color-warn: #92400e;
+  --color-warn-soft: #fef3c7;
+  --color-danger: #9f1d1d;
+  --color-danger-soft: #fde8e7;
+  --color-ok: #166534;
+  --color-ok-soft: #e7f6ec;
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: ui-serif, Georgia, "Times New Roman", serif;
+}
+
+html {
+  font-size: 17px;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Label quotes: the label's own words, set apart from Carepool's. */
+.label-quote {
+  font-family: var(--font-serif);
+  background: #fff7d6;
+  box-shadow: inset 0 -2px 0 #f2c94c;
+  padding: 0 2px;
+  border-radius: 2px;
+}
+
+details > summary {
+  cursor: pointer;
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+:focus-visible {
+  outline: 3px solid #0f766e;
+  outline-offset: 2px;
+  border-radius: 4px;
+}

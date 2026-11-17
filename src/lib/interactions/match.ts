@@ -236,3 +236,19 @@ export function findInteractions(drugs: DrugForMatching[]): PairFinding[] {
   }
   return out.sort((p, q) => Number(q.flagged) - Number(p.flagged) || p.pair.join().localeCompare(q.pair.join()));
 }
+
+/** Matcher input for a medicine the family typed, from its resolved label. */
+export function toMatchingDrug(
+  key: string,
+  typedName: string,
+  label: { generic_names: string[]; brand_names: string[]; sections: Record<string, LabelSection> },
+  classes: string[],
+): DrugForMatching {
+  return {
+    key,
+    display: typedName,
+    names: identityNames(typedName, label.generic_names, label.brand_names),
+    classes,
+    sections: label.sections,
+  };
+}

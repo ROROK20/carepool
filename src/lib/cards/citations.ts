@@ -168,11 +168,17 @@ function groundedIn(token: GroundedToken, quote: string): boolean {
 
 // ── Dose and frequency ───────────────────────────────────────────────
 
-const DOSE_AMOUNT_RE =
-  /\b\d+(?:[.,]\d+)?(?:\s*(?:-|–|to)\s*\d+(?:[.,]\d+)?)?\s*(?:mg|mcg|µg|μg|g|grams?|milligrams?|micrograms?|mL(?!\s*\/\s*min)|ml(?!\s*\/\s*min)|units?|IU|tablets?|capsules?|caplets?|puffs?|drops?|teaspoons?|tablespoons?|tsp|tbsp)(?![A-Za-z])/i;
-const WORD_DOSE_RE = /\b(?:one|two|three|four|half(?:\s+a)?|a\s+half)\s+(?:tablets?|capsules?|caplets?|puffs?|drops?|teaspoons?|tablespoons?)\b/i;
+// A number: digits (with a decimal point or comma), a unicode fraction, or digits with a fraction ("1½").
+const NUM = String.raw`(?:\d+(?:[.,]\d+)?\s*[½¼¾⅓⅔]?|[½¼¾⅓⅔])`;
+const WORD_NUM = String.raw`(?:one|two|three|four|five|six|seven|eight|nine|ten|twelve|fifteen|twenty|twenty-five|thirty|forty|fifty|hundred|half(?:\s+a)?|a\s+half|quarter)`;
+// Units of a dose. Lab-value units are excluded where a label uses them for thresholds:
+// mg/dL and mg/L (blood levels), mL/min (kidney function), mEq/L (electrolytes).
+const UNIT = String.raw`(?:mg(?!\s*\/\s*d?L\b)|mcg|µg|μg|g|grams?|milligrams?(?!\s*per\s+deciliter)|micrograms?|mL(?!\s*\/\s*min)|ml(?!\s*\/\s*min)|milliliters?|cc|units?|IU|mEq(?!\s*\/\s*L)|tablets?|tabs?|capsules?|caps?|caplets?|pills?|puffs?|drops?|sprays?|inhalations?|patch(?:es)?|suppositor(?:y|ies)|lozenges?|packets?|vials?|injections?|applications?|teaspoons?(?:fuls?)?|tablespoons?(?:fuls?)?|tsp|tbsp)`;
+
+const DOSE_AMOUNT_RE = new RegExp(String.raw`(?<![A-Za-z0-9])${NUM}(?:\s*(?:-|–|to)\s*${NUM})?\s*-?\s*${UNIT}(?![A-Za-z])`, "i");
+const WORD_DOSE_RE = new RegExp(String.raw`\b${WORD_NUM}[\s-]+${UNIT}(?![A-Za-z])`, "i");
 const FREQUENCY_RE =
-  /\b(?:once|twice|thrice|one\s+time|two\s+times|three\s+times|four\s+times|\d+\s*times)\s+(?:a\s+|per\s+|each\s+)?(?:day|daily|week|weekly|night|nightly)\b|\bevery\s+\d+(?:\s*(?:to|-)\s*\d+)?\s*(?:hours?|hrs?|days?|weeks?)\b|\b(?:b\.?i\.?d|t\.?i\.?d|q\.?i\.?d|q\.?h\.?s)\b\.?|\bq\s?\d+\s?h\b/i;
+  /\b(?:once|twice|thrice|one\s+time|two\s+times|three\s+times|four\s+times|\d+\s*times)\s+(?:a\s+|per\s+|each\s+|every\s+)?(?:day|daily|week|weekly|night|nightly)\b|\bevery\s+\d+(?:\s*(?:to|-|–)\s*\d+)?\s*(?:hours?|hrs?|days?|weeks?)\b|\bevery\s+other\s+(?:day|night|week)\b|\b(?:on\s+)?alternate\s+days\b|\b(?:b\.?i\.?d|t\.?i\.?d|q\.?i\.?d|q\.?h\.?s|q\.?o\.?d)\b\.?|\bq\s?\d+\s?h\b/i;
 
 /** The first dose amount or dosing frequency in a string, or null. */
 export function doseMention(text: string): string | null {

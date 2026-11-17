@@ -159,11 +159,33 @@ describe("doseMention", () => {
     ["every 12 hours", "every 12 hours"],
     ["three times daily", "three times daily"],
     ["b.i.d.", "b.i.d"],
+    // bypasses found in review, now closed
+    ["a 10-mg tablet", "10-mg"],
+    ["ten milligrams", "ten milligrams"],
+    ["½ tablet", "½ tablet"],
+    ["1½ tablets", "1½ tablets"],
+    ["2 tabs", "2 tabs"],
+    ["5 cc", "5 cc"],
+    ["1 teaspoonful", "1 teaspoonful"],
+    ["apply 1 patch", "1 patch"],
+    ["20 mEq", "20 mEq"],
+    ["every other day", "every other day"],
+    ["on alternate days", "on alternate days"],
   ])("finds %s", (input, found) => {
     expect(doseMention(input)?.toLowerCase().replace(/\.$/, "")).toBe(found.toLowerCase());
   });
 
-  it.each(["Take it at the same time every day.", "eGFR below 30 mL/min/1.73 m2", "in patients 65 years and older", "potassium above 5.5 mEq/L", "the dose may change"])(
+  it.each([
+    "Take it at the same time every day.",
+    "eGFR below 30 mL/min/1.73 m2",
+    "in patients 65 years and older",
+    "potassium above 5.5 mEq/L",
+    "the dose may change",
+    "blood sugar below 70 mg/dL",
+    "a half-life of about 12 hours",
+    "Do not crush or chew the tablet.",
+    "1 in 10 people",
+  ])(
     "does not flag %s",
     (input) => {
       expect(doseMention(input)).toBeNull();

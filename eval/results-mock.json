@@ -1,0 +1,1999 @@
+{
+ "generated_at": "2026-11-17T15:35:23.713Z",
+ "provider": "mock",
+ "models": [
+  "mock"
+ ],
+ "minutes": 0,
+ "cards": [
+  {
+   "name": "lisinopril",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "lisinopril",
+    "matched_by": "generic",
+    "term": "LISINOPRIL",
+    "id": "5f8d0233-0fd0-371e-e063-6294a90a29e1",
+    "set_id": "bf59ff89-a9fa-4fe3-b167-a5d0cba9e438",
+    "version": "14",
+    "effective_time": "20261105",
+    "effective_date": "2026-11-05",
+    "generic_names": [
+     "LISINOPRIL"
+    ],
+    "brand_names": [
+     "LISINOPRIL"
+    ],
+    "manufacturer": "PD-Rx Pharmaceuticals, Inc.",
+    "classes": [
+     "Angiotensin Converting Enzyme Inhibitor"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=bf59ff89-a9fa-4fe3-b167-a5d0cba9e438",
+    "cache_files": [
+     "count-generic__lisinopril.json",
+     "label-generic__lisinopril.json",
+     "ndc-names__lisinopril.json",
+     "ndc-classes__lisinopril.json"
+    ],
+    "fetched_at": "2026-11-17T15:08:57.318Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Lowering blood pressure lowers the risk of fatal and non-fatal cardiovascular events, primarily strokes and myocardial infarctions.",
+     "section": "indications_and_usage",
+     "quote": "Lowering blood pressure lowers the risk of fatal and non-fatal cardiovascular events, primarily strokes and myocardial infarctions."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "These benefits have been seen in controlled trials of antihypertensive drugs from a wide variety of pharmacologic classes.",
+     "section": "indications_and_usage",
+     "quote": "These benefits have been seen in controlled trials of antihypertensive drugs from a wide variety of pharmacologic classes."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Dosage should be adjusted according to blood pressure response.",
+     "section": "dosage_and_administration",
+     "quote": "Dosage should be adjusted according to blood pressure response."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "After the addition of a diuretic, it may be possible to reduce the dose of lisinopril.",
+     "section": "dosage_and_administration",
+     "quote": "After the addition of a diuretic, it may be possible to reduce the dose of lisinopril."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Hypertension In clinical trials in patients with hypertension treated with lisinopril, 5.7% of patients on lisinopril discontinued with adverse reactions.",
+     "section": "adverse_reactions",
+     "quote": "Hypertension In clinical trials in patients with hypertension treated with lisinopril, 5.7% of patients on lisinopril discontinued with adverse reactions."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "The following adverse reactions (events 2% greater on lisinopril than on placebo) were observed with lisinopril alone: headache (by 3.8%), dizziness (by 3.5%), cough (by 2.5%).",
+     "section": "adverse_reactions",
+     "quote": "The following adverse reactions (events 2% greater on lisinopril than on placebo) were observed with lisinopril alone: headache (by 3.8%), dizziness (by 3.5%), cough (by 2.5%)."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "WARNING: FETAL TOXICITY See full prescribing information for complete boxed warning.",
+     "section": "boxed_warning",
+     "quote": "WARNING: FETAL TOXICITY See full prescribing information for complete boxed warning."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "When pregnancy is detected, discontinue lisinopril as soon as possible.",
+     "section": "boxed_warning",
+     "quote": "When pregnancy is detected, discontinue lisinopril as soon as possible."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "furosemide",
+    "metformin",
+    "spironolactone"
+   ],
+   "seconds": 0.067
+  },
+  {
+   "name": "spironolactone",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "spironolactone",
+    "matched_by": "generic",
+    "term": "SPIRONOLACTONE",
+    "id": "5fdd324a-77ac-eda3-e063-6394a90a861d",
+    "set_id": "37066684-5b63-4d3e-ae6a-08c4b3edd7aa",
+    "version": "7",
+    "effective_time": "20261109",
+    "effective_date": "2026-11-09",
+    "generic_names": [
+     "SPIRONOLACTONE"
+    ],
+    "brand_names": [
+     "Spironolactone"
+    ],
+    "manufacturer": "QPharma, Inc.",
+    "classes": [
+     "Aldosterone Antagonist"
+    ],
+    "class_source": "label",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=37066684-5b63-4d3e-ae6a-08c4b3edd7aa",
+    "cache_files": [
+     "count-generic__spironolactone.json",
+     "label-generic__spironolactone.json"
+    ],
+    "fetched_at": "2026-11-17T15:08:58.439Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Spironolactone tablets are usually administered in conjunction with other heart failure therapies.",
+     "section": "indications_and_usage",
+     "quote": "Spironolactone tablets are usually administered in conjunction with other heart failure therapies."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "Lowering blood pressure reduces the risk of fatal and nonfatal cardiovascular events, primarily strokes and myocardial infarctions.",
+     "section": "indications_and_usage",
+     "quote": "Lowering blood pressure reduces the risk of fatal and nonfatal cardiovascular events, primarily strokes and myocardial infarctions."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Edema: Initiate therapy in a hospital setting and titrate slowly.",
+     "section": "dosage_and_administration",
+     "quote": "Edema: Initiate therapy in a hospital setting and titrate slowly."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "In patients unsuitable for surgery use the lowest effective dosage determined for the individual patient ( 2.5) .",
+     "section": "dosage_and_administration",
+     "quote": "In patients unsuitable for surgery use the lowest effective dosage determined for the individual patient ( 2.5) ."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Because these reactions were reported voluntarily from a population of uncertain size, it is not always possible to estimate their frequency, reliably, or to establish a causal relationship to drug exposure.",
+     "section": "adverse_reactions",
+     "quote": "Because these reactions were reported voluntarily from a population of uncertain size, it is not always possible to estimate their frequency, reliably, or to establish a causal relationship to drug exposure."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Digestive: Gastric bleeding, ulceration, gastritis, diarrhea and cramping, nausea, vomiting.",
+     "section": "adverse_reactions",
+     "quote": "Digestive: Gastric bleeding, ulceration, gastritis, diarrhea and cramping, nausea, vomiting."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "Hypotension and Worsening Renal Function: Monitor volume status and renal function periodically (5.2).",
+     "section": "warnings_and_cautions",
+     "quote": "Hypotension and Worsening Renal Function: Monitor volume status and renal function periodically (5.2)."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "Electrolyte and Metabolic Abnormalities: Monitor serum electrolytes, uric acid and blood glucose periodically (5.3).",
+     "section": "warnings_and_cautions",
+     "quote": "Electrolyte and Metabolic Abnormalities: Monitor serum electrolytes, uric acid and blood glucose periodically (5.3)."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "furosemide",
+    "lisinopril"
+   ],
+   "seconds": 0.069
+  },
+  {
+   "name": "warfarin",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "warfarin",
+    "matched_by": "generic",
+    "term": "WARFARIN SODIUM",
+    "id": "5fdb62ce-0dd1-4499-e063-6394a90adf7e",
+    "set_id": "61ab23a7-bc67-4777-854a-bf43c788a69a",
+    "version": "3",
+    "effective_time": "20261109",
+    "effective_date": "2026-11-09",
+    "generic_names": [
+     "WARFARIN SODIUM"
+    ],
+    "brand_names": [
+     "Warfarin Sodium"
+    ],
+    "manufacturer": "REMEDYREPACK INC.",
+    "classes": [
+     "Vitamin K Antagonist"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=61ab23a7-bc67-4777-854a-bf43c788a69a",
+    "cache_files": [
+     "count-generic__warfarin.json",
+     "label-generic__warfarin-sodium.json",
+     "ndc-names__warfarin.json",
+     "ndc-classes__warfarin-sodium.json"
+    ],
+    "fetched_at": "2026-11-17T15:08:58.676Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Prophylaxis and treatment of thromboembolic complications associated with atrial fibrillation (AF) and/or cardiac valve replacement.",
+     "section": "indications_and_usage",
+     "quote": "Prophylaxis and treatment of thromboembolic complications associated with atrial fibrillation (AF) and/or cardiac valve replacement."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "Reduction in the risk of death, recurrent myocardial infarction (MI), and thromboembolic events such as stroke or systemic embolization after myocardial infarction.",
+     "section": "indications_and_usage",
+     "quote": "Reduction in the risk of death, recurrent myocardial infarction (MI), and thromboembolic events such as stroke or systemic embolization after myocardial infarction."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "( 2.1 , 2.2 ) Knowledge of genotype can inform initial dose selection.",
+     "section": "dosage_and_administration",
+     "quote": "( 2.1 , 2.2 ) Knowledge of genotype can inform initial dose selection."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "( 2.3 ) Monitoring: Obtain daily INR determinations upon initiation until stable in the therapeutic range.",
+     "section": "dosage_and_administration",
+     "quote": "( 2.3 ) Monitoring: Obtain daily INR determinations upon initiation until stable in the therapeutic range."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Cholestatic hepatitis has been associated with concomitant administration of warfarin sodium and ticlopidine.",
+     "section": "adverse_reactions",
+     "quote": "Cholestatic hepatitis has been associated with concomitant administration of warfarin sodium and ticlopidine."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "( 6 ) To report SUSPECTED ADVERSE REACTIONS, contact Taro Pharmaceuticals U.S.A., Inc., at 1-866-923-4914 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch .",
+     "section": "adverse_reactions",
+     "quote": "( 6 ) To report SUSPECTED ADVERSE REACTIONS, contact Taro Pharmaceuticals U.S.A., Inc., at 1-866-923-4914 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch ."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "WARNING: BLEEDING RISK See full prescribing information for complete boxed warning.",
+     "section": "boxed_warning",
+     "quote": "WARNING: BLEEDING RISK See full prescribing information for complete boxed warning."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "Warfarin sodium can cause major or fatal bleeding.",
+     "section": "boxed_warning",
+     "quote": "Warfarin sodium can cause major or fatal bleeding."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "atorvastatin",
+    "levothyroxine",
+    "omeprazole",
+    "sertraline"
+   ],
+   "seconds": 0.073
+  },
+  {
+   "name": "sertraline",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "sertraline",
+    "matched_by": "generic",
+    "term": "SERTRALINE HYDROCHLORIDE",
+    "id": "5f8b1a05-8f44-9e58-e063-6294a90a23fa",
+    "set_id": "687ebdc4-6946-454e-8d46-3207488ccf32",
+    "version": "13",
+    "effective_time": "20261105",
+    "effective_date": "2026-11-05",
+    "generic_names": [
+     "SERTRALINE HYDROCHLORIDE"
+    ],
+    "brand_names": [
+     "Sertraline Hydrochloride"
+    ],
+    "manufacturer": "REMEDYREPACK INC.",
+    "classes": [
+     "Serotonin Reuptake Inhibitor"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=687ebdc4-6946-454e-8d46-3207488ccf32",
+    "cache_files": [
+     "count-generic__sertraline.json",
+     "label-generic__sertraline-hydrochloride.json",
+     "ndc-names__sertraline.json",
+     "ndc-classes__sertraline-hydrochloride.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:01.820Z"
+   },
+   "stats": {
+    "generated": 7,
+    "passed_first_check": 6,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 6,
+    "verbatim_kept": 6
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s7",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "how_to_take",
+     "text": "Given the 24-hour elimination half-life of sertraline hydrochloride, the recommended interval between dose changes is one week.",
+     "section": "dosage_and_administration",
+     "quote": "Given the 24-hour elimination half-life of sertraline hydrochloride, the recommended interval between dose changes is one week."
+    },
+    {
+     "id": "s2",
+     "part": "how_to_take",
+     "text": "Intermittent dosing would be repeated with each new cycle.",
+     "section": "dosage_and_administration",
+     "quote": "Intermittent dosing would be repeated with each new cycle."
+    },
+    {
+     "id": "s3",
+     "part": "side_effects",
+     "text": "These 3,066 patients exposed to sertraline hydrochloride for 8 to12 weeks represent 568 patient-years of exposure.",
+     "section": "adverse_reactions",
+     "quote": "These 3,066 patients exposed to sertraline hydrochloride for 8 to12 weeks represent 568 patient-years of exposure."
+    },
+    {
+     "id": "s4",
+     "part": "side_effects",
+     "text": "The mean age was 40 years; 57% were females and 43% were males.",
+     "section": "adverse_reactions",
+     "quote": "The mean age was 40 years; 57% were females and 43% were males."
+    },
+    {
+     "id": "s5",
+     "part": "warnings",
+     "text": "WARNING: SUICIDAL THOUGHTS AND BEHAVIORS Antidepressants increased the risk of suicidal thoughts and behavior in pediatric and young adult patients in short-term studies.",
+     "section": "boxed_warning",
+     "quote": "WARNING: SUICIDAL THOUGHTS AND BEHAVIORS Antidepressants increased the risk of suicidal thoughts and behavior in pediatric and young adult patients in short-term studies."
+    },
+    {
+     "id": "s6",
+     "part": "warnings",
+     "text": "WARNING: SUICIDAL THOUGHTS AND BEHAVIORS See full prescribing information for complete boxed warning.",
+     "section": "boxed_warning",
+     "quote": "WARNING: SUICIDAL THOUGHTS AND BEHAVIORS See full prescribing information for complete boxed warning."
+    }
+   ],
+   "verbatim_raw": 6,
+   "byte_exact_raw": 6,
+   "flagged_partners": [
+    "furosemide",
+    "levothyroxine",
+    "metoprolol",
+    "warfarin"
+   ],
+   "seconds": 0.082
+  },
+  {
+   "name": "metformin",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "metformin",
+    "matched_by": "generic",
+    "term": "METFORMIN HYDROCHLORIDE",
+    "id": "5fec4220-70f4-b97f-e063-6394a90ad557",
+    "set_id": "ec43efb2-8a50-4bac-9576-f4303841a497",
+    "version": "2",
+    "effective_time": "20261110",
+    "effective_date": "2026-11-10",
+    "generic_names": [
+     "METFORMIN HYDROCHLORIDE"
+    ],
+    "brand_names": [
+     "Metformin Hydrochloride"
+    ],
+    "manufacturer": "REMEDYREPACK INC.",
+    "classes": [
+     "Biguanide"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=ec43efb2-8a50-4bac-9576-f4303841a497",
+    "cache_files": [
+     "count-generic__metformin.json",
+     "label-generic__metformin-hydrochloride.json",
+     "ndc-names__metformin.json",
+     "ndc-classes__metformin-hydrochloride.json"
+    ],
+    "fetched_at": "2026-11-17T15:08:59.473Z"
+   },
+   "stats": {
+    "generated": 8,
+    "passed_first_check": 7,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 7,
+    "verbatim_kept": 7
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s8",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Metformin hydrochloride extended-release tablets are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus.",
+     "section": "indications_and_usage",
+     "quote": "Metformin hydrochloride extended-release tablets are a biguanide indicated as an adjunct to diet and exercise to improve glycemic control in adults and pediatric patients 10 years of age and older with type 2 diabetes mellitus."
+    },
+    {
+     "id": "s2",
+     "part": "how_to_take",
+     "text": "If a dose of metformin hydrochloride extended-release tablets is missed, instruct patients not to take two doses the same day and to resume their usual dose of metformin hydrochloride extended-release tablets with the next schedule dose.",
+     "section": "dosage_and_administration",
+     "quote": "If a dose of metformin hydrochloride extended-release tablets is missed, instruct patients not to take two doses the same day and to resume their usual dose of metformin hydrochloride extended-release tablets with the next schedule dose."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Metformin hydrochloride extended-release tablets are contraindicated in patients with an estimated glomerular filtration rate (eGFR) below 30 mL/minute/1.73 m 2 .",
+     "section": "dosage_and_administration",
+     "quote": "Metformin hydrochloride extended-release tablets are contraindicated in patients with an estimated glomerular filtration rate (eGFR) below 30 mL/minute/1.73 m 2 ."
+    },
+    {
+     "id": "s4",
+     "part": "side_effects",
+     "text": "Metformin Hydrochloride Extended-Release Tablets In placebo-controlled trials, in adults with type 2 diabetes mellitus, 781 patients were administered metformin hydrochloride extended-release tablets.",
+     "section": "adverse_reactions",
+     "quote": "Metformin Hydrochloride Extended-Release Tablets In placebo-controlled trials, in adults with type 2 diabetes mellitus, 781 patients were administered metformin hydrochloride extended-release tablets."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Adverse reactions reported in greater than 5% of the metformin hydrochloride extended-release tablets patients, and that were more common in metformin hydrochloride extended-release tablets - than placebo-treated patients, are listed in Table 1.",
+     "section": "adverse_reactions",
+     "quote": "Adverse reactions reported in greater than 5% of the metformin hydrochloride extended-release tablets patients, and that were more common in metformin hydrochloride extended-release tablets - than placebo-treated patients, are listed in Table 1."
+    },
+    {
+     "id": "s6",
+     "part": "warnings",
+     "text": "WARNING: LACTIC ACIDOSIS Postmarketing cases of metformin-associated lactic acidosis have resulted in death, hypothermia, hypotension, and resistant bradyarrhythmias.",
+     "section": "boxed_warning",
+     "quote": "WARNING: LACTIC ACIDOSIS Postmarketing cases of metformin-associated lactic acidosis have resulted in death, hypothermia, hypotension, and resistant bradyarrhythmias."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "The onset of metformin-associated lactic acidosis is often subtle, accompanied only by nonspecific symptoms such as malaise, myalgias, respiratory distress, somnolence, and abdominal pain.",
+     "section": "boxed_warning",
+     "quote": "The onset of metformin-associated lactic acidosis is often subtle, accompanied only by nonspecific symptoms such as malaise, myalgias, respiratory distress, somnolence, and abdominal pain."
+    }
+   ],
+   "verbatim_raw": 7,
+   "byte_exact_raw": 7,
+   "flagged_partners": [
+    "furosemide",
+    "levothyroxine",
+    "lisinopril"
+   ],
+   "seconds": 0.086
+  },
+  {
+   "name": "atorvastatin",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "atorvastatin",
+    "matched_by": "generic",
+    "term": "ATORVASTATIN CALCIUM",
+    "id": "5f9cbdd6-7e90-45f6-e063-6294a90ac535",
+    "set_id": "4e06b20d-cc5d-46eb-991b-5972248de3af",
+    "version": "14",
+    "effective_time": "20261106",
+    "effective_date": "2026-11-06",
+    "generic_names": [
+     "ATORVASTATIN CALCIUM"
+    ],
+    "brand_names": [
+     "ATORVASTATIN CALCIUM"
+    ],
+    "manufacturer": "Accord Healthcare Inc.",
+    "classes": [
+     "HMG-CoA Reductase Inhibitor"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=4e06b20d-cc5d-46eb-991b-5972248de3af",
+    "cache_files": [
+     "count-generic__atorvastatin.json",
+     "label-generic__atorvastatin-calcium.json",
+     "ndc-names__atorvastatin.json",
+     "ndc-classes__atorvastatin-calcium.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:00.260Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Adults and pediatric patients aged 10 years and older with heterozygous familial hypercholesterolemia (HeFH).",
+     "section": "indications_and_usage",
+     "quote": "Adults and pediatric patients aged 10 years and older with heterozygous familial hypercholesterolemia (HeFH)."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "As an adjunct to other LDL-C-lowering therapies, or alone if such treatments are unavailable, to reduce LDL-C in adults and pediatric patients aged 10 years and older with homozygous familial hypercholesterolemia (HoFH).",
+     "section": "indications_and_usage",
+     "quote": "As an adjunct to other LDL-C-lowering therapies, or alone if such treatments are unavailable, to reduce LDL-C in adults and pediatric patients aged 10 years and older with homozygous familial hypercholesterolemia (HoFH)."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Assess LDL-C when clinically appropriate, as early as 4 weeks after initiating atorvastatin calcium tablets, and adjust dosage if necessary ( 2.1 ).",
+     "section": "dosage_and_administration",
+     "quote": "Assess LDL-C when clinically appropriate, as early as 4 weeks after initiating atorvastatin calcium tablets, and adjust dosage if necessary ( 2.1 )."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "See full prescribing information for atorvastatin calcium tablets dosage modifications due to drug interactions ( 2.5 ).",
+     "section": "dosage_and_administration",
+     "quote": "See full prescribing information for atorvastatin calcium tablets dosage modifications due to drug interactions ( 2.5 )."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "To report SUSPECTED ADVERSE REACTIONS, contact Accord Healthcare Inc. at 1-866-941-7875 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch.",
+     "section": "adverse_reactions",
+     "quote": "To report SUSPECTED ADVERSE REACTIONS, contact Accord Healthcare Inc. at 1-866-941-7875 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Table 1 summarizes adverse reactions reported in ≥ 2% and at a rate greater than placebo in patients treated with atorvastatin calcium tablets (n=8,755), from seventeen placebo-controlled trials.",
+     "section": "adverse_reactions",
+     "quote": "Table 1 summarizes adverse reactions reported in ≥ 2% and at a rate greater than placebo in patients treated with atorvastatin calcium tablets (n=8,755), from seventeen placebo-controlled trials."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "Discontinue atorvastatin calcium tablets if markedly elevated CK levels occur or myopathy is diagnosed or suspected.",
+     "section": "warnings_and_cautions",
+     "quote": "Discontinue atorvastatin calcium tablets if markedly elevated CK levels occur or myopathy is diagnosed or suspected."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "Temporarily discontinue atorvastatin calcium tablets in patients experiencing an acute or serious condition at high risk of developing renal failure secondary to rhabdomyolysis.",
+     "section": "warnings_and_cautions",
+     "quote": "Temporarily discontinue atorvastatin calcium tablets in patients experiencing an acute or serious condition at high risk of developing renal failure secondary to rhabdomyolysis."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "warfarin"
+   ],
+   "seconds": 0.093
+  },
+  {
+   "name": "omeprazole",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "omeprazole",
+    "matched_by": "generic",
+    "term": "OMEPRAZOLE",
+    "id": "5fecd52d-67f5-91f5-e063-6394a90a62e7",
+    "set_id": "5fecd5fd-fac7-8fc7-e063-6394a90a09a0",
+    "version": "1",
+    "effective_time": "20261110",
+    "effective_date": "2026-11-10",
+    "generic_names": [
+     "OMEPRAZOLE"
+    ],
+    "brand_names": [
+     "Omeprazole"
+    ],
+    "manufacturer": "Coupler LLC",
+    "classes": [
+     "Proton Pump Inhibitor"
+    ],
+    "class_source": "label",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5fecd5fd-fac7-8fc7-e063-6394a90a09a0",
+    "cache_files": [
+     "count-generic__omeprazole.json",
+     "label-generic__omeprazole.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:06.022Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Some patients may require an additional four weeks of therapy.",
+     "section": "indications_and_usage",
+     "quote": "Some patients may require an additional four weeks of therapy."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "Triple Therapy Omeprazole delayed-release capsules in combination with clarithromycin and amoxicillin, is indicated for treatment of patients with H. pylori infection and duodenal ulcer disease (active or up to 1-year history) to eradicate H. pylori in adults.",
+     "section": "indications_and_usage",
+     "quote": "Triple Therapy Omeprazole delayed-release capsules in combination with clarithromycin and amoxicillin, is indicated for treatment of patients with H. pylori infection and duodenal ulcer disease (active or up to 1-year history) to eradicate H. pylori in adults."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Some patients with Zollinger-Ellison syndrome have been treated continuously for more than 5 years.",
+     "section": "dosage_and_administration",
+     "quote": "Some patients with Zollinger-Ellison syndrome have been treated continuously for more than 5 years."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "If a patient does not respond to 8 weeks of treatment, an additional 4 weeks of treatment may be given.",
+     "section": "dosage_and_administration",
+     "quote": "If a patient does not respond to 8 weeks of treatment, an additional 4 weeks of treatment may be given."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "( 6 ) Pediatric patients (2 to 16 years of age): Safety profile similar to that in adults, except that respiratory system events and fever were the most frequently reported reactions in pediatric studies.",
+     "section": "adverse_reactions",
+     "quote": "( 6 ) Pediatric patients (2 to 16 years of age): Safety profile similar to that in adults, except that respiratory system events and fever were the most frequently reported reactions in pediatric studies."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "( 8.4 ) To report SUSPECTED ADVERSE REACTIONS, contact Glenmark Pharmaceuticals Inc., USA at 1 (888) 721-7115 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch.",
+     "section": "adverse_reactions",
+     "quote": "( 8.4 ) To report SUSPECTED ADVERSE REACTIONS, contact Glenmark Pharmaceuticals Inc., USA at 1 (888) 721-7115 or FDA at 1-800-FDA-1088 or www.fda.gov/medwatch."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "Consider additional follow-up and diagnostic testing.",
+     "section": "warnings_and_cautions",
+     "quote": "Consider additional follow-up and diagnostic testing."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "( 5.1 ) Acute Tubulointerstitial Nephritis: discontinue treatment and evaluate patients.",
+     "section": "warnings_and_cautions",
+     "quote": "( 5.1 ) Acute Tubulointerstitial Nephritis: discontinue treatment and evaluate patients."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "furosemide",
+    "levothyroxine",
+    "warfarin"
+   ],
+   "seconds": 0.103
+  },
+  {
+   "name": "levothyroxine",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "levothyroxine",
+    "matched_by": "generic",
+    "term": "LEVOTHYROXINE SODIUM",
+    "id": "5c3b27b1-6816-47d2-905f-96924744ba38",
+    "set_id": "0db62c57-d020-4ddb-b24a-ecb349ce3850",
+    "version": "1",
+    "effective_time": "20261112",
+    "effective_date": "2026-11-12",
+    "generic_names": [
+     "LEVOTHYROXINE SODIUM"
+    ],
+    "brand_names": [
+     "LEVOTHYROXINE SODIUM"
+    ],
+    "manufacturer": "A-S Medication Solutions",
+    "classes": [
+     "l-Thyroxine"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=0db62c57-d020-4ddb-b24a-ecb349ce3850",
+    "cache_files": [
+     "count-generic__levothyroxine.json",
+     "label-generic__levothyroxine-sodium.json",
+     "ndc-names__levothyroxine.json",
+     "ndc-classes__levothyroxine-sodium.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:04.032Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Levothyroxine sodium tablets are not indicated for treatment of hypothyroidism during the recovery phase of subacute thyroiditis.",
+     "section": "indications_and_usage",
+     "quote": "Levothyroxine sodium tablets are not indicated for treatment of hypothyroidism during the recovery phase of subacute thyroiditis."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "( 1 ) Pituitary Thyrotropin (Thyroid-Stimulating Hormone, TSH) Suppression: As an adjunct to surgery and radioiodine therapy in the management of thyrotropin-dependent well-differentiated thyroid cancer.",
+     "section": "indications_and_usage",
+     "quote": "( 1 ) Pituitary Thyrotropin (Thyroid-Stimulating Hormone, TSH) Suppression: As an adjunct to surgery and radioiodine therapy in the management of thyrotropin-dependent well-differentiated thyroid cancer."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "( 2.1 ) Administer at least 4 hours before or after drugs that are known to interfere with absorption.",
+     "section": "dosage_and_administration",
+     "quote": "( 2.1 ) Administer at least 4 hours before or after drugs that are known to interfere with absorption."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "( 2.1 ) Evaluate the need for dose adjustments when regularly administering within one hour of certain foods that may affect absorption.",
+     "section": "dosage_and_administration",
+     "quote": "( 2.1 ) Evaluate the need for dose adjustments when regularly administering within one hour of certain foods that may affect absorption."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Adverse Reactions in Pediatric Patients Pseudotumor cerebri and slipped capital femoral epiphysis have been reported in pediatric patients receiving levothyroxine therapy.",
+     "section": "adverse_reactions",
+     "quote": "Adverse Reactions in Pediatric Patients Pseudotumor cerebri and slipped capital femoral epiphysis have been reported in pediatric patients receiving levothyroxine therapy."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Overtreatment may result in craniosynostosis in infants who have not undergone complete closure of the fontanelles, and in premature closure of the epiphyses in pediatric patients still experiencing growth with resultant compromised adult height.",
+     "section": "adverse_reactions",
+     "quote": "Overtreatment may result in craniosynostosis in infants who have not undergone complete closure of the fontanelles, and in premature closure of the epiphyses in pediatric patients still experiencing growth with resultant compromised adult height."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "WARNING: NOT FOR TREATMENT OF OBESITY OR FOR WEIGHT LOSS Thyroid hormones, including levothyroxine sodium, either alone or with other therapeutic agents, should not be used for the treatment of obesity or for weight loss.",
+     "section": "boxed_warning",
+     "quote": "WARNING: NOT FOR TREATMENT OF OBESITY OR FOR WEIGHT LOSS Thyroid hormones, including levothyroxine sodium, either alone or with other therapeutic agents, should not be used for the treatment of obesity or for weight loss."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "In euthyroid patients, doses within the range of daily hormonal requirements are ineffective for weight reduction.",
+     "section": "boxed_warning",
+     "quote": "In euthyroid patients, doses within the range of daily hormonal requirements are ineffective for weight reduction."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "furosemide",
+    "metformin",
+    "omeprazole",
+    "sertraline",
+    "warfarin"
+   ],
+   "seconds": 0.105
+  },
+  {
+   "name": "metoprolol",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "metoprolol",
+    "matched_by": "generic",
+    "term": "METOPROLOL TARTRATE",
+    "id": "5fdd39b3-5e30-f17c-e063-6394a90aeac1",
+    "set_id": "5fdd39b3-5e2f-f17c-e063-6394a90aeac1",
+    "version": "1",
+    "effective_time": "20261109",
+    "effective_date": "2026-11-09",
+    "generic_names": [
+     "METOPROLOL TARTRATE"
+    ],
+    "brand_names": [
+     "Metoprolol Tartrate"
+    ],
+    "manufacturer": "Direct_Rx",
+    "classes": [
+     "beta-Adrenergic Blocker"
+    ],
+    "class_source": "ndc",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=5fdd39b3-5e2f-f17c-e063-6394a90aeac1",
+    "cache_files": [
+     "count-generic__metoprolol.json",
+     "label-generic__metoprolol-tartrate.json",
+     "ndc-names__metoprolol.json",
+     "ndc-classes__metoprolol-tartrate.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:06.483Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "Lowering blood pressure lowers the risk of fatal and non-fatal cardiovascular events, primarily strokes and myocardial infarctions.",
+     "section": "indications_and_usage",
+     "quote": "Lowering blood pressure lowers the risk of fatal and non-fatal cardiovascular events, primarily strokes and myocardial infarctions."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "These benefits have been seen in controlled trials of antihypertensive drugs from a wide variety of pharmacologic classes including metoprolol.",
+     "section": "indications_and_usage",
+     "quote": "These benefits have been seen in controlled trials of antihypertensive drugs from a wide variety of pharmacologic classes including metoprolol."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "Metoprolol tartrate tablets should be taken with or immediately following meals.",
+     "section": "dosage_and_administration",
+     "quote": "Metoprolol tartrate tablets should be taken with or immediately following meals."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "Adjust dosage at weekly (or longer) intervals until optimum blood pressure reduction is achieved.",
+     "section": "dosage_and_administration",
+     "quote": "Adjust dosage at weekly (or longer) intervals until optimum blood pressure reduction is achieved."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "Hypertension and Angina Most adverse effects have been mild and transient.",
+     "section": "adverse_reactions",
+     "quote": "Hypertension and Angina Most adverse effects have been mild and transient."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Central Nervous System: Tiredness and dizziness have occurred in about 10% of patients.",
+     "section": "adverse_reactions",
+     "quote": "Central Nervous System: Tiredness and dizziness have occurred in about 10% of patients."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "When discontinuing chronically administered metoprolol tartrate, particularly in patients with ischemic heart disease, gradually reduce the dosage over a period of 1 to 2 weeks and monitor the patient.",
+     "section": "warnings_and_cautions",
+     "quote": "When discontinuing chronically administered metoprolol tartrate, particularly in patients with ischemic heart disease, gradually reduce the dosage over a period of 1 to 2 weeks and monitor the patient."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "If angina markedly worsens or acute coronary ischemia develops, promptly reinstate metoprolol tartrate, and take measures appropriate for the management of unstable angina.",
+     "section": "warnings_and_cautions",
+     "quote": "If angina markedly worsens or acute coronary ischemia develops, promptly reinstate metoprolol tartrate, and take measures appropriate for the management of unstable angina."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "furosemide",
+    "sertraline"
+   ],
+   "seconds": 0.107
+  },
+  {
+   "name": "furosemide",
+   "ok": true,
+   "error": null,
+   "label": {
+    "query": "furosemide",
+    "matched_by": "generic",
+    "term": "FUROSEMIDE",
+    "id": "5f58a690-19db-8254-e063-6294a90aad77",
+    "set_id": "2f547f7c-0322-465c-9764-43f955d98ab2",
+    "version": "4",
+    "effective_time": "20261102",
+    "effective_date": "2026-11-02",
+    "generic_names": [
+     "FUROSEMIDE"
+    ],
+    "brand_names": [
+     "Furosemide"
+    ],
+    "manufacturer": "Micro Labs Limited",
+    "classes": [
+     "Loop Diuretic"
+    ],
+    "class_source": "label",
+    "dailymed_url": "https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=2f547f7c-0322-465c-9764-43f955d98ab2",
+    "cache_files": [
+     "count-generic__furosemide.json",
+     "label-generic__furosemide.json"
+    ],
+    "fetched_at": "2026-11-17T15:09:07.254Z"
+   },
+   "stats": {
+    "generated": 9,
+    "passed_first_check": 8,
+    "recovered_by_repair": 0,
+    "repair_rounds": 1,
+    "kept": 8,
+    "verbatim_kept": 8
+   },
+   "review": {
+    "status": "unchanged",
+    "changed": 0,
+    "reverted": 0,
+    "reverted_ids": [],
+    "note": null
+   },
+   "removed": [
+    {
+     "id": "s9",
+     "part": "uses",
+     "text": "It also cures the common cold.",
+     "section": "indications_and_usage",
+     "quote": "also cures the common cold",
+     "reason": "QUOTE_NOT_FOUND",
+     "detail": "The quote does not appear word for word in the indications_and_usage section."
+    }
+   ],
+   "sentences": [
+    {
+     "id": "s1",
+     "part": "uses",
+     "text": "INDICATIONS AND USAGE Parenteral therapy should be reserved for patients unable to take oral medication or for patients in emergency clinical situations.",
+     "section": "indications_and_usage",
+     "quote": "INDICATIONS AND USAGE Parenteral therapy should be reserved for patients unable to take oral medication or for patients in emergency clinical situations."
+    },
+    {
+     "id": "s2",
+     "part": "uses",
+     "text": "Edema: Furosemide is indicated in adults and pediatric patients for the treatment of edema associated with congestive heart failure, cirrhosis of the liver, and renal disease, including the nephrotic syndrome.",
+     "section": "indications_and_usage",
+     "quote": "Edema: Furosemide is indicated in adults and pediatric patients for the treatment of edema associated with congestive heart failure, cirrhosis of the liver, and renal disease, including the nephrotic syndrome."
+    },
+    {
+     "id": "s3",
+     "part": "how_to_take",
+     "text": "DOSAGE AND ADMINISTRATION Adults: Parenteral therapy with Furosemide Injection should be used only in patients unable to take oral medication or in emergency situations and should be replaced with oral therapy as soon as practical.",
+     "section": "dosage_and_administration",
+     "quote": "DOSAGE AND ADMINISTRATION Adults: Parenteral therapy with Furosemide Injection should be used only in patients unable to take oral medication or in emergency situations and should be replaced with oral therapy as soon as practical."
+    },
+    {
+     "id": "s4",
+     "part": "how_to_take",
+     "text": "The intravenous dose should be given slowly (1 to 2 minutes).",
+     "section": "dosage_and_administration",
+     "quote": "The intravenous dose should be given slowly (1 to 2 minutes)."
+    },
+    {
+     "id": "s5",
+     "part": "side_effects",
+     "text": "ADVERSE REACTIONS Adverse reactions are categorized below by organ system and listed by decreasing severity.",
+     "section": "adverse_reactions",
+     "quote": "ADVERSE REACTIONS Adverse reactions are categorized below by organ system and listed by decreasing severity."
+    },
+    {
+     "id": "s6",
+     "part": "side_effects",
+     "text": "Increase in cholesterol and triglyceride serum levels.",
+     "section": "adverse_reactions",
+     "quote": "Increase in cholesterol and triglyceride serum levels."
+    },
+    {
+     "id": "s7",
+     "part": "warnings",
+     "text": "WARNING Furosemide is a potent diuretic which, if given in excessive amounts, can lead to a profound diuresis with water and electrolyte depletion.",
+     "section": "boxed_warning",
+     "quote": "WARNING Furosemide is a potent diuretic which, if given in excessive amounts, can lead to a profound diuresis with water and electrolyte depletion."
+    },
+    {
+     "id": "s8",
+     "part": "warnings",
+     "text": "Therefore, careful medical supervision is required and dose and dose schedule must be adjusted to the individual patient's needs (see DOSAGE AND ADMINISTRATION ).",
+     "section": "boxed_warning",
+     "quote": "Therefore, careful medical supervision is required and dose and dose schedule must be adjusted to the individual patient's needs (see DOSAGE AND ADMINISTRATION )."
+    }
+   ],
+   "verbatim_raw": 8,
+   "byte_exact_raw": 8,
+   "flagged_partners": [
+    "levothyroxine",
+    "lisinopril",
+    "metformin",
+    "metoprolol",
+    "omeprazole",
+    "sertraline",
+    "spironolactone"
+   ],
+   "seconds": 0.108
+  }
+ ],
+ "interactions": [
+  {
+   "pair": [
+    "atorvastatin",
+    "warfarin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "warfarin>atorvastatin:drug_interactions:3002",
+     "a": "warfarin",
+     "b": "atorvastatin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "atorvastatin",
+     "class_name": null,
+     "matched_text": "atorvastatin",
+     "quote": "thiabendazole, ticlopidine, verapamil, zileuton montelukast, moricizine, omeprazole, phenobarbital, phenytoin, cigarette smoking CYP3A4 alprazolam, amiodarone, amlodipine, amprenavir, aprepitant, atorvastatin, atazanavir, bicalutamide, cilostazol, cimetidine, ciprofloxacin, clarithromycin, conivaptan, cyclosporine, darunavir/ritonavir, diltiazem, erythromycin, fluconazole, fluoxetine, fluvoxamine,",
+     "clipped_start": true,
+     "clipped_end": true,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "levothyroxine"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "levothyroxine>furosemide:drug_interactions:2879",
+     "a": "levothyroxine",
+     "b": "furosemide",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "furosemide",
+     "class_name": null,
+     "matched_text": "Furosemide",
+     "quote": "Other drugs: Carbamazepine Furosemide (> 80 mg IV) Heparin Hydantoins Non-Steroidal Anti-inflammatory Drugs - Fenamates These drugs may cause protein-binding site displacement.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "lisinopril"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "furosemide>lisinopril:drug_interactions:1113",
+     "a": "furosemide",
+     "b": "lisinopril",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "angiotensin converting enzyme inhibitor",
+     "class_name": "Angiotensin Converting Enzyme Inhibitor",
+     "matched_text": "angiotensin converting enzyme inhibitors",
+     "quote": "Furosemide combined with angiotensin converting enzyme inhibitors or angiotensin II receptor blockers may lead to severe hypotension and deterioration in renal function, including renal failure.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "furosemide>lisinopril:precautions:5530",
+     "a": "furosemide",
+     "b": "lisinopril",
+     "section": "precautions",
+     "section_title": "Precautions",
+     "kind": "class",
+     "term": "angiotensin converting enzyme inhibitor",
+     "class_name": "Angiotensin Converting Enzyme Inhibitor",
+     "matched_text": "angiotensin converting enzyme inhibitors",
+     "quote": "Furosemide combined with angiotensin converting enzyme inhibitors or angiotensin II receptor blockers may lead to severe hypotension and deterioration in renal function, including renal failure.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "lisinopril>furosemide:drug_interactions:0",
+     "a": "lisinopril",
+     "b": "furosemide",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "Diuretics",
+     "quote": "7 DRUG INTERACTIONS Diuretics: Excessive drop in blood pressure (7.1) NSAIDS: Increased risk of renal impairment and loss of antihypertensive efficacy (7.3) Dual inhibition of the renin-angiotensin system: Increased risk of renal",
+     "clipped_start": false,
+     "clipped_end": true,
+     "polarity": "caution"
+    },
+    {
+     "id": "lisinopril>furosemide:warnings_and_cautions:4465",
+     "a": "lisinopril",
+     "b": "furosemide",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretic",
+     "quote": "Patients at risk of excessive hypotension include those with the following conditions or characteristics: heart failure with systolic blood pressure below 100 mmHg, ischemic heart disease, cerebrovascular disease, hyponatremia, high dose diuretic therapy, renal dialysis, or severe volume and/or salt depletion of any etiology.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "metformin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "metformin>furosemide:drug_interactions:2373",
+     "a": "metformin",
+     "b": "furosemide",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretics",
+     "quote": "Examples: Thiazides and other diuretics, corticosteroids, phenothiazines, thyroid products, estrogens, oral contraceptives, phenytoin, nicotinic acid, sympathomimetics, calcium channel blockers, and isoniazid.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "metoprolol"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "metoprolol>furosemide:warnings_and_cautions:900",
+     "a": "metoprolol",
+     "b": "furosemide",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretics",
+     "quote": "If such symptoms occur, increase diuretics and restore clinical stability before advancing the dose of metoprolol tartrate[see Dosage and Administration (2)].",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "omeprazole"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "omeprazole>furosemide:warnings_and_cautions:8192",
+     "a": "omeprazole",
+     "b": "furosemide",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretics",
+     "quote": "For patientsexpected to be on prolonged treatment or who take PPIs with medications such as digoxin or drugs that may cause hypomagnesemia (e.g., diuretics), health care professionals may consider monitoring magnesium levels prior to initiation of PPI treatment and periodically [ see Adverse Reactions ( 6.2 )].",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "sertraline"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "sertraline>furosemide:warnings_and_cautions:8964",
+     "a": "sertraline",
+     "b": "furosemide",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretics",
+     "quote": "Elderly patients, patients taking diuretics, and those who are volume-depleted may be at greater risk of developing hyponatremia with SSRIs and SNRIs [See Use in Specific Populations (8.5) ] .",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "furosemide",
+    "spironolactone"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "furosemide>spironolactone:warnings:422",
+     "a": "furosemide",
+     "b": "spironolactone",
+     "section": "warnings",
+     "section_title": "Warnings",
+     "kind": "class",
+     "term": "aldosterone antagonist",
+     "class_name": "Aldosterone Antagonist",
+     "matched_text": "aldosterone antagonist",
+     "quote": "Supplemental potassium chloride and, if required, an aldosterone antagonist are helpful in preventing hypokalemia and metabolic alkalosis.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "spironolactone>furosemide:drug_interactions:1107",
+     "a": "spironolactone",
+     "b": "furosemide",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "diuretic",
+     "class_name": "Loop Diuretic",
+     "matched_text": "diuretics",
+     "quote": "Examples of drugs that can increase potassium include: ACE inhibitors angiotensin receptor blockers non-steroidal anti-inflammatory drugs (NSAIDs) heparin and low molecular weight heparin trimethoprim 7.2 Lithium Like other diuretics, spironolactone reduces the renal clearance of lithium, thus increasing the risk of lithium toxicity.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "levothyroxine",
+    "metformin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "levothyroxine>metformin:drug_interactions:5543",
+     "a": "levothyroxine",
+     "b": "metformin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "antidiabetic",
+     "class_name": "Biguanide",
+     "matched_text": "Antidiabetic",
+     "quote": "7.2 Antidiabetic Therapy Addition of levothyroxine sodium therapy in patients with diabetes mellitus may worsen glycemic control and result in increased antidiabetic agent or insulin requirements.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "levothyroxine>metformin:warnings_and_cautions:742",
+     "a": "levothyroxine",
+     "b": "metformin",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "antidiabetic",
+     "class_name": "Biguanide",
+     "matched_text": "antidiabetic",
+     "quote": "( 5.4 ) Worsening of diabetic control: Therapy in patients with diabetes mellitus may worsen glycemic control and result in increased antidiabetic agent or insulin requirements.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "levothyroxine",
+    "omeprazole"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "levothyroxine>omeprazole:drug_interactions:1506",
+     "a": "levothyroxine",
+     "b": "omeprazole",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "proton pump inhibitor",
+     "class_name": "Proton Pump Inhibitor",
+     "matched_text": "Proton Pump Inhibitors",
+     "quote": "Proton Pump Inhibitors Sucralfate Antacids (e.g., aluminum & magnesium hydroxides, simethicone) Gastric acidity is an essential requirement for adequate absorption of levothyroxine.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "levothyroxine",
+    "sertraline"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "levothyroxine>sertraline:drug_interactions:6949",
+     "a": "levothyroxine",
+     "b": "sertraline",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "sertraline",
+     "class_name": null,
+     "matched_text": "sertraline",
+     "quote": "Administration of sertraline in patients stabilized on levothyroxine sodium may result in increased levothyroxine sodium requirements.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "levothyroxine",
+    "warfarin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "levothyroxine>warfarin:drug_interactions:5885",
+     "a": "levothyroxine",
+     "b": "warfarin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "anticoagulant",
+     "class_name": "Vitamin K Antagonist",
+     "matched_text": "Anticoagulants",
+     "quote": "7.3 Oral Anticoagulants Levothyroxine sodium increases the response to oral anticoagulant therapy.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "lisinopril",
+    "metformin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "lisinopril>metformin:drug_interactions:1231",
+     "a": "lisinopril",
+     "b": "metformin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "antidiabetic",
+     "class_name": "Biguanide",
+     "matched_text": "Antidiabetics",
+     "quote": "7.2 Antidiabetics Concomitant administration of lisinopril and antidiabetic medicines (insulins, oral hypoglycemic agents) may cause an increased blood-glucose-lowering effect with risk of hypoglycemia.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "lisinopril",
+    "spironolactone"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "lisinopril>spironolactone:drug_interactions:1002",
+     "a": "lisinopril",
+     "b": "spironolactone",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "spironolactone",
+     "class_name": null,
+     "matched_text": "spironolactone",
+     "quote": "Potassium-sparing diuretics (spironolactone, amiloride, triamterene, and others) can increase the risk of hyperkalemia.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "lisinopril>spironolactone:warnings_and_cautions:5708",
+     "a": "lisinopril",
+     "b": "spironolactone",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "potassium-sparing diuretic",
+     "class_name": "Aldosterone Antagonist",
+     "matched_text": "potassium-sparing diuretics",
+     "quote": "Risk factors for the development of hyperkalemia include renal insufficiency, diabetes mellitus, and the concomitant use of potassium-sparing diuretics, potassium supplements and/or potassium-containing salt substitutes [see Drug Interactions (7.1) ].",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "spironolactone>lisinopril:drug_interactions:995",
+     "a": "spironolactone",
+     "b": "lisinopril",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "ACE inhibitor",
+     "class_name": "Angiotensin Converting Enzyme Inhibitor",
+     "matched_text": "ACE inhibitor",
+     "quote": "Check serum potassium levels when ACE inhibitor or ARB therapy is altered in patients receiving spironolactone.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "spironolactone>lisinopril:warnings_and_cautions:463",
+     "a": "spironolactone",
+     "b": "lisinopril",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "class",
+     "term": "angiotensin converting enzyme inhibitor",
+     "class_name": "Angiotensin Converting Enzyme Inhibitor",
+     "matched_text": "angiotensin converting enzyme inhibitors",
+     "quote": "This risk is increased by impaired renal function or concomitant potassium supplementation, potassium-containing salt substitutes or drugs that increase potassium, such as angiotensin converting enzyme inhibitors and angiotensin receptor blockers [see Drug Interactions (7.1) ] .",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "metoprolol",
+    "sertraline"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "sertraline>metoprolol:drug_interactions:3486",
+     "a": "sertraline",
+     "b": "metoprolol",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "metoprolol",
+     "class_name": null,
+     "matched_text": "metoprolol",
+     "quote": "Examples: propafenone, flecainide, atomoxetine, desipramine, dextromethorphan, metoprolol, nebivolol, perphenazine, thoridazine, tolterodine, venlafaxine Phenytoin Clinical Impact: Phenytoin is a narrow therapeutic index drug.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "omeprazole",
+    "warfarin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "omeprazole>warfarin:drug_interactions:1709",
+     "a": "omeprazole",
+     "b": "warfarin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "warfarin",
+     "class_name": null,
+     "matched_text": "Warfarin",
+     "quote": "Warfarin Clinical Impact: Increased INR and prothrombin time in patients receiving PPIs, including omeprazole, and warfarin concomitantly.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "warfarin>omeprazole:drug_interactions:2883",
+     "a": "warfarin",
+     "b": "omeprazole",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "omeprazole",
+     "class_name": null,
+     "matched_text": "omeprazole",
+     "quote": "methoxsalen, mexiletine, norfloxacin, oral contraceptives, phenylpropanolamine, propafenone, propranolol, terbinafine, thiabendazole, ticlopidine, verapamil, zileuton montelukast, moricizine, omeprazole, phenobarbital, phenytoin, cigarette smoking CYP3A4 alprazolam, amiodarone, amlodipine, amprenavir, aprepitant, atorvastatin, atazanavir, bicalutamide, cilostazol, cimetidine, ciprofloxacin,",
+     "clipped_start": true,
+     "clipped_end": true,
+     "polarity": "caution"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "sertraline",
+    "warfarin"
+   ],
+   "flagged": true,
+   "flags": [
+    {
+     "id": "sertraline>warfarin:drug_interactions:0",
+     "a": "sertraline",
+     "b": "warfarin",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "name",
+     "term": "warfarin",
+     "class_name": null,
+     "matched_text": "warfarin",
+     "quote": "7 DRUG INTERACTIONS Protein-bound drugs: Monitor for adverse reactions and reduce dosage of sertraline hydrochloride or other protein-bound drugs (e.g., warfarin) as warranted.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "sertraline>warfarin:warnings_and_cautions:252",
+     "a": "sertraline",
+     "b": "warfarin",
+     "section": "warnings_and_cautions",
+     "section_title": "Warnings and Precautions",
+     "kind": "name",
+     "term": "warfarin",
+     "class_name": null,
+     "matched_text": "warfarin",
+     "quote": "( 5.2 ) Increased Risk of Bleeding: Concomitant use of aspirin, nonsteroidal anti-inflammatory drugs (NSAIDs), other antiplatelet drugs, warfarin, and other anticoagulants may increase this risk.",
+     "clipped_start": false,
+     "clipped_end": false,
+     "polarity": "caution"
+    },
+    {
+     "id": "warfarin>sertraline:drug_interactions:4359",
+     "a": "warfarin",
+     "b": "sertraline",
+     "section": "drug_interactions",
+     "section_title": "Drug Interactions",
+     "kind": "class",
+     "term": "serotonin reuptake inhibitor",
+     "class_name": "Serotonin Reuptake Inhibitor",
+     "matched_text": "Serotonin Reuptake Inhibitors",
+     "quote": "Nonsteroidal Anti-Inflammatory Agents celecoxib, diclofenac, diflunisal, fenoprofen, ibuprofen, indomethacin, ketoprofen, ketorolac, mefenamic acid, naproxen, oxaprozin, piroxicam, sulindac Serotonin Reuptake Inhibitors citalopram, desvenlafaxine, duloxetine, escitalopram, fluoxetine, fluvoxamine, milnacipran, paroxetine, sertraline, venlafaxine, vilazodone 7.4 Antibiotics and Antifungals There have been reports of",
+     "clipped_start": true,
+     "clipped_end": true,
+     "polarity": "caution"
+    }
+   ]
+  }
+ ],
+ "matcher_vs_truth": {
+  "tp": 5,
+  "fp": 1,
+  "fn": 1,
+  "tn": 3,
+  "precision": 0.8333333333333334,
+  "recall": 0.8333333333333334,
+  "pairs": [
+   {
+    "a": "lisinopril",
+    "b": "spironolactone",
+    "interacts": true,
+    "why": "Raised potassium (hyperkalemia).",
+    "evidence": [
+     {
+      "label": "lisinopril",
+      "section": "drug_interactions",
+      "quote": "Potassium-sparing diuretics (spironolactone, amiloride, triamterene, and others) can increase the risk of hyperkalemia."
+     },
+     {
+      "label": "spironolactone",
+      "section": "drug_interactions",
+      "quote": "Check serum potassium levels when ACE inhibitor or ARB therapy is altered in patients receiving spironolactone."
+     }
+    ],
+    "predicted": true,
+    "outcome": "TP",
+    "matcher_evidence": "lisinopril label, Drug Interactions: \"spironolactone\""
+   },
+   {
+    "a": "sertraline",
+    "b": "warfarin",
+    "interacts": true,
+    "why": "Bleeding risk.",
+    "evidence": [
+     {
+      "label": "sertraline",
+      "section": "warnings_and_cautions",
+      "quote": "Concomitant use of aspirin, nonsteroidal anti-inflammatory drugs (NSAIDs), other antiplatelet drugs, warfarin, and other anticoagulants may increase this risk."
+     }
+    ],
+    "predicted": true,
+    "outcome": "TP",
+    "matcher_evidence": "sertraline label, Drug Interactions: \"warfarin\""
+   },
+   {
+    "a": "lisinopril",
+    "b": "metformin",
+    "interacts": true,
+    "why": "Low blood sugar (hypoglycemia); named by class (antidiabetic medicines).",
+    "evidence": [
+     {
+      "label": "lisinopril",
+      "section": "drug_interactions",
+      "quote": "Concomitant administration of lisinopril and antidiabetic medicines (insulins, oral hypoglycemic agents) may cause an increased blood-glucose-lowering effect with risk of hypoglycemia."
+     }
+    ],
+    "predicted": true,
+    "outcome": "TP",
+    "matcher_evidence": "lisinopril label, Drug Interactions: \"Antidiabetics\""
+   },
+   {
+    "a": "omeprazole",
+    "b": "warfarin",
+    "interacts": true,
+    "why": "INR changes.",
+    "evidence": [
+     {
+      "label": "omeprazole",
+      "section": "drug_interactions",
+      "quote": "Increased INR and prothrombin time in patients receiving PPIs, including omeprazole, and warfarin concomitantly."
+     }
+    ],
+    "predicted": true,
+    "outcome": "TP",
+    "matcher_evidence": "omeprazole label, Drug Interactions: \"Warfarin\""
+   },
+   {
+    "a": "atorvastatin",
+    "b": "warfarin",
+    "interacts": true,
+    "why": "Warfarin's label lists atorvastatin as a CYP3A4 inhibitor and says to monitor INR with such drugs.",
+    "evidence": [
+     {
+      "label": "warfarin",
+      "section": "drug_interactions",
+      "quote": "Closely monitor INR if a concomitant drug is a CYP2C9, 1A2, and/or 3A4 inhibitor or inducer."
+     },
+     {
+      "label": "warfarin",
+      "section": "drug_interactions",
+      "quote": "CYP3A4 alprazolam, amiodarone, amlodipine, amprenavir, aprepitant, atorvastatin"
+     }
+    ],
+    "predicted": true,
+    "outcome": "TP",
+    "matcher_evidence": "warfarin label, Drug Interactions: \"atorvastatin\""
+   },
+   {
+    "a": "levothyroxine",
+    "b": "metoprolol",
+    "interacts": true,
+    "why": "Named by class (beta-adrenergic antagonists). Expected miss: the matcher's class table says 'beta-adrenergic blocker', not 'antagonist'.",
+    "evidence": [
+     {
+      "label": "levothyroxine",
+      "section": "drug_interactions",
+      "quote": "Actions of particular beta-adrenergic antagonists may be impaired when a hypothyroid patient is converted to the euthyroid state."
+     }
+    ],
+    "predicted": false,
+    "outcome": "FN",
+    "matcher_evidence": "none"
+   },
+   {
+    "a": "metoprolol",
+    "b": "furosemide",
+    "interacts": false,
+    "why": "Metoprolol's label mentions diuretics only as heart-failure management advice, not as a caution about the combination. Furosemide's label never mentions beta-blockers. Expected false positive.",
+    "evidence": [
+     {
+      "label": "metoprolol",
+      "section": "warnings_and_cautions",
+      "quote": "If such symptoms occur, increase diuretics and restore clinical stability before advancing the dose of metoprolol tartrate"
+     }
+    ],
+    "searched": {
+     "furosemide>metoprolol": "/metoprolol|beta[\\s-]*(adrenergic|blocker|blocking|antagonist)/i: 0 hits"
+    },
+    "predicted": true,
+    "outcome": "FP",
+    "matcher_evidence": "metoprolol label, Warnings and Precautions: \"diuretics\""
+   },
+   {
+    "a": "metformin",
+    "b": "warfarin",
+    "interacts": false,
+    "why": "Neither label names the other or its class.",
+    "evidence": [],
+    "searched": {
+     "metformin>warfarin": "/warfarin|anticoag|coumarin|vitamin k antag/i: 0 hits",
+     "warfarin>metformin": "/metformin|antidiabet|hypoglycemic agent|oral hypoglycem/i: 0 hits"
+    },
+    "predicted": false,
+    "outcome": "TN",
+    "matcher_evidence": "none"
+   },
+   {
+    "a": "lisinopril",
+    "b": "atorvastatin",
+    "interacts": false,
+    "why": "Neither label names the other or its class.",
+    "evidence": [],
+    "searched": {
+     "lisinopril>atorvastatin": "/atorvastatin|\\bstatins?\\b|HMG[\\s-]CoA/i: 0 hits",
+     "atorvastatin>lisinopril": "/lisinopril|\\bACE\\b|angiotensin[\\s-]converting|renin/: 0 hits"
+    },
+    "predicted": false,
+    "outcome": "TN",
+    "matcher_evidence": "none"
+   },
+   {
+    "a": "spironolactone",
+    "b": "sertraline",
+    "interacts": false,
+    "why": "Neither label names the other or its class.",
+    "evidence": [],
+    "searched": {
+     "spironolactone>sertraline": "/sertraline|serotonin|\\bSSRIs?\\b/: 0 hits",
+     "sertraline>spironolactone": "/spironolactone|potassium[\\s-]sparing|aldosterone/i: 0 hits"
+    },
+    "predicted": false,
+    "outcome": "TN",
+    "matcher_evidence": "none"
+   }
+  ]
+ }
+}

@@ -77,6 +77,8 @@ export interface CardResult {
   stats: {
     generated: number;
     passed_first_check: number;
+    /** Why sentences failed the first check (before any repair), by reason. */
+    first_check_failures: Partial<Record<CardFailure["reason"], number>>;
     recovered_by_repair: number;
     repair_rounds: number;
     kept: number;
@@ -177,8 +179,10 @@ export async function buildCard(
   const draft: CardSentence[] = parsed.data.sentences.map((s, i) => ({ id: `s${i + 1}`, ...s }));
 
   step("Checking every quote against the label");
-  let check = checkCardSentences(draft, sections);
+  const check = checkCardSentences(draft, sections);
   const passedFirst = check.passed.length;
+  const firstFailures: CardResult["stats"]["first_check_failures"] = {};
+  for (const f of check.failed) firstFailures[f.reason] = (firstFailures[f.reason] ?? 0) + 1;
   let kept = check.passed;
   let failed = check.failed;
 
@@ -264,6 +268,7 @@ export async function buildCard(
     stats: {
       generated: draft.length,
       passed_first_check: passedFirst,
+      first_check_failures: firstFailures,
       recovered_by_repair: recoveredByRepair,
       repair_rounds: rounds,
       kept: finalSentences.length,
