@@ -14,7 +14,7 @@ export interface Provider {
 
 export function modelForRole(role: ModelRole): string {
   const env = getEnv();
-  return role === "review" ? env.CAREPOOL_MODEL_REVIEW : env.CAREPOOL_MODEL_WRITER;
+  return role === "review" || role === "judge" ? env.CAREPOOL_MODEL_REVIEW : env.CAREPOOL_MODEL_WRITER;
 }
 
 /** The configured provider: claude-cli (default) or mock. */

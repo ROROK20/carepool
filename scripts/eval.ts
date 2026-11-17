@@ -23,6 +23,7 @@
 import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
+import { judgeSentences } from "../src/lib/cards/judge";
 import { buildCard, labelTitle, type CardResult } from "../src/lib/cards/pipeline";
 import { getEnv } from "../src/lib/env";
 import { findInteractions, toMatchingDrug, type DrugForMatching, type PairFinding } from "../src/lib/interactions/match";
@@ -47,6 +48,17 @@ interface DrugRow {
   byte_exact_raw: number;
   flagged_partners: string[];
   seconds: number;
+  judge: JudgeRow | null;
+}
+
+interface JudgeRow {
+  model: string;
+  supported: number;
+  partial: number;
+  unsupported: number;
+  unjudged: number;
+  error: string | null;
+  notes: { id: string; part: string; text: string; quote: string; verdict: string; reason: string }[];
 }
 
 const args = process.argv.slice(2);
@@ -111,10 +123,32 @@ async function main() {
           if (raw.collapsed.includes(s.quote)) verbatim++;
           if (raw.joined.includes(s.quote)) byteExact++;
         }
-        return { name, ok: true, card, verbatim_raw: verbatim, byte_exact_raw: byteExact, flagged_partners: [], seconds: (Date.now() - t0) / 1000 };
+        const seconds = (Date.now() - t0) / 1000;
+        let judge: JudgeRow | null = null;
+        if (!mock && card.sentences.length > 0) {
+          try {
+            const j = await judgeSentences(card.sentences, provider);
+            const count = (v: string) => [...j.verdicts.values()].filter((x) => x.verdict === v).length;
+            judge = {
+              model: j.model,
+              supported: count("supported"),
+              partial: count("partial"),
+              unsupported: count("unsupported"),
+              unjudged: j.missing.length,
+              error: null,
+              notes: card.sentences
+                .filter((x) => j.verdicts.get(x.id) && j.verdicts.get(x.id)!.verdict !== "supported")
+                .map((x) => ({ id: x.id, part: x.part, text: x.text, quote: x.quote, verdict: j.verdicts.get(x.id)!.verdict, reason: j.verdicts.get(x.id)!.reason })),
+            };
+          } catch (err) {
+            judge = { model: "", supported: 0, partial: 0, unsupported: 0, unjudged: card.sentences.length, error: (err as Error).message.slice(0, 200), notes: [] };
+          }
+          console.log(`[eval] ${name}: meaning check ${judge.supported}/${card.sentences.length} supported`);
+        }
+        return { name, ok: true, card, verbatim_raw: verbatim, byte_exact_raw: byteExact, flagged_partners: [], seconds, judge };
       } catch (err) {
         console.log(`[eval] ${name}: FAILED ${(err as Error).message}`);
-        return { name, ok: false, error: (err as Error).message, verbatim_raw: 0, byte_exact_raw: 0, flagged_partners: [], seconds: (Date.now() - t0) / 1000 };
+        return { name, ok: false, error: (err as Error).message, verbatim_raw: 0, byte_exact_raw: 0, flagged_partners: [], seconds: (Date.now() - t0) / 1000, judge: null };
       }
     }),
   );
@@ -219,7 +253,11 @@ async function main() {
   md.push("- **Kept quotes verbatim** is 100% by construction: the checker deletes any sentence whose quote is not word-for-word in its label section. The column shows it anyway, re-checked here against the raw openFDA field in the cache file (joined, whitespace collapsed) rather than the app's own parsed copy.");
   md.push("- **Byte-exact in raw field** is stricter: the quote appears in the raw field with no whitespace change at all. A gap between the two columns means a quote spans a line break or double space in the original label.");
   md.push("- **Failed the first check** counts sentences the writer got wrong on its first try; each one was sent back once with the checker's reason. QUOTE_NOT_FOUND means the quote was paraphrased instead of copied; DOSE_MENTION means the sentence or its quote carried a dose amount or a dosing frequency, which cards never show; WRONG_PART means the section cannot support that part of the card. **Removed** sentences never reach the family.");
-  md.push("- **Not measured here:** whether each plain-language sentence means the same thing as its quote. The checker proves the quote is real and in the right section; it cannot prove the paraphrase is faithful. That is why the app always shows the quote next to the sentence. A meaning check (human raters or a separate judge model, sampled) is the next evaluation step.");
+  md.push(
+    mock
+      ? "- **Not measured in mock mode:** whether each plain-language sentence means the same thing as its quote (Part 4 runs only with the real model)."
+      : "- **What the checker cannot see:** whether each plain-language sentence means the same thing as its quote. The checker proves the quote is real and in the right section; Part 4 is a first, model-judged measure of meaning, and the app always shows the quote next to the sentence so a reader can compare.",
+  );
   md.push("");
   md.push(`## 2. Interaction flags among these ${meds.length} medicines`);
   md.push("");
@@ -257,6 +295,43 @@ async function main() {
   md.push("Ten pairs is a seed, not a benchmark: one more error moves either number by more than ten points. The misses are listed as they are, not fixed after the fact, so the numbers are not tuned to this list.");
   md.push("");
 
+  if (!mock) {
+    const judged = okRows.filter((r) => r.judge && !r.judge.error);
+    const jsum = (f: (j: JudgeRow) => number) => judged.reduce((a, r) => a + f(r.judge!), 0);
+    const jSup = jsum((j) => j.supported);
+    const jPart = jsum((j) => j.partial);
+    const jUns = jsum((j) => j.unsupported);
+    const jTotal = jSup + jPart + jUns;
+    const judgeModel = judged[0]?.judge?.model ?? "?";
+    md.push("## 4. Meaning check (model-judged, v0)");
+    md.push("");
+    md.push(
+      `The citation checker cannot tell whether a plain sentence says what its quote says. Here a second model (\`${judgeModel}\`) read each kept sentence next to its own quote, and only the quote, and answered **supported**, **partial** (the core is supported but the sentence adds a claim, cause or condition) or **unsupported**. This is one model's opinion, not a pharmacist's: it points to where a person should look. It was not used to tune anything.`,
+    );
+    md.push("");
+    md.push("| Medicine | Kept | Supported | Partial | Unsupported | Not judged |");
+    md.push("|---|---:|---:|---:|---:|---:|");
+    for (const r of okRows) {
+      const j = r.judge;
+      if (!j) continue;
+      md.push(`| ${r.name} | ${r.card!.stats.kept} | ${j.supported} | ${j.partial} | ${j.unsupported} | ${j.unjudged}${j.error ? ` (judge failed: ${j.error.replace(/\|/g, "/")})` : ""} |`);
+    }
+    md.push(`| **Total** | **${kept}** | **${jSup} (${pct(jSup, jTotal)})** | **${jPart}** | **${jUns}** | **${kept - jTotal}** |`);
+    md.push("");
+    const notes = judged.flatMap((r) => r.judge!.notes.map((n) => ({ ...n, drug: r.name })));
+    if (notes.length > 0) {
+      md.push("Every sentence the judge did not call supported, with its reason:");
+      md.push("");
+      md.push("| Medicine | Verdict | Sentence | Its quote | Judge's reason |");
+      md.push("|---|---|---|---|---|");
+      const cell = (t: string) => t.replace(/\|/g, "/").replace(/\s+/g, " ");
+      for (const n of notes) md.push(`| ${n.drug} | ${n.verdict} | ${cell(n.text)} | "${cell(n.quote)}" | ${cell(n.reason)} |`);
+      md.push("");
+    }
+    md.push("Next: pharmacist raters on a sample, to see how far the judge's opinion can be trusted.");
+    md.push("");
+  }
+
   const outBase = mock ? "eval/results-mock" : "eval/results";
   fs.writeFileSync(`${outBase}.md`, `${md.join("\n")}\n`);
   fs.writeFileSync(
@@ -280,6 +355,7 @@ async function main() {
           byte_exact_raw: r.byte_exact_raw,
           flagged_partners: r.flagged_partners,
           seconds: r.seconds,
+          meaning_check: r.judge,
         })),
         interactions: findings,
         matcher_vs_truth: { tp, fp, fn, tn, precision: tp / Math.max(1, tp + fp), recall: tp / Math.max(1, tp + fn), pairs: scored },

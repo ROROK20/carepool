@@ -18,8 +18,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="min-h-screen">
-        <div role="note" aria-label="Safety notice" data-testid="safety-banner" className="border-b border-amber-200 bg-warn-soft px-4 py-2 text-center text-sm text-warn">
-          <strong>Not medical advice.</strong> Carepool shows what each medicine&apos;s FDA label says, in plain words, with the label&apos;s exact text beside it.
+        <div
+          role="note"
+          aria-label="Safety notice"
+          data-testid="safety-banner"
+          className="sticky top-0 z-50 border-b border-amber-200 bg-warn-soft px-4 py-2 text-center text-sm text-warn shadow-sm"
+        >
+          <strong>Not medical advice.</strong>
+          <span className="hidden sm:inline">
+            {" "}
+            Carepool shows what each medicine&apos;s FDA label says, in plain words, with the label&apos;s exact text beside it.
+          </span>{" "}
           Always confirm medicines, doses and interactions with a pharmacist or doctor.
         </div>
         {mock ? (

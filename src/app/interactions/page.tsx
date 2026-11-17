@@ -62,7 +62,7 @@ export default function InteractionsPage() {
         const explanation = p.flags.map((f) => f.explanation).find((e) => e?.verified);
         return (
           <Card key={p.key} className="border-l-4 border-l-amber-400">
-            <div id={p.key} className="scroll-mt-24" data-testid="flag-pair">
+            <div id={p.key} className="scroll-mt-28" data-testid="flag-pair">
               <div className="flex flex-wrap items-center gap-2">
                 <SectionTitle>
                   {p.names[0]} + {p.names[1]}

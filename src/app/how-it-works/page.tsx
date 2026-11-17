@@ -8,7 +8,13 @@ interface EvalSummary {
   generated_at: string;
   provider: string;
   models: string[];
-  cards: { name: string; ok: boolean; stats: { generated: number; kept: number; passed_first_check: number; recovered_by_repair: number } | null; verbatim_raw: number }[];
+  cards: {
+    name: string;
+    ok: boolean;
+    stats: { generated: number; kept: number; passed_first_check: number; recovered_by_repair: number } | null;
+    verbatim_raw: number;
+    meaning_check?: { model: string; supported: number; partial: number; unsupported: number; error: string | null } | null;
+  }[];
   matcher_vs_truth: { tp: number; fp: number; fn: number; tn: number; precision: number; recall: number };
 }
 
@@ -39,6 +45,9 @@ export default function HowItWorks() {
   const kept = ok.reduce((a, c) => a + (c.stats?.kept ?? 0), 0);
   const generated = ok.reduce((a, c) => a + (c.stats?.generated ?? 0), 0);
   const verbatim = ok.reduce((a, c) => a + c.verbatim_raw, 0);
+  const judged = ok.filter((c) => c.meaning_check && !c.meaning_check.error).map((c) => c.meaning_check!);
+  const supported = judged.reduce((a, j) => a + j.supported, 0);
+  const judgedTotal = judged.reduce((a, j) => a + j.supported + j.partial + j.unsupported, 0);
   return (
     <div className="space-y-6">
       <PageTitle title="How Carepool works" kicker="For judges and curious families">
@@ -65,7 +74,7 @@ export default function HowItWorks() {
       <Card>
         <SectionTitle>Measured, not promised</SectionTitle>
         {ev ? (
-          <div className="grid gap-4 sm:grid-cols-3" data-testid="eval-summary">
+          <div className={`grid gap-4 ${judgedTotal ? "sm:grid-cols-4" : "sm:grid-cols-3"}`} data-testid="eval-summary">
             <div>
               <p className="text-3xl font-bold">
                 {verbatim}/{kept}
@@ -74,6 +83,14 @@ export default function HowItWorks() {
                 kept sentences whose quote was found word for word in the raw label ({ok.length} medicines, {generated} sentences drafted)
               </p>
             </div>
+            {judgedTotal ? (
+              <div>
+                <p className="text-3xl font-bold">
+                  {supported}/{judgedTotal}
+                </p>
+                <p className="text-sm text-muted">kept sentences a second model judged fully supported by their own quote (the rest: partly, with the reason listed in the eval)</p>
+              </div>
+            ) : null}
             <div>
               <p className="text-3xl font-bold">{Math.round(ev.matcher_vs_truth.precision * 100)}%</p>
               <p className="text-sm text-muted">
@@ -84,9 +101,9 @@ export default function HowItWorks() {
               <p className="text-3xl font-bold">{Math.round(ev.matcher_vs_truth.recall * 100)}%</p>
               <p className="text-sm text-muted">recall on the same pairs ({ev.matcher_vs_truth.fn} missed)</p>
             </div>
-            <p className="text-xs text-muted sm:col-span-3">
-              From eval/results.md, run {ev.generated_at.slice(0, 10)} with {ev.provider === "mock" ? "the mock provider" : ev.models.join(" and ")}. Ten pairs is a seed, not a benchmark. Not
-              measured yet: whether each plain sentence means exactly what its quote says, which is why the quote is always one click away.
+            <p className={`text-xs text-muted ${judgedTotal ? "sm:col-span-4" : "sm:col-span-3"}`}>
+              From eval/results.md, run {ev.generated_at.slice(0, 10)} with {ev.provider === "mock" ? "the mock provider" : ev.models.join(" and ")}. Ten pairs is a seed, not a benchmark. The
+              meaning check is a model&apos;s opinion, not a pharmacist&apos;s, which is why the quote is always one click away.
             </p>
           </div>
         ) : (

@@ -82,5 +82,8 @@ export const createMockModel = (): ModelFn => async (req: ModelRequest) => {
           sentences: [{ text: `The ${f.a_name} label names ${f.matched_text} in its ${f.section_title} section.`, quote: f.quote }],
         })),
       });
+    case "judge":
+      // The eval does not run the meaning check in mock mode; this answer only satisfies the interface.
+      return respond({ verdicts: ctx.ids.map((id) => ({ id, verdict: "supported", reason: "mock" })) });
   }
 };

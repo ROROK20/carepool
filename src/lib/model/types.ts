@@ -11,7 +11,7 @@
  * because a drug card's sources (the label sections) are known up front.
  */
 
-export type ModelRole = "writer" | "repair" | "review" | "explain";
+export type ModelRole = "writer" | "repair" | "review" | "explain" | "judge";
 
 export interface ModelRequest {
   role: ModelRole;
@@ -42,7 +42,8 @@ export type MockContext =
   | { role: "writer"; drug: string; sections: Record<string, { key: string; title: string; text: string }> }
   | { role: "repair" }
   | { role: "review"; sentences: { id: string; text: string }[] }
-  | { role: "explain"; flags: { flag_id: string; a_name: string; matched_text: string; section_title: string; quote: string }[] };
+  | { role: "explain"; flags: { flag_id: string; a_name: string; matched_text: string; section_title: string; quote: string }[] }
+  | { role: "judge"; ids: string[] };
 
 export class ModelUnavailableError extends Error {
   constructor(message: string) {
