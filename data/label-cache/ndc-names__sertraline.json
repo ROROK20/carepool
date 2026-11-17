@@ -1,0 +1,71 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22sertraline%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:02.136Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Sertraline Hydrochloride",
+    "count": 153
+   },
+   {
+    "term": "Sertraline",
+    "count": 34
+   },
+   {
+    "term": "sertraline hydrochloride",
+    "count": 26
+   },
+   {
+    "term": "Sertraline hydrochloride",
+    "count": 20
+   },
+   {
+    "term": "SERTRALINE HYDROCHLORIDE",
+    "count": 19
+   },
+   {
+    "term": "SERTRALINE HCL",
+    "count": 1
+   },
+   {
+    "term": "SERTRALINE HVDROCHLORIDE(FORM-II)",
+    "count": 1
+   },
+   {
+    "term": "SERTRALINE HYDROCHLORIDE (FORM-II)",
+    "count": 1
+   },
+   {
+    "term": "SERTRALINE HYDROCHLORIDE (Form-I)",
+    "count": 1
+   },
+   {
+    "term": "Sertraline HCL",
+    "count": 1
+   },
+   {
+    "term": "Sertraline HCl",
+    "count": 1
+   },
+   {
+    "term": "Sertraline Hydrochloride (Form I)",
+    "count": 1
+   },
+   {
+    "term": "Sertraline Hydrochloride (Form-I)",
+    "count": 1
+   },
+   {
+    "term": "Sertraline Hydrochloride (Form-II)",
+    "count": 1
+   }
+  ]
+ }
+}

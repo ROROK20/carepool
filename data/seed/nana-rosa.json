@@ -1,0 +1,25 @@
+{
+  "fictional": true,
+  "notice": "FICTIONAL DEMO DATA. Nana Rosa and her family are invented. The medication list is an example typed the way a family member would copy it from prescription bottles. It is not a real person's prescription and it is not a recommendation.",
+  "recipient": { "name": "Nana Rosa", "age": 78 },
+  "meds": [
+    { "name": "Lisinopril", "dose": "10 mg tablet, take 1 tablet by mouth once daily", "times": ["08:00"], "notes": "" },
+    { "name": "Spironolactone", "dose": "25 mg tablet, take 1 tablet by mouth once daily", "times": ["08:00"], "notes": "" },
+    { "name": "Warfarin", "dose": "5 mg tablet, take 1 tablet by mouth once daily in the evening", "times": ["18:00"], "notes": "" },
+    { "name": "Sertraline", "dose": "50 mg tablet, take 1 tablet by mouth once daily", "times": ["08:00"], "notes": "" },
+    { "name": "Metformin", "dose": "500 mg tablet, take 1 tablet by mouth twice daily with meals", "times": ["08:00", "18:00"], "notes": "with breakfast and dinner" }
+  ],
+  "members": [
+    { "name": "Ana", "relation": "daughter", "color": "teal" },
+    { "name": "Luis", "relation": "son", "color": "amber" },
+    { "name": "Maya", "relation": "granddaughter", "color": "violet" }
+  ],
+  "tasks": [
+    { "title": "Morning dose check", "kind": "dose_check", "slot": "08:00", "assignee": "Ana", "recurrence": { "type": "daily" }, "time": "08:30" },
+    { "title": "Evening dose check", "kind": "dose_check", "slot": "18:00", "assignee": "Maya", "recurrence": { "type": "daily" }, "time": "18:30" },
+    { "title": "Fill the weekly pill organizer", "kind": "organizer", "assignee": "Luis", "recurrence": { "type": "weekly", "days": [0] }, "time": "10:00" },
+    { "title": "Pick up refills at the pharmacy", "kind": "refill", "assignee": "Luis", "recurrence": { "type": "every_n_days", "n": 30, "start": "2026-11-20" }, "time": "17:00" },
+    { "title": "Call Nana to say goodnight", "kind": "custom", "assignee": "Maya", "recurrence": { "type": "daily" }, "time": "20:00" },
+    { "title": "Bring the medication list to the next doctor visit", "kind": "custom", "assignee": "Ana", "recurrence": { "type": "once", "date": "2026-11-24" }, "time": "09:00" }
+  ]
+}

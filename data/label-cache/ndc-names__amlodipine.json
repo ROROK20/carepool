@@ -1,0 +1,187 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22amlodipine%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:01.313Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Amlodipine Besylate",
+    "count": 103
+   },
+   {
+    "term": "Amlodipine besylate",
+    "count": 61
+   },
+   {
+    "term": "Amlodipine Besylate and Benazepril Hydrochloride",
+    "count": 52
+   },
+   {
+    "term": "AMLODIPINE BESYLATE",
+    "count": 48
+   },
+   {
+    "term": "Amlodipine and Atorvastatin",
+    "count": 48
+   },
+   {
+    "term": "Amlodipine and Benazepril Hydrochloride",
+    "count": 46
+   },
+   {
+    "term": "Amlodipine and Olmesartan Medoxomil",
+    "count": 25
+   },
+   {
+    "term": "amlodipine and valsartan",
+    "count": 19
+   },
+   {
+    "term": "olmesartan medoxomil / amlodipine besylate / hydrochlorothiazide",
+    "count": 18
+   },
+   {
+    "term": "amlodipine and atorvastatin",
+    "count": 16
+   },
+   {
+    "term": "Amlodipine and Valsartan",
+    "count": 13
+   },
+   {
+    "term": "Amlodipine besylate and Atorvastatin calcium",
+    "count": 11
+   },
+   {
+    "term": "amlodipine besylate",
+    "count": 11
+   },
+   {
+    "term": "Amlodipine, Valsartan and Hydrochlorothiazide",
+    "count": 10
+   },
+   {
+    "term": "Telmisartan and Amlodipine",
+    "count": 10
+   },
+   {
+    "term": "amlodipine besylate valsartan hydrochlorothiazide",
+    "count": 10
+   },
+   {
+    "term": "amlodipine valsartan and hydrochlorothiazide",
+    "count": 10
+   },
+   {
+    "term": "Amlodipine and atorvastatin",
+    "count": 8
+   },
+   {
+    "term": "Amlodipine besylate and Olmesartran medoxomil",
+    "count": 8
+   },
+   {
+    "term": "amlodipine besylate and olmesartan medoxomil",
+    "count": 8
+   },
+   {
+    "term": "amlodipine besylate and valsartan",
+    "count": 7
+   },
+   {
+    "term": "Amlodipine, valsartan and hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Olmesartan Medoxomil, Amlodipine and Hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Olmesartan Medoxomil, Amlodipine besylate and Hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Olmesartan medoxomil Amlodipine and Hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Olmesartan medoxomil, amlodipine and hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "amlodipine",
+    "count": 5
+   },
+   {
+    "term": "amlodipine,valsartan and hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "olmesartan medoxomil and amlodipine besylate and hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "AMLODIPINE AND VALSARTAN",
+    "count": 4
+   },
+   {
+    "term": "AMLODIPINE and OLMESARTAN medoxomil",
+    "count": 4
+   },
+   {
+    "term": "Amlodipine and olmesartan Medoxomil",
+    "count": 4
+   },
+   {
+    "term": "Amlodipine and valsartan",
+    "count": 4
+   },
+   {
+    "term": "Amlodipine besylate and Olmesartan medoxomil",
+    "count": 4
+   },
+   {
+    "term": "telmisartan and amlodipine",
+    "count": 4
+   },
+   {
+    "term": "telmisartan, amlodipine and indapamide",
+    "count": 3
+   },
+   {
+    "term": "AMLODIPINE AND BENAZEPRIL HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "Amlodipine",
+    "count": 1
+   },
+   {
+    "term": "Amlodipine Besylate (Process 1)",
+    "count": 1
+   },
+   {
+    "term": "Amlodipine Besylate Anhydrous",
+    "count": 1
+   },
+   {
+    "term": "Phthaloyl Amlodipine",
+    "count": 1
+   },
+   {
+    "term": "Phthaloyl amlodipine",
+    "count": 1
+   },
+   {
+    "term": "phthaloyl amlodipine",
+    "count": 1
+   }
+  ]
+ }
+}

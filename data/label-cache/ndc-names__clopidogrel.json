@@ -1,0 +1,55 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22clopidogrel%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:08.795Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Clopidogrel Bisulfate",
+    "count": 38
+   },
+   {
+    "term": "Clopidogrel bisulfate",
+    "count": 19
+   },
+   {
+    "term": "Clopidogrel",
+    "count": 13
+   },
+   {
+    "term": "CLOPIDOGREL BISULFATE",
+    "count": 10
+   },
+   {
+    "term": "clopidogrel bisulfate",
+    "count": 6
+   },
+   {
+    "term": "clopidogrel",
+    "count": 4
+   },
+   {
+    "term": "CLOPIDOGREL",
+    "count": 3
+   },
+   {
+    "term": "Clopidogrel Bisulfate (Form II)",
+    "count": 1
+   },
+   {
+    "term": "Clopidogrel Bisulphate",
+    "count": 1
+   },
+   {
+    "term": "clopidogrel bisulphate",
+    "count": 1
+   }
+  ]
+ }
+}

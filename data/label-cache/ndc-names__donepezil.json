@@ -1,0 +1,75 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22donepezil%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:10.351Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Donepezil Hydrochloride",
+    "count": 55
+   },
+   {
+    "term": "donepezil hydrochloride",
+    "count": 21
+   },
+   {
+    "term": "Donepezil hydrochloride",
+    "count": 10
+   },
+   {
+    "term": "memantine hydrochloride and donepezil hydrochloride",
+    "count": 10
+   },
+   {
+    "term": "Memantine and Donepezil",
+    "count": 7
+   },
+   {
+    "term": "DONEPEZIL HYDROCHLORIDE",
+    "count": 4
+   },
+   {
+    "term": "Donepezil",
+    "count": 1
+   },
+   {
+    "term": "Donepezil Base",
+    "count": 1
+   },
+   {
+    "term": "Donepezil HCl",
+    "count": 1
+   },
+   {
+    "term": "Donepezil Hydrochloride (Form-1)",
+    "count": 1
+   },
+   {
+    "term": "Donepezil Hydrochloride Anhydrous",
+    "count": 1
+   },
+   {
+    "term": "Donepezil Hydrochloride Monohydrate",
+    "count": 1
+   },
+   {
+    "term": "Donepezil Hydrochloride Monohydrate (Form-1)",
+    "count": 1
+   },
+   {
+    "term": "MEMANTINE AND DONEPEZIL HYDROCHLORIDES",
+    "count": 1
+   },
+   {
+    "term": "donepezil base",
+    "count": 1
+   }
+  ]
+ }
+}

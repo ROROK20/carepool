@@ -1,0 +1,155 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22hydrochlorothiazide%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:07:48.346Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-17"
+  },
+  "results": [
+   {
+    "term": "HYDROCHLOROTHIAZIDE",
+    "count": 146
+   },
+   {
+    "term": "LOSARTAN POTASSIUM AND HYDROCHLOROTHIAZIDE",
+    "count": 75
+   },
+   {
+    "term": "TRIAMTERENE AND HYDROCHLOROTHIAZIDE",
+    "count": 61
+   },
+   {
+    "term": "VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 48
+   },
+   {
+    "term": "LISINOPRIL AND HYDROCHLOROTHIAZIDE",
+    "count": 40
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL AND HYDROCHLOROTHIAZIDE",
+    "count": 37
+   },
+   {
+    "term": "LISINOPRIL AND HYDROCHLOROTHIAZIDE TABLETS",
+    "count": 30
+   },
+   {
+    "term": "BISOPROLOL FUMARATE AND HYDROCHLOROTHIAZIDE",
+    "count": 22
+   },
+   {
+    "term": "IRBESARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 18
+   },
+   {
+    "term": "SPIRONOLACTONE AND HYDROCHLOROTHIAZIDE",
+    "count": 12
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL / AMLODIPINE BESYLATE / HYDROCHLOROTHIAZIDE",
+    "count": 10
+   },
+   {
+    "term": "TELMISARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 9
+   },
+   {
+    "term": "BENAZEPRIL HYDROCHLORIDE AND HYDROCHLOROTHIAZIDE",
+    "count": 7
+   },
+   {
+    "term": "CANDESARTAN CILEXETIL AND HYDROCHLOROTHIAZIDE",
+    "count": 6
+   },
+   {
+    "term": "METOPROLOL TARTRATE AND HYDROCHLOROTHIAZIDE",
+    "count": 5
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL-HYDROCHLOROTHIAZIDE",
+    "count": 5
+   },
+   {
+    "term": "AMLODIPINE BESYLATE VALSARTAN HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "AMLODIPINE, VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "ENALAPRIL MALEATE AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "FOSINOPRIL SODIUM AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL, AMLODIPINE AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "AMILORIDE - APIS MELLIFERA - BERBERIS VULGARIS FRUIT - HIERACIUM PILOSELLA FLOWERING TOP - HYDROCHLOROTHIAZIDE - SOLIDAGO VIRGAUREA FLOWERING TOP - SPIRONOLACTONE - SUS SCROFA PITUITARY GLAND -",
+    "count": 1
+   },
+   {
+    "term": "AMILORIDE HYDROCHLORIDE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE,VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "CAPTOPRIL AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL AMLODIPINE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL AND AMLODIPINE BESYLATE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL, AMLODIPINE BESYLATE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL AND HYDROCHLOROTHIAZIDE 10/12.5",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL AND HYDROCHLOROTHIAZIDE 20/12.5",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL AND HYDROCHLOROTHIAZIDE 20/25",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL HCL AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "QUINAPRIL HYDROCHLORIDE/HYDROCHLOROTHIAZIDE",
+    "count": 1
+   }
+  ]
+ }
+}

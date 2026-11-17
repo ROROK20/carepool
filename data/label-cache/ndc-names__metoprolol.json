@@ -1,0 +1,71 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22metoprolol%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:06.732Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Metoprolol Tartrate",
+    "count": 113
+   },
+   {
+    "term": "Metoprolol succinate",
+    "count": 102
+   },
+   {
+    "term": "Metoprolol Succinate",
+    "count": 89
+   },
+   {
+    "term": "METOPROLOL TARTRATE",
+    "count": 87
+   },
+   {
+    "term": "metoprolol succinate",
+    "count": 52
+   },
+   {
+    "term": "Metoprolol Succinate ER Tablets",
+    "count": 35
+   },
+   {
+    "term": "metoprolol tartrate",
+    "count": 29
+   },
+   {
+    "term": "METOPROLOL",
+    "count": 23
+   },
+   {
+    "term": "METOPROLOL SUCCINATE",
+    "count": 11
+   },
+   {
+    "term": "Metoprolol Tartrate and Hydrochlorothiazide",
+    "count": 9
+   },
+   {
+    "term": "metoprolol tartrate and hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Metoprolol Succinate ER",
+    "count": 2
+   },
+   {
+    "term": "METOPROLOL TARTRATE DS/IP",
+    "count": 1
+   },
+   {
+    "term": "Metoprolol Tartrate Injection",
+    "count": 1
+   }
+  ]
+ }
+}

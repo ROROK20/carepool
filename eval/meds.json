@@ -1,0 +1,15 @@
+{
+  "note": "Ten medications commonly taken by older adults. The first five are the Nana Rosa demo list. Names are typed the way a family member would type them.",
+  "meds": [
+    "lisinopril",
+    "spironolactone",
+    "warfarin",
+    "sertraline",
+    "metformin",
+    "atorvastatin",
+    "omeprazole",
+    "levothyroxine",
+    "metoprolol",
+    "furosemide"
+  ]
+}

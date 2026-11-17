@@ -1,0 +1,59 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22lisinopril%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:08:57.977Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Lisinopril",
+    "count": 261
+   },
+   {
+    "term": "Lisinopril and Hydrochlorothiazide",
+    "count": 45
+   },
+   {
+    "term": "Lisinopril and Hydrochlorothiazide Tablets",
+    "count": 38
+   },
+   {
+    "term": "lisinopril",
+    "count": 20
+   },
+   {
+    "term": "LISINOPRIL",
+    "count": 13
+   },
+   {
+    "term": "LISINOPRIL AND HYDROCHLOROTHIAZIDE",
+    "count": 6
+   },
+   {
+    "term": "Lisinopril and hydrochlorothiazide",
+    "count": 6
+   },
+   {
+    "term": "LISINOPRIL and HYDROCHLOROTHIAZIDE",
+    "count": 3
+   },
+   {
+    "term": "lisinopril and hydrochlorothiazide",
+    "count": 3
+   },
+   {
+    "term": "Lisinopril Dihydrate",
+    "count": 1
+   },
+   {
+    "term": "Lisinopril/HCTZ",
+    "count": 1
+   }
+  ]
+ }
+}

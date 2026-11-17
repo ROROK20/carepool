@@ -1,0 +1,23 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name.exact:%22ATORVASTATIN%20CALCIUM%22&count=pharm_class.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:00.757Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "HMG-CoA Reductase Inhibitor [EPC]",
+    "count": 158
+   },
+   {
+    "term": "Hydroxymethylglutaryl-CoA Reductase Inhibitors [MoA]",
+    "count": 158
+   }
+  ]
+ }
+}

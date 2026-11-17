@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "checked_on": "2026-11-17",
+  "checked_by": "Claude Code (the build agent), by reading the cached openFDA label text in data/label-cache/. Not a pharmacist. Re-verify before quoting these numbers anywhere.",
+  "frozen_before_scoring": "This list and the matcher were both fixed before the matcher was scored against it. The one known miss (levothyroxine + metoprolol) was found while writing the list and was deliberately NOT patched into the matcher's class table, so the score is not tuned to this list.",
+  "rule": "A pair is POSITIVE when either drug's label, in its Drug Interactions, Boxed Warning, Contraindications or Warnings/Precautions sections, states an interaction or a caution about using the two together that names the other drug or a class the other drug belongs to. A mention that is not about using the two together (for example, heart-failure dosing advice that says to increase diuretics) is NEGATIVE. Negatives were confirmed by searching both labels with the broad patterns listed, which go wider than the matcher's own terms.",
+  "pairs": [
+    {
+      "a": "lisinopril",
+      "b": "spironolactone",
+      "interacts": true,
+      "why": "Raised potassium (hyperkalemia).",
+      "evidence": [
+        { "label": "lisinopril", "section": "drug_interactions", "quote": "Potassium-sparing diuretics (spironolactone, amiloride, triamterene, and others) can increase the risk of hyperkalemia." },
+        { "label": "spironolactone", "section": "drug_interactions", "quote": "Check serum potassium levels when ACE inhibitor or ARB therapy is altered in patients receiving spironolactone." }
+      ]
+    },
+    {
+      "a": "sertraline",
+      "b": "warfarin",
+      "interacts": true,
+      "why": "Bleeding risk.",
+      "evidence": [
+        { "label": "sertraline", "section": "warnings_and_cautions", "quote": "Concomitant use of aspirin, nonsteroidal anti-inflammatory drugs (NSAIDs), other antiplatelet drugs, warfarin, and other anticoagulants may increase this risk." }
+      ]
+    },
+    {
+      "a": "lisinopril",
+      "b": "metformin",
+      "interacts": true,
+      "why": "Low blood sugar (hypoglycemia); named by class (antidiabetic medicines).",
+      "evidence": [
+        { "label": "lisinopril", "section": "drug_interactions", "quote": "Concomitant administration of lisinopril and antidiabetic medicines (insulins, oral hypoglycemic agents) may cause an increased blood-glucose-lowering effect with risk of hypoglycemia." }
+      ]
+    },
+    {
+      "a": "omeprazole",
+      "b": "warfarin",
+      "interacts": true,
+      "why": "INR changes.",
+      "evidence": [
+        { "label": "omeprazole", "section": "drug_interactions", "quote": "Increased INR and prothrombin time in patients receiving PPIs, including omeprazole, and warfarin concomitantly." }
+      ]
+    },
+    {
+      "a": "atorvastatin",
+      "b": "warfarin",
+      "interacts": true,
+      "why": "Warfarin's label lists atorvastatin as a CYP3A4 inhibitor and says to monitor INR with such drugs.",
+      "evidence": [
+        { "label": "warfarin", "section": "drug_interactions", "quote": "Closely monitor INR if a concomitant drug is a CYP2C9, 1A2, and/or 3A4 inhibitor or inducer." },
+        { "label": "warfarin", "section": "drug_interactions", "quote": "CYP3A4 alprazolam, amiodarone, amlodipine, amprenavir, aprepitant, atorvastatin" }
+      ]
+    },
+    {
+      "a": "levothyroxine",
+      "b": "metoprolol",
+      "interacts": true,
+      "why": "Named by class (beta-adrenergic antagonists). Expected miss: the matcher's class table says 'beta-adrenergic blocker', not 'antagonist'.",
+      "evidence": [
+        { "label": "levothyroxine", "section": "drug_interactions", "quote": "Actions of particular beta-adrenergic antagonists may be impaired when a hypothyroid patient is converted to the euthyroid state." }
+      ]
+    },
+    {
+      "a": "metoprolol",
+      "b": "furosemide",
+      "interacts": false,
+      "why": "Metoprolol's label mentions diuretics only as heart-failure management advice, not as a caution about the combination. Furosemide's label never mentions beta-blockers. Expected false positive.",
+      "evidence": [
+        { "label": "metoprolol", "section": "warnings_and_cautions", "quote": "If such symptoms occur, increase diuretics and restore clinical stability before advancing the dose of metoprolol tartrate" }
+      ],
+      "searched": { "furosemide>metoprolol": "/metoprolol|beta[\\s-]*(adrenergic|blocker|blocking|antagonist)/i: 0 hits" }
+    },
+    {
+      "a": "metformin",
+      "b": "warfarin",
+      "interacts": false,
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "metformin>warfarin": "/warfarin|anticoag|coumarin|vitamin k antag/i: 0 hits",
+        "warfarin>metformin": "/metformin|antidiabet|hypoglycemic agent|oral hypoglycem/i: 0 hits"
+      }
+    },
+    {
+      "a": "lisinopril",
+      "b": "atorvastatin",
+      "interacts": false,
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "lisinopril>atorvastatin": "/atorvastatin|\\bstatins?\\b|HMG[\\s-]CoA/i: 0 hits",
+        "atorvastatin>lisinopril": "/lisinopril|\\bACE\\b|angiotensin[\\s-]converting|renin/: 0 hits"
+      }
+    },
+    {
+      "a": "spironolactone",
+      "b": "sertraline",
+      "interacts": false,
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "spironolactone>sertraline": "/sertraline|serotonin|\\bSSRIs?\\b/: 0 hits",
+        "sertraline>spironolactone": "/spironolactone|potassium[\\s-]sparing|aldosterone/i: 0 hits"
+      }
+    }
+  ]
+}

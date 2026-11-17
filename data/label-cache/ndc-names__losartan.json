@@ -1,0 +1,59 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22losartan%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:09.582Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Losartan Potassium",
+    "count": 161
+   },
+   {
+    "term": "losartan potassium and hydrochlorothiazide",
+    "count": 50
+   },
+   {
+    "term": "Losartan Potassium and Hydrochlorothiazide",
+    "count": 47
+   },
+   {
+    "term": "LOSARTAN POTASSIUM",
+    "count": 25
+   },
+   {
+    "term": "Losartan potassium",
+    "count": 20
+   },
+   {
+    "term": "losartan potassium",
+    "count": 20
+   },
+   {
+    "term": "LOSARTAN POTASSIUM AND HYDROCHLOROTHIAZIDE",
+    "count": 15
+   },
+   {
+    "term": "Losartan",
+    "count": 7
+   },
+   {
+    "term": "Losartan potassium and Hydrochlorothiazide",
+    "count": 5
+   },
+   {
+    "term": "Losartan Potassium (Form-1)",
+    "count": 1
+   },
+   {
+    "term": "Losartan Potassium Tabs 25 mg, 50 mg and 100mg (common blend)",
+    "count": 1
+   }
+  ]
+ }
+}

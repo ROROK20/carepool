@@ -1,0 +1,123 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22metformin%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:07:41.325Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-17"
+  },
+  "results": [
+   {
+    "term": "METFORMIN HYDROCHLORIDE",
+    "count": 266
+   },
+   {
+    "term": "METFORMIN HCL",
+    "count": 27
+   },
+   {
+    "term": "SITAGLIPTIN AND METFORMIN HYDROCHLORIDE",
+    "count": 17
+   },
+   {
+    "term": "GLYBURIDE AND METFORMIN HYDROCHLORIDE",
+    "count": 12
+   },
+   {
+    "term": "METFORMIN ER 500 MG",
+    "count": 12
+   },
+   {
+    "term": "DAPAGLIFLOZIN AND METFORMIN HYDROCHLORIDE",
+    "count": 10
+   },
+   {
+    "term": "GLYBURIDE-METFORMIN HYDROCHLORIDE",
+    "count": 7
+   },
+   {
+    "term": "GLIPIZIDE AND METFORMIN HYDROCHLORIDE",
+    "count": 6
+   },
+   {
+    "term": "METFORMIN ER 750 MG",
+    "count": 6
+   },
+   {
+    "term": "METFORMIN",
+    "count": 5
+   },
+   {
+    "term": "METFORMIN HYDROCHLORIDE EXTENDED-RELEASE TABLETS",
+    "count": 4
+   },
+   {
+    "term": "PIOGLITAZONE AND METFORMIN HYDROCHLORIDE",
+    "count": 4
+   },
+   {
+    "term": "ALOGLIPTIN AND METFORMIN HYDROCHLORIDE",
+    "count": 3
+   },
+   {
+    "term": "GLIPIZIDE AND METFORMIN HCL",
+    "count": 3
+   },
+   {
+    "term": "LINAGLIPTIN AND METFORMIN HYDROCHLORIDE",
+    "count": 3
+   },
+   {
+    "term": "METFORMIN HYDROCHLORIDE TABLET",
+    "count": 3
+   },
+   {
+    "term": "PIOGLITAZOLE AND METFORMIN HYDROCHLORIDE",
+    "count": 2
+   },
+   {
+    "term": "PIOGLITAZONE HYDROCHLORIDE AND METFORMIN HYDROCHLORIDE",
+    "count": 2
+   },
+   {
+    "term": "CANAGLIFLOZIN AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "EMPAGLIFLOZIN AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "EMPAGLIFLOZIN, LINAGLIPTIN, METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "EMPAGLIFLOZIN, METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "ERTUGLIFLOZIN AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "METFORMIN HYDROCHLORIDE TABLETS",
+    "count": 1
+   },
+   {
+    "term": "PIOGLITAZONE HCL AND METFORMIN HCL",
+    "count": 1
+   },
+   {
+    "term": "SAXAGLIPTIN AND METFORMIN",
+    "count": 1
+   },
+   {
+    "term": "SAXAGLIPTIN AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   }
+  ]
+ }
+}

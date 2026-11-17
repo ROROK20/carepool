@@ -1,0 +1,87 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22levothyroxine%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:04.203Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Levothyroxine Sodium",
+    "count": 353
+   },
+   {
+    "term": "levothyroxine sodium",
+    "count": 153
+   },
+   {
+    "term": "LEVOTHYROXINE SODIUM",
+    "count": 78
+   },
+   {
+    "term": "LEVOTHYROXINE, LIOTHYRONINE",
+    "count": 23
+   },
+   {
+    "term": "LEVOTHYROXINE SODIUM ANHYDROUS",
+    "count": 16
+   },
+   {
+    "term": "LEVOTHYROXINE and LIOTHYRONINE",
+    "count": 15
+   },
+   {
+    "term": "Levothyroxine sodium",
+    "count": 13
+   },
+   {
+    "term": "Levothyroxine Sodium Anhydrous",
+    "count": 3
+   },
+   {
+    "term": "ADENOSINE TRIPHOSPHATE, AMMONIUM MURIATICUM, BAPTISIA TINCTORIA, COLCHICUM AUTUMNALE, JUNIPERUS COMMUNIS, LEVOTHYROXINE, PODOPHYLLINUM, RHUS TOXICODENDRON",
+    "count": 2
+   },
+   {
+    "term": "adenosine triphosphate, ammonium carbonicum, camphora, crotalus cascavella, fucus vesiculosus, iodium, kali phosphoricum, levothyroxine, triiodothyronine",
+    "count": 2
+   },
+   {
+    "term": "1,4-benzoquinone - arnica montana - oxytocin - barium carbonate - barium oxalosuccinate - corticotropin - lead - levothyroxine - lutrelin - malic acid - melatonin - neurotrophin-3 - neurotrophin-4 - phenylalanine - pork liver - pyruvic acid - rinfabate - sus scrofa adrenal gland - sus scrofa frontal lobe - sus scrofa hypothalamus - thyrotropin alfa - brain-derived neurotrophic factor human -",
+    "count": 1
+   },
+   {
+    "term": "ADENOSINE TRIPHOSPHATE, ARSENICUM ALBUM, LEVOTHYROXINE, NATRUM SULPHURICUM, PHOSPHORUS, RUTA GRAVEOLENS",
+    "count": 1
+   },
+   {
+    "term": "ARANEUS DIADEMATUS, TRIBASIC CALCIUM PHOSPHATE,EQUISETUM HYEMALE WHOLE, FERROUS IODIDE,FUMARIA OFFICINALIS FLOWERING TOP, GENTIANA LUTEA ROOT, JUGLANS REGIA LEAF, LEVOTHYROXINE SODIUM ANHYDROUS, MYOSOTIS ARVENSIS WHOLE,NASTURTIUM OFFICINALE,SODIUM SULFATE, PINUS SYLVESTRIS LEAFY TWIG,SMILAX ORNATA ROOT,SCROPHULARIA NODOSA WHOLE, TEUCRIUM SCORODONIA FLOWERING, VERONICA OFFICINALIS FLOWERING TOP",
+    "count": 1
+   },
+   {
+    "term": "Aesculus hippocastanum - apis mellifera - calendula officinalis flower - hexaketocyclohexane - equisetum hyemale - fumaric acid - graphite - hydrastis canadensis - hydrocotyle asiatica - juglans regia - levothyroxine - magnesium phosphate - malic acid - myosotis arvensis - phytolacca americana root - sarsaparilla - sodium diethyl oxalacetate - sodium pyruvate - sus scrofa placenta - taraxacum officinale -",
+    "count": 1
+   },
+   {
+    "term": "Levothyroxine",
+    "count": 1
+   },
+   {
+    "term": "apis mellifera - calendula officinalis flower - centella asiatica - dodecahydroxycyclohexane dihydrate - equisetum hyemale - fumaric acid - goldenseal - graphite - juglans regia leaf - levothyroxine - magnesium phosphate - malic acid - myosotis arvensis - phytolacca americana root - sarsaparilla - sodium diethyl oxalacetate - sodium pyruvate - sus scrofa capillary tissue - sus scrofa small intestine mucosa lymph follicle - sus scrofa vein - taraxacum officinale -",
+    "count": 1
+   },
+   {
+    "term": "levothyroxine liothyronine",
+    "count": 1
+   },
+   {
+    "term": "levothyroxine, liothyronine",
+    "count": 1
+   }
+  ]
+ }
+}

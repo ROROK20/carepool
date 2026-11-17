@@ -1,0 +1,107 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22amlodipine%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:07:43.146Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-17"
+  },
+  "results": [
+   {
+    "term": "AMLODIPINE BESYLATE",
+    "count": 130
+   },
+   {
+    "term": "AMLODIPINE BESYLATE AND BENAZEPRIL HYDROCHLORIDE",
+    "count": 28
+   },
+   {
+    "term": "AMLODIPINE AND BENAZEPRIL HYDROCHLORIDE",
+    "count": 20
+   },
+   {
+    "term": "AMLODIPINE AND ATORVASTATIN",
+    "count": 14
+   },
+   {
+    "term": "AMLODIPINE AND OLMESARTAN MEDOXOMIL",
+    "count": 10
+   },
+   {
+    "term": "AMLODIPINE AND VALSARTAN",
+    "count": 10
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL / AMLODIPINE BESYLATE / HYDROCHLOROTHIAZIDE",
+    "count": 10
+   },
+   {
+    "term": "AMLODIPINE",
+    "count": 4
+   },
+   {
+    "term": "TELMISARTAN AND AMLODIPINE",
+    "count": 4
+   },
+   {
+    "term": "AMLODIPINE BESYLATE AND OLMESARTAN MEDOXOMIL",
+    "count": 3
+   },
+   {
+    "term": "AMLODIPINE BESYLATE AND OLMESARTRAN MEDOXOMIL",
+    "count": 2
+   },
+   {
+    "term": "AMLODIPINE BESYLATE VALSARTAN HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "AMLODIPINE, VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL, AMLODIPINE AND HYDROCHLOROTHIAZIDE",
+    "count": 2
+   },
+   {
+    "term": "AAMLODIPINE AND OLMESARTAN MEDOXOMIL",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE BESYLATE AND ATORVASTATIN CALCIUM",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE BESYLATE AND VALSARTAN",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "AMLODIPINE,VALSARTAN AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL AMLODIPINE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL AND AMLODIPINE BESYLATE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "OLMESARTAN MEDOXOMIL, AMLODIPINE BESYLATE AND HYDROCHLOROTHIAZIDE",
+    "count": 1
+   },
+   {
+    "term": "TELMISARTAN, AMLODIPINE AND INDAPAMIDE",
+    "count": 1
+   }
+  ]
+ }
+}

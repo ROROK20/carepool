@@ -1,0 +1,59 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22omeprazole%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:07:46.030Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-17"
+  },
+  "results": [
+   {
+    "term": "OMEPRAZOLE",
+    "count": 285
+   },
+   {
+    "term": "OMEPRAZOLE MAGNESIUM",
+    "count": 26
+   },
+   {
+    "term": "OMEPRAZOLE AND SODIUM BICARBONATE",
+    "count": 15
+   },
+   {
+    "term": "OMEPRAZOLE, SODIUM BICARBONATE",
+    "count": 10
+   },
+   {
+    "term": "OMEPRAZOLE 20 MG",
+    "count": 3
+   },
+   {
+    "term": "OMEPRAZOLE 20MG",
+    "count": 2
+   },
+   {
+    "term": "OMEPRAZOLE MAGNESIUM 20.6MG CAPSULES",
+    "count": 2
+   },
+   {
+    "term": "OMEPRAZOLE MAGNESIUM, AMOXICILLIN AND RIFABUTIN",
+    "count": 1
+   },
+   {
+    "term": "OMEPRAZOLE SODIUM BICARBONATE",
+    "count": 1
+   },
+   {
+    "term": "OMEPRAZOLE TABLET, DELAYED RELEASE",
+    "count": 1
+   },
+   {
+    "term": "OMEPRAZOLE/SODIIUM BICARBONATE",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,91 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22atorvastatin%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:09:00.541Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "ATORVASTATIN CALCIUM",
+    "count": 167
+   },
+   {
+    "term": "Atorvastatin Calcium",
+    "count": 113
+   },
+   {
+    "term": "Atorvastatin calcium",
+    "count": 68
+   },
+   {
+    "term": "atorvastatin calcium",
+    "count": 57
+   },
+   {
+    "term": "Amlodipine and Atorvastatin",
+    "count": 48
+   },
+   {
+    "term": "atorvastatin calcium, film coated",
+    "count": 18
+   },
+   {
+    "term": "amlodipine and atorvastatin",
+    "count": 16
+   },
+   {
+    "term": "Amlodipine besylate and Atorvastatin calcium",
+    "count": 11
+   },
+   {
+    "term": "Amlodipine and atorvastatin",
+    "count": 8
+   },
+   {
+    "term": "Atorvastatin Calcium Trihydrate",
+    "count": 6
+   },
+   {
+    "term": "ATORVASTATIN CALCIUM PROPYLENE GLYCOL SOLVATE",
+    "count": 2
+   },
+   {
+    "term": "ATORVASTATIN CALCIUM TRIHYDRATE",
+    "count": 2
+   },
+   {
+    "term": "Atorvastatin",
+    "count": 1
+   },
+   {
+    "term": "Atorvastatin Calcium Amorphous",
+    "count": 1
+   },
+   {
+    "term": "Atorvastatin Calcium Form-I",
+    "count": 1
+   },
+   {
+    "term": "Atorvastatin calcium crystalline",
+    "count": 1
+   },
+   {
+    "term": "Atorvastatin calcium trihydrate",
+    "count": 1
+   },
+   {
+    "term": "atorvastatin",
+    "count": 1
+   },
+   {
+    "term": "atorvastatin calcium amorphous",
+    "count": 1
+   }
+  ]
+ }
+}

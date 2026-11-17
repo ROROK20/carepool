@@ -1,0 +1,11 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22lipitor%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:07:52.536Z",
+ "status": 404,
+ "body": {
+  "error": {
+   "code": "NOT_FOUND",
+   "message": "No matches found!"
+  }
+ }
+}

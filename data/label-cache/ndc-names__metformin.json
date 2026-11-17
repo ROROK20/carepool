@@ -1,0 +1,227 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22metformin%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-17T15:08:59.729Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-16"
+  },
+  "results": [
+   {
+    "term": "Metformin Hydrochloride",
+    "count": 241
+   },
+   {
+    "term": "METFORMIN HYDROCHLORIDE",
+    "count": 106
+   },
+   {
+    "term": "metformin hydrochloride",
+    "count": 47
+   },
+   {
+    "term": "Metformin HCl",
+    "count": 33
+   },
+   {
+    "term": "Metformin hydrochloride",
+    "count": 27
+   },
+   {
+    "term": "sitagliptin and metformin hydrochloride",
+    "count": 19
+   },
+   {
+    "term": "Glyburide and Metformin Hydrochloride",
+    "count": 18
+   },
+   {
+    "term": "canagliflozin and metformin hydrochloride",
+    "count": 16
+   },
+   {
+    "term": "dapagliflozin and metformin hydrochloride",
+    "count": 16
+   },
+   {
+    "term": "Dapagliflozin and Metformin Hydrochloride",
+    "count": 14
+   },
+   {
+    "term": "Glipizide and Metformin Hydrochloride",
+    "count": 14
+   },
+   {
+    "term": "Sitagliptin and Metformin Hydrochloride",
+    "count": 14
+   },
+   {
+    "term": "Metformin ER 500 mg",
+    "count": 12
+   },
+   {
+    "term": "empagliflozin and metformin hydrochloride",
+    "count": 12
+   },
+   {
+    "term": "alogliptin and metformin hydrochloride",
+    "count": 9
+   },
+   {
+    "term": "glyburide-metformin hydrochloride",
+    "count": 9
+   },
+   {
+    "term": "linagliptin and metformin hydrochloride",
+    "count": 9
+   },
+   {
+    "term": "DAPAGLIFLOZIN AND METFORMIN HYDROCHLORIDE",
+    "count": 8
+   },
+   {
+    "term": "Metformin Hydrochloride Extended-Release Tablets",
+    "count": 8
+   },
+   {
+    "term": "SITAGLIPTIN and METFORMIN HYDROCHLORIDE",
+    "count": 8
+   },
+   {
+    "term": "ertugliflozin and metformin hydrochloride",
+    "count": 8
+   },
+   {
+    "term": "metformin",
+    "count": 7
+   },
+   {
+    "term": "Metformin ER 750 mg",
+    "count": 6
+   },
+   {
+    "term": "Pioglitazone Hydrochloride and Metformin Hydrochloride",
+    "count": 6
+   },
+   {
+    "term": "glyburide and metformin hydrochloride",
+    "count": 6
+   },
+   {
+    "term": "Metformin Hydrochloride Tablet",
+    "count": 5
+   },
+   {
+    "term": "Dapagliflozin and Metformin hydrochloride",
+    "count": 4
+   },
+   {
+    "term": "Glipizide and Metformin HCl",
+    "count": 4
+   },
+   {
+    "term": "Metformin HCL",
+    "count": 4
+   },
+   {
+    "term": "Pioglitazone and metformin hydrochloride",
+    "count": 4
+   },
+   {
+    "term": "empagliflozin, linagliptin, metformin hydrochloride",
+    "count": 4
+   },
+   {
+    "term": "empagliflozin, metformin hydrochloride",
+    "count": 4
+   },
+   {
+    "term": "Glipizide and metformin hcl",
+    "count": 3
+   },
+   {
+    "term": "Linagliptin and metformin hydrochloride",
+    "count": 3
+   },
+   {
+    "term": "Metformin Hydrochloride and Sitagliptin Phosphate",
+    "count": 3
+   },
+   {
+    "term": "SITAGLIPTIN PHOSPHATE and METFORMIN HYDROCHLORIDE",
+    "count": 3
+   },
+   {
+    "term": "Saxagliptin and Metformin Hydrochloride",
+    "count": 3
+   },
+   {
+    "term": "Sitagliptin Phosphate/Metformin Hydrochloride Extended",
+    "count": 3
+   },
+   {
+    "term": "saxagliptin and metformin",
+    "count": 3
+   },
+   {
+    "term": "Metformin",
+    "count": 2
+   },
+   {
+    "term": "Pioglitazole and metformin hydrochloride",
+    "count": 2
+   },
+   {
+    "term": "Pioglitazone HCL and Metformin HCL",
+    "count": 2
+   },
+   {
+    "term": "pioglitazone hydrochloride and metformin hydrochloride",
+    "count": 2
+   },
+   {
+    "term": "METFORMIN HYDROCHLORIDE DC",
+    "count": 1
+   },
+   {
+    "term": "Metformin HCL DC Granule 95%",
+    "count": 1
+   },
+   {
+    "term": "Metformin HCl plus 0.5 percent Mg Stearate",
+    "count": 1
+   },
+   {
+    "term": "Metformin Hcl",
+    "count": 1
+   },
+   {
+    "term": "Metformin-Hcl",
+    "count": 1
+   },
+   {
+    "term": "SITAGLIPTIN AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "SITAGLIPTIN PHOSPHATE AND METFORMIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "metformin hydrochloride tablet",
+    "count": 1
+   },
+   {
+    "term": "metformin hydrochloride tablets",
+    "count": 1
+   },
+   {
+    "term": "pioglitazone and metformin hydrochloride",
+    "count": 1
+   }
+  ]
+ }
+}
