@@ -77,7 +77,8 @@ export interface FlagView extends InteractionFlag {
   label_date: string | null;
   label_version: string | null;
   dailymed_url: string;
-  explanation: (Explanation & { verified: boolean }) | null;
+  /** The model's explanation; each sentence's quote re-checked against the flagged section now. */
+  explanation: (Omit<Explanation, "sentences"> & { sentences: { text: string; quote: string; verified: boolean }[]; verified: boolean }) | null;
 }
 
 export interface PairView {
@@ -115,7 +116,12 @@ export function interactionsView(): InteractionsView {
         label_date: l.label.effective_date,
         label_version: l.label.version,
         dailymed_url: `https://dailymed.nlm.nih.gov/dailymed/lookup.cfm?setid=${encodeURIComponent(l.label.set_id)}`,
-        explanation: e ? { ...e, verified: isVerbatim(sectionText, e.quote) } : null,
+        explanation: e
+          ? (() => {
+              const sentences = e.sentences.map((x) => ({ ...x, verified: isVerbatim(sectionText, x.quote) }));
+              return { ...e, sentences, verified: sentences.length > 0 && sentences.every((x) => x.verified) };
+            })()
+          : null,
       };
     }),
   }));

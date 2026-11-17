@@ -84,7 +84,7 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ d
                   <Link href={`/interactions#${p.key}`} className="font-semibold hover:text-accent">
                     {p.names[0]} + {p.names[1]}
                   </Link>
-                  <span className="text-sm text-muted">{explained?.explanation?.text ?? `The ${p.flags[0].a_name} label names ${p.flags[0].matched_text}.`}</span>
+                  <span className="text-sm text-muted">{explained?.explanation?.sentences.map((x) => x.text).join(" ") ?? `The ${p.flags[0].a_name} label names ${p.flags[0].matched_text}.`}</span>
                 </li>
               );
             })}

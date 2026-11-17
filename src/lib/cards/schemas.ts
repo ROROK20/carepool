@@ -31,7 +31,9 @@ export const ReviewOutputSchema = z.object({
 export type ReviewOutput = z.infer<typeof ReviewOutputSchema>;
 
 export const ExplainOutputSchema = z.object({
-  explanations: z.array(z.object({ flag_id: z.string().trim().min(1).max(200), text, quote })).max(60),
+  explanations: z
+    .array(z.object({ flag_id: z.string().trim().min(1).max(200), sentences: z.array(z.object({ text, quote })).min(1).max(3) }))
+    .max(60),
 });
 export type ExplainOutput = z.infer<typeof ExplainOutputSchema>;
 
@@ -98,10 +100,20 @@ export const EXPLAIN_JSON_SCHEMA = {
         type: "object",
         properties: {
           flag_id: { type: "string" },
-          text: { type: "string", description: "One or two plain sentences: what the label says can happen." },
-          quote: { type: "string", description: "Words copied exactly from the flagged label text." },
+          sentences: {
+            type: "array",
+            description: "One or two sentences. Each one makes a single claim, backed by its own quote.",
+            items: {
+              type: "object",
+              properties: {
+                text: { type: "string", description: "One plain sentence: what the label says." },
+                quote: { type: "string", description: "Words copied exactly from the flagged label text that say what this sentence says." },
+              },
+              required: ["text", "quote"],
+            },
+          },
         },
-        required: ["flag_id", "text", "quote"],
+        required: ["flag_id", "sentences"],
       },
     },
   },

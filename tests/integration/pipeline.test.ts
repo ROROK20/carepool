@@ -31,6 +31,8 @@ const resolved: ResolvedLabel = {
   fetched_at: "2026-11-17T00:00:00.000Z",
   classes: ["Angiotensin Converting Enzyme Inhibitor"],
   class_source: "ndc",
+  formulation_wanted: null,
+  formulation_mismatch: false,
 };
 const resolve = async () => resolved;
 
@@ -130,20 +132,45 @@ describe("explainFlags", () => {
     const provider = scripted({
       explain: () => ({
         explanations: [
-          { flag_id: flags[0].id, text: "Taking them together can raise potassium.", quote: "can increase the risk of hyperkalemia" },
-          { flag_id: "made-up>flag", text: "These two also interact.", quote: "can increase the risk of hyperkalemia" },
+          {
+            flag_id: flags[0].id,
+            sentences: [
+              { text: "Taking them together can raise potassium.", quote: "can increase the risk of hyperkalemia" },
+              // a second claim with no support in its quote is dropped, the first is kept
+              { text: "Potassium should be checked within 3 days.", quote: "can increase the risk of hyperkalemia" },
+            ],
+          },
+          { flag_id: "made-up>flag", sentences: [{ text: "These two also interact.", quote: "can increase the risk of hyperkalemia" }] },
         ],
       }),
     });
     const r = await explainFlags(flags, drugs, provider);
-    expect(r.explanations).toEqual([{ flag_id: flags[0].id, text: "Taking them together can raise potassium.", quote: "can increase the risk of hyperkalemia" }]);
-    expect(r.dropped.map((d) => d.reason)).toEqual(["UNKNOWN_FLAG"]);
+    expect(r.explanations).toEqual([
+      { flag_id: flags[0].id, sentences: [{ text: "Taking them together can raise potassium.", quote: "can increase the risk of hyperkalemia" }] },
+    ]);
+    expect(r.dropped.map((d) => d.reason).sort()).toEqual(["UNKNOWN_FLAG", "UNGROUNDED_TOKEN"].sort());
   });
 
   it("drops an explanation whose quote is not in the flagged section", async () => {
-    const provider = scripted({ explain: () => ({ explanations: [{ flag_id: flags[0].id, text: "Potassium may rise.", quote: "potassium may rise a lot" }] }) });
+    const provider = scripted({ explain: () => ({ explanations: [{ flag_id: flags[0].id, sentences: [{ text: "Potassium may rise.", quote: "potassium may rise a lot" }] }] }) });
     const r = await explainFlags(flags, drugs, provider);
     expect(r.explanations).toEqual([]);
     expect(r.dropped[0].reason).toBe("QUOTE_NOT_FOUND");
+  });
+});
+
+describe("duplicate quotes", () => {
+  it("two sentences citing the same words keep only the first", async () => {
+    const provider = scripted({
+      writer: () => ({
+        sentences: [
+          { part: "uses", text: "It treats high blood pressure in adults.", section: "indications_and_usage", quote: "indicated for the treatment of hypertension in adults" },
+          { part: "uses", text: "Adults take it for high blood pressure.", section: "indications_and_usage", quote: "indicated for the treatment of hypertension in adults" },
+        ],
+      }),
+    });
+    const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 0, resolve });
+    expect(card.sentences.map((s) => s.id)).toEqual(["s1"]);
+    expect(card.removed.map((r) => [r.id, r.reason])).toEqual([["s2", "DUPLICATE_QUOTE"]]);
   });
 });

@@ -220,3 +220,13 @@ describe("helpers", () => {
     for (const p of res.passed) expect(sections[p.section].text.includes(p.quote)).toBe(true);
   });
 });
+
+describe("one sentence per quote", () => {
+  it("MULTIPLE_SENTENCES when the text makes two statements for one quote", () => {
+    expect(reason(s({ text: "Headache, dizziness and cough are common. Call the doctor if they last." }))).toBe("MULTIPLE_SENTENCES");
+  });
+
+  it("an abbreviation inside one sentence is not a second sentence", () => {
+    expect(reason(s({ text: "Common side effects (e.g. headache, dizziness and cough) can happen." }))).toBe("OK");
+  });
+});

@@ -1,6 +1,6 @@
 {
- "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22CLOPIDOGREL%22+AND+_exists_:indications_and_usage&sort=effective_time:desc&limit=1",
- "fetched_at": "2026-11-17T15:09:08.544Z",
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name.exact:%22CLOPIDOGREL%22+AND+_exists_:indications_and_usage+AND+NOT+description:%22extended-release%22+AND+NOT+indications_and_usage:%22extended-release%22&sort=effective_time:desc&limit=1",
+ "fetched_at": "2026-11-17T15:57:48.732Z",
  "status": 200,
  "body": {
   "meta": {

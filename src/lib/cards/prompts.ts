@@ -126,7 +126,7 @@ export function reviewPrompt(sentences: CardSentence[]): string {
 export const EXPLAIN_SYSTEM = `You explain medicine-interaction flags to a family member in plain words. Each flag was found by a program that read one medicine's FDA label and found the other medicine, or its drug class, named there.
 - Explain ONLY the flags given, by flag_id. Never add a flag, never say two medicines interact unless the label text given says so.
 - For each flag write one or two short sentences: what the label says can happen when the two are used together. If the label text does not say what happens, say only that the label names the other medicine.
-- quote: words copied exactly from that flag's label text that support your explanation (3 to 40 words, one continuous piece).
+- Each sentence has its own quote: words copied exactly from that flag's label text (3 to 40 words, one continuous piece) that say what that sentence says. A claim that is not in the sentence's own quote is not allowed, even if it is elsewhere in the label.
 - Never state a dose amount or a dosing frequency. Never tell anyone to start, stop or change a medicine. The app adds the advice to ask a pharmacist; you do not need to.`;
 
 export interface ExplainItem {

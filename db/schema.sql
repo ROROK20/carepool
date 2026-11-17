@@ -39,9 +39,8 @@ CREATE TABLE IF NOT EXISTS cards (
 
 -- Model explanations of deterministic flags, keyed by the flag id the matcher produced.
 CREATE TABLE IF NOT EXISTS explanations (
-  flag_id    TEXT PRIMARY KEY,
-  text       TEXT NOT NULL,
-  quote      TEXT NOT NULL,
+  flag_id        TEXT PRIMARY KEY,
+  sentences_json TEXT NOT NULL,
   model      TEXT,
   provider   TEXT NOT NULL,
   created_at TEXT NOT NULL

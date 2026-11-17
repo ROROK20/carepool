@@ -71,10 +71,16 @@ export default function InteractionsPage() {
               </div>
               {explanation ? (
                 <div className="mb-3" data-testid="flag-explanation">
-                  <p className="text-lg">{explanation.text}</p>
+                  <p className="text-lg">{explanation.sentences.map((x) => x.text).join(" ")}</p>
                   <p className="mt-1 text-xs text-muted">
-                    Plain-words explanation by {explanation.provider === "mock" ? "the mock template" : (explanation.model ?? "Claude")}, checked: it quotes the label word for word (
-                    <span className="label-quote">{explanation.quote}</span>).
+                    In plain words by {explanation.provider === "mock" ? "the mock template" : (explanation.model ?? "Claude")}. Checked: each sentence quotes the label word for word
+                    {explanation.sentences.map((x, i) => (
+                      <span key={i}>
+                        {i === 0 ? " (" : "; "}
+                        <span className="label-quote">{x.quote}</span>
+                      </span>
+                    ))}
+                    ).
                   </p>
                 </div>
               ) : (

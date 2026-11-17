@@ -43,7 +43,7 @@ export interface RecordedRun {
   models: string[];
   note: string;
   cards: Record<string, CardResult>;
-  explanations: { flag_id: string; text: string; quote: string; model: string | null }[];
+  explanations: { flag_id: string; sentences: { text: string; quote: string }[]; model: string | null }[];
 }
 
 export function seedDemo(file = SEED_FILE): void {
@@ -74,7 +74,7 @@ export async function importRecordedRun(file = RECORDED_RUN_FILE): Promise<{ car
   for (const med of meds) {
     const card = run.cards[med.id];
     if (!card) continue;
-    const resolved = await resolveLabel(med.name);
+    const resolved = await resolveLabel(med.name, { formulationText: med.dose });
     if (resolved.label.id !== card.label.id) {
       throw new Error(`${med.name}: the cached label (${resolved.label.id}) is not the one the recorded card used (${card.label.id}).`);
     }
@@ -90,7 +90,7 @@ export async function importRecordedRun(file = RECORDED_RUN_FILE): Promise<{ car
   const keep = run.explanations.filter((e) => {
     const f = flags.get(e.flag_id);
     const text = f ? labels.get(f.a)?.label.sections[f.section]?.text ?? "" : "";
-    const ok = Boolean(f) && isVerbatim(text, e.quote);
+    const ok = Boolean(f) && e.sentences.length > 0 && e.sentences.every((x) => isVerbatim(text, x.quote));
     if (!ok) dropped.push(e.flag_id);
     return ok;
   });

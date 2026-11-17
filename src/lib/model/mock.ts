@@ -79,8 +79,7 @@ export const createMockModel = (): ModelFn => async (req: ModelRequest) => {
       return respond({
         explanations: ctx.flags.map((f) => ({
           flag_id: f.flag_id,
-          text: `The ${f.a_name} label names ${f.matched_text} in its ${f.section_title} section.`,
-          quote: f.quote,
+          sentences: [{ text: `The ${f.a_name} label names ${f.matched_text} in its ${f.section_title} section.`, quote: f.quote }],
         })),
       });
   }

@@ -17,6 +17,8 @@ export interface LabelSection {
   text: string;
 }
 
+export type Formulation = "extended" | "delayed" | "immediate";
+
 export interface ParsedLabel {
   /** openFDA document id of this label version. */
   id: string;
@@ -31,6 +33,8 @@ export interface ParsedLabel {
   manufacturer: string | null;
   /** Established pharmacologic classes, without the " [EPC]" suffix. */
   pharm_classes: string[];
+  /** Release form, read from the label's description, indications and package panel. */
+  formulation: Formulation;
   sections: Record<string, LabelSection>;
 }
 
@@ -62,6 +66,16 @@ export function stripClassSuffix(cls: string): string {
   return collapseWhitespace(cls.replace(/\s*\[(EPC|MoA|PE|CS|EXT)\]\s*$/i, ""));
 }
 
+/** Release form a label describes. Extended-release labels say so in their description or package panel. */
+export function labelFormulation(r: Record<string, unknown>): Formulation {
+  const text = ["description", "indications_and_usage", "package_label_principal_display_panel", "dosage_and_administration"]
+    .map((k) => strings(r[k]).join(" ").slice(0, 4000))
+    .join(" ");
+  if (/extended[\s-]release|\bEXTENDED RELEASE\b/i.test(text)) return "extended";
+  if (/delayed[\s-]release|\bDELAYED RELEASE\b/i.test(text)) return "delayed";
+  return "immediate";
+}
+
 export function parseLabel(raw: unknown): ParsedLabel {
   if (!raw || typeof raw !== "object") throw new Error("parseLabel: expected an openFDA label object");
   const r = raw as Record<string, unknown>;
@@ -90,6 +104,7 @@ export function parseLabel(raw: unknown): ParsedLabel {
     brand_names: uniq(strings(openfda.brand_name)),
     manufacturer: strings(openfda.manufacturer_name)[0] ?? null,
     pharm_classes: uniq(strings(openfda.pharm_class_epc).map(stripClassSuffix)),
+    formulation: labelFormulation(r),
     sections,
   };
 }

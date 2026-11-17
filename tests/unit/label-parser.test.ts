@@ -110,3 +110,25 @@ describe("choosing the right label name", () => {
     ).toEqual(["Angiotensin Converting Enzyme Inhibitor"]);
   });
 });
+
+describe("release form", () => {
+  it("reads the release form from the label text", async () => {
+    const { labelFormulation } = await import("@/lib/labels/parse");
+    expect(labelFormulation({ description: ["Metformin hydrochloride extended-release tablets, USP contain"] })).toBe("extended");
+    expect(labelFormulation({ package_label_principal_display_panel: ["DOSAGE: TABLET, EXTENDED RELEASE"] })).toBe("extended");
+    expect(labelFormulation({ description: ["Omeprazole delayed-release capsules"] })).toBe("delayed");
+    expect(labelFormulation({ description: ["Metformin hydrochloride tablets, USP contain"] })).toBe("immediate");
+  });
+
+  it("an extended-release hint comes only from what the family typed", async () => {
+    const { formulationHint, formulationMismatch } = await import("@/lib/labels/openfda");
+    expect(formulationHint("Metformin ER 500 mg")).toBe("extended");
+    expect(formulationHint("metoprolol succinate 24 hr tablet")).toBe("extended");
+    expect(formulationHint("Metformin 500 mg tablet twice daily")).toBeNull();
+    expect(formulationHint("Lisinopril 10 mg; ask Dr. Sanders")).toBeNull();
+    expect(formulationMismatch(null, "extended")).toBe(true);
+    expect(formulationMismatch(null, "immediate")).toBe(false);
+    expect(formulationMismatch("extended", "immediate")).toBe(true);
+    expect(formulationMismatch(null, "delayed")).toBe(false);
+  });
+});

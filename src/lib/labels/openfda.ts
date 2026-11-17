@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { parseLabel, stripClassSuffix, type ParsedLabel } from "./parse";
+import { parseLabel, stripClassSuffix, type Formulation, type ParsedLabel } from "./parse";
 
 /**
  * openFDA drug-label lookup with an on-disk cache.
@@ -15,7 +15,13 @@ import { parseLabel, stripClassSuffix, type ParsedLabel } from "./parse";
  *     name, and take the most common. "metformin" → "METFORMIN HYDROCHLORIDE".
  *     No generic match → the same with `openfda.brand_name` ("Lipitor").
  *  2. Fetch the most recently updated label with that exact name that has an
- *     indications section.
+ *     indications section, in the right release form. openFDA gives
+ *     immediate- and extended-release metformin the same generic name, and on
+ *     2026-11-17 the newest "METFORMIN HYDROCHLORIDE" label was extended-release
+ *     (whose card says "take with the evening meal"). So unless the family
+ *     typed ER/XR/XL/SR/"extended", the query excludes extended-release labels;
+ *     if they did, it asks for one. Either falls back to any label, and the
+ *     card warns when the label's form does not match what was typed.
  *  3. Classes. Most labels in the label endpoint carry no
  *     `openfda.pharm_class_epc` (none of 154 lisinopril labels did on
  *     2026-11-17), so when the label has none we ask openFDA's NDC directory,
@@ -71,6 +77,19 @@ export interface ResolvedLabel {
   /** Established pharmacologic classes (no suffix), from the label or the NDC directory. */
   classes: string[];
   class_source: "label" | "ndc" | "none";
+  /** Release form the typed name or dose asked for, if any. */
+  formulation_wanted: "extended" | null;
+  /** True when the label's release form differs from what was typed (shown as a warning). */
+  formulation_mismatch: boolean;
+}
+
+/** "ER", "XR", "XL", "SR", "CR", "LA", "extended", "24 hr", "sustained": the family typed an extended-release form. */
+export function formulationHint(text: string): "extended" | null {
+  return /\b(?:ER|XR|XL|SR|CR|LA|XL24|extended|sustained|controlled|24[\s-]?h(?:ou)?r)\b/i.test(text) ? "extended" : null;
+}
+
+export function formulationMismatch(wanted: "extended" | null, actual: Formulation): boolean {
+  return wanted === "extended" ? actual !== "extended" : actual === "extended";
 }
 
 // Salt, hydrate and dosage-form words removed when comparing a typed name with an openFDA name.
@@ -184,8 +203,13 @@ function countUrl(field: "generic_name" | "brand_name", query: string): string {
   return `${BASE}?search=${q(`openfda.${field}`, query)}&count=openfda.${field}.exact&limit=100`;
 }
 
-function labelUrl(field: "generic_name" | "brand_name", term: string): string {
+type Variant = "ir" | "er" | "any";
+
+function labelUrl(field: "generic_name" | "brand_name", term: string, variant: Variant): string {
   const parts = [q(`openfda.${field}.exact`, term), "_exists_:indications_and_usage"];
+  const er = encodeURIComponent('"extended-release"');
+  if (variant === "ir") parts.push(`NOT+description:${er}`, `NOT+indications_and_usage:${er}`);
+  if (variant === "er") parts.push(`description:${er}`);
   return `${BASE}?search=${parts.join("+AND+")}&sort=effective_time:desc&limit=1`;
 }
 
@@ -231,9 +255,13 @@ function firstResult(res: CachedResponse): Record<string, unknown> | null {
   return Array.isArray(results) && results[0] && typeof results[0] === "object" ? (results[0] as Record<string, unknown>) : null;
 }
 
-/** Resolve a typed medication name to one FDA label. */
-export async function resolveLabel(query: string): Promise<ResolvedLabel> {
+/**
+ * Resolve a typed medication name to one FDA label. `formulationText` is what
+ * else the family typed (the dose line); it only decides the release form.
+ */
+export async function resolveLabel(query: string, opts: { formulationText?: string } = {}): Promise<ResolvedLabel> {
   const name = baseName(query);
+  const wanted = formulationHint(`${query} ${opts.formulationText ?? ""}`);
   if (!name) throw new LabelNotFoundError(query);
   const files: string[] = [];
 
@@ -245,11 +273,16 @@ export async function resolveLabel(query: string): Promise<ResolvedLabel> {
     const term = pickTerm(name, countTerms(counted));
     if (!term) continue;
 
-    const labelFile = `label-${kind}__${slug(term)}.json`;
-    files.push(labelFile);
-    const res = await cachedGet(labelFile, labelUrl(field, term));
-    const raw = firstResult(res);
-    if (!raw) continue;
+    let res: CachedResponse | null = null;
+    let raw: Record<string, unknown> | null = null;
+    for (const variant of [wanted === "extended" ? "er" : "ir", "any"] as Variant[]) {
+      const labelFile = `label-${kind}${variant === "any" ? "" : `-${variant}`}__${slug(term)}.json`;
+      files.push(labelFile);
+      res = await cachedGet(labelFile, labelUrl(field, term, variant));
+      raw = firstResult(res);
+      if (raw) break;
+    }
+    if (!raw || !res) continue;
     const label = parseLabel(raw);
     let classes = label.pharm_classes;
     let classSource: ResolvedLabel["class_source"] = classes.length > 0 ? "label" : "none";
@@ -268,6 +301,8 @@ export async function resolveLabel(query: string): Promise<ResolvedLabel> {
       fetched_at: res.fetched_at,
       classes,
       class_source: classSource,
+      formulation_wanted: wanted,
+      formulation_mismatch: formulationMismatch(wanted, label.formulation),
     };
   }
   throw new LabelNotFoundError(query);

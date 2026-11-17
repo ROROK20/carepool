@@ -25,6 +25,8 @@ const REASON_TEXT: Record<string, string> = {
   QUOTE_TOO_SHORT: "its quote is too short to check",
   QUOTE_TOO_LONG: "its quote is too long",
   NO_CITATION: "it has no quote",
+  MULTIPLE_SENTENCES: "it said more than one thing for a single quote",
+  DUPLICATE_QUOTE: "another sentence already says the same thing from the same words",
 };
 
 export default async function CardPage({ params }: { params: Promise<{ id: string }> }) {
@@ -44,7 +46,9 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
       <PageTitle title={med.name} kicker="Medicine card">
         {card && label ? (
           <span data-testid="label-meta">
-            From the FDA label for <strong className="text-ink">{labelTitle(card.label)}</strong>, version {card.label.version ?? "?"}, effective {longDate(card.label.effective_date)}.{" "}
+            From the FDA label for <strong className="text-ink">{labelTitle(card.label)}</strong>
+            {card.label.formulation === "extended" ? " (extended-release)" : card.label.formulation === "delayed" ? " (delayed-release)" : ""}, version {card.label.version ?? "?"}, effective{" "}
+            {longDate(card.label.effective_date)}.{" "}
             <a href={card.label.dailymed_url} className="font-semibold text-accent hover:underline" target="_blank" rel="noreferrer">
               Read the full label on DailyMed
             </a>
@@ -75,6 +79,15 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
         </Card>
       ) : (
         <>
+          {card.label.formulation_mismatch ? (
+            <div role="alert" className="rounded-xl border border-amber-300 bg-warn-soft p-3 text-sm text-warn" data-testid="formulation-warning">
+              <strong>Check the bottle.</strong>{" "}
+              {card.label.formulation === "extended"
+                ? "The only FDA label found is for an extended-release form, but your entry does not say extended-release (ER, XR, XL)."
+                : "Your entry says extended-release, but the label found is not for an extended-release form."}{" "}
+              Instructions can differ between forms. If the bottle says ER, XR or XL, add that to the name or dose and remake the card.
+            </div>
+          ) : null}
           <div className="flex flex-wrap items-center gap-2 text-sm" data-testid="card-provenance">
             {card.provider === "mock" ? <Pill kind="mock">Mock card (scripted, not a model)</Pill> : null}
             <Pill kind={allVerified ? "verified" : "failed"}>

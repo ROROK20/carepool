@@ -36,8 +36,7 @@ export interface CardRow {
 
 export interface Explanation {
   flag_id: string;
-  text: string;
-  quote: string;
+  sentences: { text: string; quote: string }[];
   model: string | null;
   provider: string;
 }
@@ -230,14 +229,19 @@ export function listCards(): Map<string, CardRow> {
 export function replaceExplanations(list: Omit<Explanation, "provider">[], provider: string): void {
   tx((db) => {
     db.prepare("DELETE FROM explanations").run();
-    const ins = db.prepare("INSERT INTO explanations (flag_id, text, quote, model, provider, created_at) VALUES (?, ?, ?, ?, ?, ?)");
-    for (const e of list) ins.run(e.flag_id, e.text, e.quote, e.model, provider, nowIso());
+    const ins = db.prepare("INSERT INTO explanations (flag_id, sentences_json, model, provider, created_at) VALUES (?, ?, ?, ?, ?)");
+    for (const e of list) ins.run(e.flag_id, JSON.stringify(e.sentences), e.model, provider, nowIso());
   });
 }
 
 export function listExplanations(): Map<string, Explanation> {
-  const rows = getDb().prepare("SELECT flag_id, text, quote, model, provider FROM explanations").all() as Explanation[];
-  return new Map(rows.map((r) => [r.flag_id, r]));
+  const rows = getDb().prepare("SELECT flag_id, sentences_json, model, provider FROM explanations").all() as {
+    flag_id: string;
+    sentences_json: string;
+    model: string | null;
+    provider: string;
+  }[];
+  return new Map(rows.map((r) => [r.flag_id, { flag_id: r.flag_id, sentences: parseJson(r.sentences_json, []), model: r.model, provider: r.provider }]));
 }
 
 // ── runs ─────────────────────────────────────────────────────────────

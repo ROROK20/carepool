@@ -76,7 +76,7 @@ async function main() {
       models: [...models],
       note: `Recorded by npm run live with claude CLI ${version} in ${seconds} s. Real model output, checked by the citation checker. Fictional demo household.`,
       cards: recorded,
-      explanations: explanations.map((e) => ({ flag_id: e.flag_id, text: e.text, quote: e.quote, model: e.model })),
+      explanations: explanations.map((e) => ({ flag_id: e.flag_id, sentences: e.sentences, model: e.model })),
     };
     fs.mkdirSync(path.dirname(RECORDED_RUN_FILE), { recursive: true });
     fs.writeFileSync(RECORDED_RUN_FILE, `${JSON.stringify(out, null, 1)}\n`);

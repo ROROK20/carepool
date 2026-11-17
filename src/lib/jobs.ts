@@ -49,7 +49,7 @@ export async function runGeneration(opts: { medIds?: string[]; provider?: Provid
     meds.map(async (med) => {
       try {
         const { card, resolved } = await buildCard(
-          { medKey: med.id, typedName: med.name },
+          { medKey: med.id, typedName: med.name, typedDose: med.dose },
           {
             provider,
             reviewEnabled: env.REVIEW_ENABLED,
@@ -82,11 +82,11 @@ export async function runGeneration(opts: { medIds?: string[]; provider?: Provid
     log(`Interactions: ${flags.length} flag(s) to explain`);
     const explained = await explainFlags(flags, new Map(drugs.map((d) => [d.key, d])), provider);
     replaceExplanations(
-      explained.explanations.map((e) => ({ ...e, model: explained.model })),
+      explained.explanations.map((e) => ({ flag_id: e.flag_id, sentences: e.sentences, model: explained.model })),
       provider.name,
     );
     result.explanations = explained.explanations.length;
-    if (explained.dropped.length > 0) result.note = `${explained.dropped.length} explanation(s) failed the quote check and were not shown.`;
+    if (explained.dropped.length > 0) result.note = `${explained.dropped.length} explanation sentence(s) failed the quote check and were not shown.`;
   } catch (err) {
     result.note = `Flags are shown, but their explanations could not be written: ${(err as Error).message.slice(0, 200)}`;
     log(result.note);

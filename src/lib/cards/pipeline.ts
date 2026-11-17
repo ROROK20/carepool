@@ -54,6 +54,10 @@ export interface CardLabelInfo {
   manufacturer: string | null;
   classes: string[];
   class_source: "label" | "ndc" | "none";
+  /** Release form of the label, what the family's entry asked for, and whether they differ. */
+  formulation: "extended" | "delayed" | "immediate";
+  formulation_wanted: "extended" | null;
+  formulation_mismatch: boolean;
   dailymed_url: string;
   cache_files: string[];
   fetched_at: string;
@@ -96,7 +100,7 @@ export interface BuildCardOptions {
   reviewEnabled: boolean;
   maxRepairRounds: number;
   /** Test seam: supply the label (production resolves through openFDA and the cache). */
-  resolve?: (query: string) => Promise<ResolvedLabel>;
+  resolve?: (query: string, opts?: { formulationText?: string }) => Promise<ResolvedLabel>;
   onStep?: (step: string) => void;
 }
 
@@ -116,6 +120,9 @@ function labelInfo(r: ResolvedLabel): CardLabelInfo {
     manufacturer: l.manufacturer,
     classes: r.classes,
     class_source: r.class_source,
+    formulation: l.formulation,
+    formulation_wanted: r.formulation_wanted,
+    formulation_mismatch: r.formulation_mismatch,
     dailymed_url: dailyMedUrl(l.set_id),
     cache_files: r.cache_files,
     fetched_at: r.fetched_at,
@@ -135,7 +142,7 @@ function sortSentences(list: CardSentence[]): CardSentence[] {
 }
 
 export async function buildCard(
-  input: { medKey: string; typedName: string },
+  input: { medKey: string; typedName: string; typedDose?: string },
   opts: BuildCardOptions,
 ): Promise<{ card: CardResult; resolved: ResolvedLabel }> {
   const { provider } = opts;
@@ -151,7 +158,7 @@ export async function buildCard(
 
   step("Fetching the FDA label");
   let t = Date.now();
-  const resolved = await (opts.resolve ?? resolveLabel)(input.typedName);
+  const resolved = await (opts.resolve ?? resolveLabel)(input.typedName, { formulationText: input.typedDose ?? "" });
   timings.label = Date.now() - t;
   const info = labelInfo(resolved);
   const sections = resolved.label.sections;
@@ -177,6 +184,7 @@ export async function buildCard(
   const parsed = WriterOutputSchema.safeParse(written.output);
   if (!parsed.success) throw new Error(`The card writer's answer did not match the schema:\n${formatZodIssues(parsed.error)}`);
   const draft: CardSentence[] = parsed.data.sentences.map((s, i) => ({ id: `s${i + 1}`, ...s }));
+  const duplicates: CardFailure[] = [];
 
   step("Checking every quote against the label");
   const check = checkCardSentences(draft, sections);
@@ -212,6 +220,18 @@ export async function buildCard(
   }
   timings.repair = Date.now() - t;
   const recoveredByRepair = kept.length - passedFirst;
+
+  // Two sentences citing the same words say the same thing twice: keep the first.
+  const seenQuotes = new Set<string>();
+  kept = sortSentences(kept).filter((s) => {
+    const key = `${s.section}\u0000${s.quote}`;
+    if (!seenQuotes.has(key)) {
+      seenQuotes.add(key);
+      return true;
+    }
+    duplicates.push({ id: s.id, part: s.part, text: s.text, section: s.section, quote: s.quote, reason: "DUPLICATE_QUOTE", detail: "Another sentence on this card already cites the same words." });
+    return false;
+  });
 
   const review: CardResult["review"] = { status: "disabled", changed: 0, reverted: 0, reverted_ids: [], note: null };
   if (opts.reviewEnabled && kept.length > 0) {
@@ -263,7 +283,7 @@ export async function buildCard(
     typed_name: input.typedName,
     label: info,
     sentences: finalSentences,
-    removed: failed,
+    removed: [...failed, ...duplicates],
     review,
     stats: {
       generated: draft.length,

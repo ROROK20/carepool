@@ -1,4 +1,5 @@
 import type { LabelSection } from "../labels/parse";
+import { splitSentences } from "../labels/sentences";
 import { PART_SECTIONS, type CardPart } from "../labels/sections";
 
 /**
@@ -22,6 +23,9 @@ import { PART_SECTIONS, type CardPart } from "../labels/sections";
  *                      sentence does not appear in the quote.
  *  7. DOSE_MENTION     the sentence or its quote states a dose amount or a dosing
  *                      frequency. Doses come only from what the family typed.
+ *  8. MULTIPLE_SENTENCES the plain text is more than one sentence: one quote backs
+ *                      one sentence, so a second claim cannot ride along.
+ * (The pipeline adds DUPLICATE_QUOTE when two sentences cite the same span.)
  *
  * One mechanical repair is allowed and only one: if the quote matches after
  * curly quotes and dashes are mapped to plain ones, the stored quote is
@@ -37,7 +41,9 @@ export type CardFailureReason =
   | "QUOTE_TOO_LONG"
   | "QUOTE_NOT_FOUND"
   | "UNGROUNDED_TOKEN"
-  | "DOSE_MENTION";
+  | "DOSE_MENTION"
+  | "MULTIPLE_SENTENCES"
+  | "DUPLICATE_QUOTE";
 
 export interface CardSentence {
   id: string;
@@ -235,6 +241,10 @@ export function describe(reason: CardFailureReason, s: Pick<CardSentence, "part"
       return `${token} is in the sentence but not in its quote.`;
     case "DOSE_MENTION":
       return `"${token}" is a dose amount or dosing frequency; cards never state doses (the family's own prescription does).`;
+    case "MULTIPLE_SENTENCES":
+      return "The text is more than one sentence; write one sentence per quote.";
+    case "DUPLICATE_QUOTE":
+      return "Another sentence on this card already cites the same words.";
   }
 }
 
@@ -248,6 +258,7 @@ export type QuoteCheck =
  * every number/date/quoted phrase of the plain text inside the quote.
  */
 export function checkQuoted(text: string, quote: string, sectionText: string): QuoteCheck {
+  if (splitSentences(text.trim()).length > 1) return { ok: false, reason: "MULTIPLE_SENTENCES" };
   const q = cleanQuote(quote);
   if (q.length < MIN_QUOTE_CHARS || q.split(" ").length < MIN_QUOTE_WORDS) return { ok: false, reason: "QUOTE_TOO_SHORT" };
   if (q.length > MAX_QUOTE_CHARS) return { ok: false, reason: "QUOTE_TOO_LONG" };

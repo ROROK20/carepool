@@ -13,13 +13,20 @@ import type { DrugForMatching, InteractionFlag, PairFinding } from "./match";
  * grounded) or it is dropped.
  */
 
-export interface FlagExplanation {
-  flag_id: string;
+export interface ExplanationSentence {
   text: string;
   quote: string;
 }
 
-export interface DroppedExplanation extends FlagExplanation {
+export interface FlagExplanation {
+  flag_id: string;
+  sentences: ExplanationSentence[];
+}
+
+export interface DroppedExplanation {
+  flag_id: string;
+  text: string;
+  quote: string;
   reason: CardFailureReason | "UNKNOWN_FLAG";
   detail: string;
 }
@@ -96,18 +103,20 @@ export async function explainFlags(
   for (const e of parsed.data.explanations) {
     const flag = byId.get(e.flag_id);
     if (!flag) {
-      result.dropped.push({ ...e, reason: "UNKNOWN_FLAG", detail: "No flag with this id was found; the model cannot add flags." });
+      for (const s of e.sentences) result.dropped.push({ flag_id: e.flag_id, ...s, reason: "UNKNOWN_FLAG", detail: "No flag with this id was found; the model cannot add flags." });
       continue;
     }
     if (seen.has(flag.id)) continue;
     const sectionText = drugs.get(flag.a)?.sections[flag.section]?.text ?? "";
-    const r = checkQuoted(e.text, e.quote, sectionText);
-    if (!r.ok) {
-      result.dropped.push({ ...e, reason: r.reason, detail: describe(r.reason, { part: "warnings", section: flag.section }, r.token) });
-      continue;
+    const kept: ExplanationSentence[] = [];
+    for (const s of e.sentences) {
+      const r = checkQuoted(s.text, s.quote, sectionText);
+      if (r.ok) kept.push({ text: s.text, quote: r.exact });
+      else result.dropped.push({ flag_id: flag.id, ...s, reason: r.reason, detail: describe(r.reason, { part: "warnings", section: flag.section }, r.token) });
     }
+    if (kept.length === 0) continue;
     seen.add(flag.id);
-    result.explanations.push({ flag_id: flag.id, text: e.text, quote: r.exact });
+    result.explanations.push({ flag_id: flag.id, sentences: kept });
   }
   return result;
 }
