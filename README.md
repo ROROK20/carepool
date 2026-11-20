@@ -127,6 +127,13 @@ Everything else (label lookup and caching, label parser, interaction matcher, sc
 - Demo data (`data/seed/nana-rosa.json`): fictional people and an example medicine list typed the way a family member would. Not a real prescription and not a recommendation.
 - Code: MIT (`LICENSE`).
 
+## Credits
+
+- **Data and APIs:** openFDA drug label API and openFDA NDC directory (U.S. Food and Drug Administration; public domain; no key).
+- **Libraries:** TypeScript, Next.js, React, Tailwind CSS, better-sqlite3 (SQLite), zod. **Testing:** vitest, Playwright. Exact versions are in `package.json`.
+- **Adapted code:** [Dispute Defender](https://github.com/ROROK20/dispute-defender) (MIT), file by file in "Reused components" above.
+- **AI:** Claude (Anthropic), through the Claude Code CLI, in the product and in development (see "AI disclosure").
+
 ## Limits
 
 - **Meaning is not machine-proved.** The checker proves each quote is real, in the right section, carries no dose, and contains every number the sentence uses. It cannot prove the plain sentence means exactly what its quote says: in the evaluation a second model judged 23 of 132 kept sentences (17%) only partly supported, usually an added detail or reason, such as "because chest pain or a heart attack can happen" next to a quote that only says not to stop without the doctor's advice. That is why the quote is one click away on every sentence, and why the next step is pharmacist raters.
