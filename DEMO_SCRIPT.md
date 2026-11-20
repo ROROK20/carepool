@@ -1,6 +1,6 @@
 # Carepool demo script (about 1:50)
 
-Six scenes, timed to the silent capture `npm run record` makes (`demo/out/carepool-demo-silent.mp4`, 107 seconds). Record your voice over it, or screen-record yourself following the same steps. Speak at a calm pace, about 2.3 words a second; each scene's narration fits its time.
+Six scenes, timed to the silent capture `npm run record` makes (`demo/out/carepool-demo-silent.mp4`, 107 seconds). Record your voice over it, or screen-record yourself following the same steps. At a calm pace (about 2.3 words a second), scenes 1, 2, 3 and 6 run a few seconds longer than the capture gives them (measured 2026-11-20). The easy fix is to add a short still frame where the page is already still (on the home page, on an open quote, on the Lisinopril + Spironolactone pair), never to cut or speed up the capture; with those stills the voiced demo is about 2:00.
 
 Before recording: `npm run setup -- --reset --with-cards`, then `npm run dev`, and open `http://localhost:3300`. The care-circle scene uses Friday 2026-11-20 (`?date=2026-11-20`) so the same tasks show every time. Reset the database before each take: scene 5 changes it.
 
