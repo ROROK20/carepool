@@ -25,7 +25,9 @@ import { PART_SECTIONS, type CardPart } from "../labels/sections";
  *                      frequency. Doses come only from what the family typed.
  *  8. MULTIPLE_SENTENCES the plain text is more than one sentence: one quote backs
  *                      one sentence, so a second claim cannot ride along.
- * (The pipeline adds DUPLICATE_QUOTE when two sentences cite the same span.)
+ * (The pipeline adds DUPLICATE_QUOTE when two sentences cite the same span, and
+ * the meaning gate adds MEANING_PARTIAL / MEANING_UNSUPPORTED / MEANING_UNCHECKED
+ * when a second model finds the sentence says more than, or other than, its quote.)
  *
  * One mechanical repair is allowed and only one: if the quote matches after
  * curly quotes and dashes are mapped to plain ones, the stored quote is
@@ -43,7 +45,10 @@ export type CardFailureReason =
   | "UNGROUNDED_TOKEN"
   | "DOSE_MENTION"
   | "MULTIPLE_SENTENCES"
-  | "DUPLICATE_QUOTE";
+  | "DUPLICATE_QUOTE"
+  | "MEANING_PARTIAL"
+  | "MEANING_UNSUPPORTED"
+  | "MEANING_UNCHECKED";
 
 export interface CardSentence {
   id: string;
@@ -245,12 +250,18 @@ export function describe(reason: CardFailureReason, s: Pick<CardSentence, "part"
       return "The text is more than one sentence; write one sentence per quote.";
     case "DUPLICATE_QUOTE":
       return "Another sentence on this card already cites the same words.";
+    case "MEANING_PARTIAL":
+      return "A meaning check found the sentence says more than its quote.";
+    case "MEANING_UNSUPPORTED":
+      return "A meaning check found the quote does not say what the sentence says.";
+    case "MEANING_UNCHECKED":
+      return "The meaning check gave no verdict for this sentence.";
   }
 }
 
 export type QuoteCheck =
   | { ok: true; exact: string }
-  | { ok: false; reason: Exclude<CardFailureReason, "NO_CITATION" | "UNKNOWN_SECTION" | "WRONG_PART">; token?: string };
+  | { ok: false; reason: Exclude<CardFailureReason, "NO_CITATION" | "UNKNOWN_SECTION" | "WRONG_PART" | "MEANING_PARTIAL" | "MEANING_UNSUPPORTED" | "MEANING_UNCHECKED">; token?: string };
 
 /**
  * The core rules shared by card sentences and interaction explanations:

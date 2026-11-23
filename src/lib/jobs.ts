@@ -54,6 +54,7 @@ export async function runGeneration(opts: { medIds?: string[]; provider?: Provid
             provider,
             reviewEnabled: env.REVIEW_ENABLED,
             maxRepairRounds: env.MAX_REPAIR_ROUNDS,
+            meaningGate: env.MEANING_GATE_ENABLED,
             onStep: (step) => {
               setCardStatus(med.id, "running", step);
               log(`${med.name}: ${step}`);

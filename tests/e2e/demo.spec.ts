@@ -45,6 +45,10 @@ test("a card: typed dose, quoted sentences, citation opens on the label text, ch
   await removed.locator("summary").click();
   await expect(removed).toContainText("common cold");
   await expect(removed).toContainText("not in the label word for word");
+  // The meaning gate: a sentence with a real quote that adds a claim is removed, with the check's reason shown.
+  await expect(page.getByTestId("meaning-gate")).toContainText("meaning check");
+  await expect(removed).toContainText("the meaning check found it says more than its quote");
+  await expect(removed.getByTestId("meaning-reason").first()).toContainText("Its quote:");
   // No card sentence carries a dose amount.
   const texts = await sentences.allInnerTexts();
   for (const t of texts) expect(t).not.toMatch(/\b\d+\s*(mg|mcg|tablets?)\b/i);

@@ -27,7 +27,13 @@ const REASON_TEXT: Record<string, string> = {
   NO_CITATION: "it has no quote",
   MULTIPLE_SENTENCES: "it said more than one thing for a single quote",
   DUPLICATE_QUOTE: "another sentence already says the same thing from the same words",
+  MEANING_PARTIAL: "the meaning check found it says more than its quote",
+  MEANING_UNSUPPORTED: "the meaning check found its quote does not say this",
+  MEANING_UNCHECKED: "the meaning check gave no verdict for it",
 };
+
+/** Reasons whose detail line is the meaning check's own words, shown to the family. */
+const MEANING_REASONS = new Set(["MEANING_PARTIAL", "MEANING_UNSUPPORTED"]);
 
 export default async function CardPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -106,7 +112,22 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
               {card.models.writer ? ` · written by ${card.models.writer}` : ""}
               {card.review.status === "applied" && card.models.review ? `, reworded for clarity by ${card.models.review} (${card.review.changed} re-checked${card.review.reverted ? `, ${card.review.reverted} kept original` : ""})` : ""}
             </span>
+            {card.gate?.status === "applied" ? (
+              <span className="text-muted" data-testid="meaning-gate">
+                · meaning check{card.gate.model ? ` by ${card.gate.model}` : ""}: {card.gate.first.supported}/{card.gate.checked} supported as written
+                {card.gate.repaired ? `, ${card.gate.repaired} rewritten and passed` : ""}
+                {card.gate.removed.partial + card.gate.removed.unsupported + card.gate.removed.unchecked > 0
+                  ? `, ${card.gate.removed.partial + card.gate.removed.unsupported + card.gate.removed.unchecked} removed`
+                  : ""}
+              </span>
+            ) : null}
           </div>
+          {card.gate?.status === "failed" ? (
+            <div role="alert" className="rounded-xl border border-amber-300 bg-warn-soft p-3 text-sm text-warn" data-testid="meaning-gate-failed">
+              <strong>Meaning check did not run.</strong> Every quote below is real and in the right section, but no second check compared each sentence with its quote.
+              Read the quote under each sentence, or remake the card.
+            </div>
+          ) : null}
 
           {CARD_PARTS.map((part) => {
             const sentences = card.sentences.filter((s) => s.part === part);
@@ -154,13 +175,18 @@ export default async function CardPage({ params }: { params: Promise<{ id: strin
             <Card>
               <details data-testid="removed-sentences">
                 <summary className="font-semibold">
-                  {card.removed.length} sentence{card.removed.length === 1 ? "" : "s"} removed by the checker <span className="text-sm font-normal text-muted">(never shown on the card)</span>
+                  {card.removed.length} sentence{card.removed.length === 1 ? "" : "s"} removed by the checks <span className="text-sm font-normal text-muted">(never shown on the card)</span>
                 </summary>
                 <ul className="mt-3 space-y-2 text-sm">
                   {card.removed.map((r) => (
                     <li key={r.id} className="rounded-lg bg-danger-soft p-2">
                       <span className="line-through">{r.text}</span>
                       <span className="block text-danger">Removed because {REASON_TEXT[r.reason] ?? r.reason}.</span>
+                      {MEANING_REASONS.has(r.reason) && r.detail ? (
+                        <span className="block text-muted" data-testid="meaning-reason">
+                          Its quote: &ldquo;{r.quote}&rdquo;. The check said: {r.detail}
+                        </span>
+                      ) : null}
                     </li>
                   ))}
                 </ul>

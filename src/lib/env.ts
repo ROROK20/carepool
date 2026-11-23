@@ -58,6 +58,12 @@ const EnvSchema = z.object({
   CAREPOOL_MODEL_WRITER: stringWithDefault("sonnet"),
   CAREPOOL_MODEL_REVIEW: stringWithDefault("opus"),
   REVIEW_ENABLED: flag(true),
+  // Meaning gate: a separate model call reads each kept sentence next to its quote, and only the quote.
+  // PARTIAL gets one repair round, then is removed if still not supported; UNSUPPORTED is removed.
+  MEANING_GATE_ENABLED: flag(true),
+  // The gate's model. Defaults to a different model from the evaluation's judge (CAREPOOL_MODEL_REVIEW),
+  // so the eval's meaning numbers are not the gate grading its own work.
+  CAREPOOL_MODEL_GATE: stringWithDefault("sonnet"),
   MAX_REPAIR_ROUNDS: nonNegativeInt(1, 3),
   CARD_CONCURRENCY: positiveInt(2, 8),
   CLAUDE_CLI_PATH: optionalString,

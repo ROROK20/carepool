@@ -5,7 +5,7 @@ import { findInteractions, type DrugForMatching } from "@/lib/interactions/match
 import type { ResolvedLabel } from "@/lib/labels/openfda";
 import { parseLabel } from "@/lib/labels/parse";
 import { getProvider, type Provider } from "@/lib/model";
-import { MOCK_UNSUPPORTED_ID } from "@/lib/model/mock";
+import { MOCK_ADDED_CLAIM, MOCK_UNSUPPORTED_ID } from "@/lib/model/mock";
 import type { ModelRequest } from "@/lib/model/types";
 
 const raw = {
@@ -91,7 +91,8 @@ describe("buildCard", () => {
     expect(card.sentences.find((s) => s.id === "s5")?.text).toBe("Swelling of the face, lips or tongue can happen.");
     for (const s of card.sentences) expect(label.sections[s.section].text.includes(s.quote)).toBe(true);
     expect(card.label).toMatchObject({ effective_date: "2026-11-05", version: "3", set_id: "set-1" });
-    expect(card.models).toEqual({ writer: "scripted-writer", repair: "scripted-repair", review: "scripted-review" });
+    expect(card.models).toEqual({ writer: "scripted-writer", repair: "scripted-repair", review: "scripted-review", gate: null });
+    expect(card.gate?.status).toBe("disabled");
     expect(card.usage).toEqual({ input_tokens: 30, output_tokens: 15 });
   });
 
@@ -174,5 +175,158 @@ describe("duplicate quotes", () => {
     const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 0, resolve });
     expect(card.sentences.map((s) => s.id)).toEqual(["s1"]);
     expect(card.removed.map((r) => [r.id, r.reason])).toEqual([["s2", "DUPLICATE_QUOTE"]]);
+  });
+});
+
+describe("meaning gate", () => {
+  const draft = {
+    sentences: [
+      { part: "uses", text: "It treats high blood pressure in adults.", section: "indications_and_usage", quote: "indicated for the treatment of hypertension in adults" },
+      { part: "side_effects", text: "Headache, dizziness and cough are common.", section: "adverse_reactions", quote: "headache, dizziness and cough" },
+      { part: "side_effects", text: "Cough happens because the medicine irritates the throat.", section: "adverse_reactions", quote: "The most common adverse reactions are headache, dizziness and cough." },
+      { part: "warnings", text: "Swelling of the face can happen, mostly in older adults.", section: "warnings_and_cautions", quote: "Angioedema of the face, lips and tongue has been reported." },
+      { part: "warnings", text: "Seek help right away if this happens.", section: "warnings_and_cautions", quote: "Stop and seek help right away if this happens." },
+      { part: "uses", text: "It cures kidney disease.", section: "indications_and_usage", quote: "Testopril is indicated for the treatment of hypertension in adults." },
+    ],
+  };
+
+  it("keeps supported sentences, rewrites partial ones once, and removes what still fails, with the check's reason", async () => {
+    let gateCalls = 0;
+    const seen: string[][] = [];
+    const before: string[] = [];
+    const provider = scripted({
+      writer: () => draft,
+      repair: () => ({
+        sentences: [
+          // s3 rewritten to match its quote; s4 rewritten but still adds a claim.
+          { id: "s3", part: "side_effects", text: "Cough is one of the most common side effects.", section: "adverse_reactions", quote: "The most common adverse reactions are headache, dizziness and cough." },
+          { id: "s4", part: "warnings", text: "Swelling of the face, mostly in older adults, has been reported.", section: "warnings_and_cautions", quote: "Angioedema of the face, lips and tongue has been reported." },
+        ],
+      }),
+      gate: (req) => {
+        gateCalls++;
+        const sentences = req.context.role === "gate" ? req.context.sentences : [];
+        seen.push(sentences.map((x) => x.id));
+        if (gateCalls === 1)
+          return {
+            verdicts: [
+              { id: "s1", verdict: "supported", reason: "" },
+              { id: "s2", verdict: "supported", reason: "" },
+              { id: "s3", verdict: "partial", reason: "The quote gives no cause for the cough." },
+              { id: "s4", verdict: "partial", reason: "The quote does not say older adults." },
+              // s5 left out: no verdict on the first call
+              { id: "s6", verdict: "unsupported", reason: "The quote says hypertension, not kidney disease." },
+            ],
+          };
+        return {
+          verdicts: [
+            { id: "s3", verdict: "supported", reason: "" },
+            { id: "s4", verdict: "partial", reason: "Still says older adults." },
+            { id: "s5", verdict: "supported", reason: "" },
+          ],
+        };
+      },
+    });
+    const { card } = await buildCard(
+      { medKey: "m1", typedName: "Testopril" },
+      { provider, reviewEnabled: false, maxRepairRounds: 1, meaningGate: true, resolve, onBeforeGate: (list) => before.push(...list.map((x) => x.id)) },
+    );
+
+    expect(before).toEqual(["s1", "s6", "s2", "s3", "s4", "s5"]);
+    // second call: the two rewrites (both pass the citation checker) and the sentence skipped the first time
+    expect(seen).toEqual([["s1", "s6", "s2", "s3", "s4", "s5"], ["s3", "s4", "s5"]]);
+    expect(card.sentences.map((x) => x.id)).toEqual(["s1", "s2", "s3", "s5"]);
+    expect(card.sentences.find((x) => x.id === "s3")?.text).toBe("Cough is one of the most common side effects.");
+    expect(card.removed.map((f) => [f.id, f.reason, f.detail])).toEqual([
+      ["s6", "MEANING_UNSUPPORTED", "The quote says hypertension, not kidney disease."],
+      ["s4", "MEANING_PARTIAL", "Still says older adults."],
+    ]);
+    // The family-facing removed entry keeps the sentence as it was written, not the failed rewrite.
+    expect(card.removed.find((f) => f.id === "s4")?.text).toBe("Swelling of the face can happen, mostly in older adults.");
+    expect(card.gate).toMatchObject({
+      status: "applied",
+      model: "scripted-gate",
+      checked: 6,
+      first: { supported: 2, partial: 2, unsupported: 1, unjudged: 1 },
+      repaired: 1,
+      removed: { partial: 1, unsupported: 1, unchecked: 0 },
+      note: null,
+    });
+    expect(card.stats.kept).toBe(4);
+    expect(card.models.gate).toBe("scripted-gate");
+    // writer + gate + repair + gate
+    expect(card.usage).toEqual({ input_tokens: 40, output_tokens: 20 });
+    for (const x of card.sentences) expect(label.sections[x.section].text.includes(x.quote)).toBe(true);
+  });
+
+  it("a rewrite must pass the citation checker again before it is judged", async () => {
+    let gateCalls = 0;
+    const provider = scripted({
+      writer: () => ({ sentences: draft.sentences.slice(2, 3) }),
+      // the rewrite paraphrases its quote: the citation checker rejects it, so it is never re-judged
+      repair: () => ({ sentences: [{ id: "s1", part: "side_effects", text: "Cough is common.", section: "adverse_reactions", quote: "cough is common" }] }),
+      gate: () => {
+        gateCalls++;
+        return { verdicts: [{ id: "s1", verdict: "partial", reason: "No cause in the quote." }] };
+      },
+    });
+    const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 1, meaningGate: true, resolve });
+    expect(gateCalls).toBe(1);
+    expect(card.sentences).toEqual([]);
+    expect(card.removed.map((f) => [f.id, f.reason, f.detail])).toEqual([["s1", "MEANING_PARTIAL", "No cause in the quote."]]);
+  });
+
+  it("with no repair rounds a partial sentence is removed without a rewrite", async () => {
+    const provider = scripted({
+      writer: () => ({ sentences: draft.sentences.slice(0, 3) }),
+      gate: (req) => ({
+        verdicts: (req.context.role === "gate" ? req.context.sentences : []).map((x) => ({ id: x.id, verdict: x.id === "s3" ? "partial" : "supported", reason: x.id === "s3" ? "Adds a cause." : "" })),
+      }),
+    });
+    const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 0, meaningGate: true, resolve });
+    expect(card.sentences.map((x) => x.id)).toEqual(["s1", "s2"]);
+    expect(card.removed.map((f) => f.reason)).toEqual(["MEANING_PARTIAL"]);
+    expect(card.gate?.repaired).toBe(0);
+  });
+
+  it("a gate that throws keeps the checked sentences and says the meaning check did not run", async () => {
+    const provider = scripted({
+      writer: () => ({ sentences: draft.sentences.slice(0, 2) }),
+      gate: () => {
+        throw new Error("usage limit reached");
+      },
+    });
+    const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 1, meaningGate: true, resolve });
+    expect(card.sentences.map((x) => x.id)).toEqual(["s1", "s2"]);
+    expect(card.gate?.status).toBe("failed");
+    expect(card.gate?.note).toMatch(/did not run \(usage limit reached\)/);
+    expect(card.removed).toEqual([]);
+  });
+
+  it("a sentence the gate never judges, twice, is removed as unchecked", async () => {
+    const provider = scripted({
+      writer: () => ({ sentences: draft.sentences.slice(0, 2) }),
+      gate: () => ({ verdicts: [{ id: "s1", verdict: "supported", reason: "" }] }),
+    });
+    const { card } = await buildCard({ medKey: "m1", typedName: "Testopril" }, { provider, reviewEnabled: false, maxRepairRounds: 1, meaningGate: true, resolve });
+    expect(card.sentences.map((x) => x.id)).toEqual(["s1"]);
+    expect(card.removed.map((f) => [f.id, f.reason])).toEqual([["s2", "MEANING_UNCHECKED"]]);
+    expect(card.gate?.removed.unchecked).toBe(1);
+  });
+
+  it("the mock provider's added-claim sentence passes the citation checker and is removed by the gate", async () => {
+    const raw2 = {
+      ...raw,
+      warnings_and_cautions: [`${raw.warnings_and_cautions[0]} Low blood pressure can happen in patients who are dehydrated or also take diuretics.`],
+    };
+    const resolved2: ResolvedLabel = { ...resolved, raw: raw2, label: parseLabel(raw2) };
+    const { card } = await buildCard(
+      { medKey: "m1", typedName: "Testopril" },
+      { provider: getProvider("mock"), reviewEnabled: true, maxRepairRounds: 1, meaningGate: true, resolve: async () => resolved2 },
+    );
+    const removed = card.removed.find((r) => r.text.endsWith(MOCK_ADDED_CLAIM));
+    expect(removed?.reason).toBe("MEANING_PARTIAL");
+    expect(card.sentences.some((x) => x.text.endsWith(MOCK_ADDED_CLAIM))).toBe(false);
+    expect(card.gate).toMatchObject({ status: "applied", first: { partial: 1, unsupported: 0 }, removed: { partial: 1 } });
   });
 });

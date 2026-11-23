@@ -14,6 +14,7 @@ export interface Provider {
 
 export function modelForRole(role: ModelRole): string {
   const env = getEnv();
+  if (role === "gate") return env.CAREPOOL_MODEL_GATE;
   return role === "review" || role === "judge" ? env.CAREPOOL_MODEL_REVIEW : env.CAREPOOL_MODEL_WRITER;
 }
 
