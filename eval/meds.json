@@ -1,5 +1,5 @@
 {
-  "note": "Ten medications commonly taken by older adults. The first five are the Nana Rosa demo list. Names are typed the way a family member would type them.",
+  "note": "Twenty-five medicines commonly taken by older adults, all single-ingredient and taken by mouth. The first five are the Nana Rosa demo list; the first ten are the v1 set, in their original order. Names are typed the way a family member would type them (plain generic names).",
   "meds": [
     "lisinopril",
     "spironolactone",
@@ -10,6 +10,21 @@
     "omeprazole",
     "levothyroxine",
     "metoprolol",
-    "furosemide"
+    "furosemide",
+    "amlodipine",
+    "apixaban",
+    "clopidogrel",
+    "donepezil",
+    "gabapentin",
+    "hydrochlorothiazide",
+    "losartan",
+    "simvastatin",
+    "amiodarone",
+    "digoxin",
+    "glipizide",
+    "meloxicam",
+    "tamsulosin",
+    "allopurinol",
+    "memantine"
   ]
 }

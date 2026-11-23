@@ -1,0 +1,47 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22tamsulosin%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-23T03:41:26.442Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-20"
+  },
+  "results": [
+   {
+    "term": "Tamsulosin Hydrochloride",
+    "count": 65
+   },
+   {
+    "term": "tamsulosin hydrochloride",
+    "count": 5
+   },
+   {
+    "term": "TAMSULOSIN HYDROCHLORIDE",
+    "count": 4
+   },
+   {
+    "term": "Tamsulosin hydrochloride",
+    "count": 3
+   },
+   {
+    "term": "Dutasteride and tamsulosin hydrochloride",
+    "count": 2
+   },
+   {
+    "term": "DUTASTERIDE and TAMSULOSIN HYDROCHLORIDE",
+    "count": 1
+   },
+   {
+    "term": "Dutasteride and Tamsulosin Hydrochloride",
+    "count": 1
+   },
+   {
+    "term": "dutasteride and tamsulosin hydrochloride",
+    "count": 1
+   }
+  ]
+ }
+}

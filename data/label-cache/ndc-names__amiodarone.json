@@ -1,0 +1,43 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22amiodarone%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-23T03:41:23.342Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-20"
+  },
+  "results": [
+   {
+    "term": "Amiodarone Hydrochloride",
+    "count": 47
+   },
+   {
+    "term": "amiodarone hydrochloride",
+    "count": 16
+   },
+   {
+    "term": "AMIODARONE HYDROCHLORIDE",
+    "count": 7
+   },
+   {
+    "term": "Amiodarone hydrochloride",
+    "count": 4
+   },
+   {
+    "term": "NEXTERONE (AMIODARONE HCI)",
+    "count": 2
+   },
+   {
+    "term": "AMIODARONE HCI",
+    "count": 1
+   },
+   {
+    "term": "Amiodarone HCl",
+    "count": 1
+   }
+  ]
+ }
+}

@@ -1,0 +1,23 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name.exact:%22Tamsulosin%20Hydrochloride%22&count=pharm_class.exact&limit=100",
+ "fetched_at": "2026-11-23T03:41:26.781Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-20"
+  },
+  "results": [
+   {
+    "term": "Adrenergic alpha-Antagonists [MoA]",
+    "count": 55
+   },
+   {
+    "term": "alpha-Adrenergic Blocker [EPC]",
+    "count": 55
+   }
+  ]
+ }
+}
