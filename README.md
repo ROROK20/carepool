@@ -1,3 +1,5 @@
+<p><img src="docs/brand/logo.png" alt="Carepool" width="360"></p>
+
 # Carepool
 
 **A family care coordinator for an older relative's medicines.** You type the medicine list exactly as the prescription bottles say. Carepool fetches each medicine's real FDA label and turns it into a plain-language card in which **every sentence quotes the label word for word**, and a program deletes any sentence whose quote it cannot find. It flags pairs of medicines that one label names together, quoting that label. It builds a daily schedule **only from the doses and times you typed**. And it lets the family share the work: recurring jobs like refill pickups and dose checks, a "today" page for each person, and a way to ask for, and offer, cover.
@@ -53,6 +55,7 @@ PORT=3400 npm run dev                             # another port (3300 is the de
 | `npm run lint` / `npm run typecheck` / `npm run build` | ESLint, `tsc --noEmit`, production build. |
 | `npm run screens` | Screenshots into `docs/screens/` (see the script header for the server it expects). |
 | `npm run record` | A silent screen capture of the demo, cut to `DEMO_SCRIPT.md` (needs ffmpeg). |
+| `npm run brand` | Regenerate the logo files (`src/app/icon.svg`, `src/app/apple-icon.png`, `docs/brand/`) from `src/lib/brand.ts`. |
 
 Configuration is optional; see `.env.example` (provider, model aliases, review on/off, repair rounds, concurrency, timeouts, database path, offline mode).
 
@@ -128,6 +131,7 @@ Everything else (label lookup and caching, label parser, interaction matcher, sc
 - Label text and pharmacologic classes: openFDA (U.S. Food and Drug Administration), public domain. Cached copies in `data/label-cache/` keep the request URL and fetch time.
 - Demo data (`data/seed/nana-rosa.json`): fictional people and an example medicine list typed the way a family member would. Not a real prescription and not a recommendation.
 - Code: MIT (`LICENSE`).
+- Logo and wordmark (`docs/brand/`, `src/app/icon.svg`): drawn for Carepool from circles and lines in `src/lib/brand.ts`, no font or third-party artwork; MIT with the code.
 
 ## Credits
 
