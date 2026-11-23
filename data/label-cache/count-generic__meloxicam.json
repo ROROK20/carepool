@@ -1,0 +1,27 @@
+{
+ "url": "https://api.fda.gov/drug/label.json?search=openfda.generic_name:%22meloxicam%22&count=openfda.generic_name.exact&limit=100",
+ "fetched_at": "2026-11-23T03:41:24.851Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-20"
+  },
+  "results": [
+   {
+    "term": "MELOXICAM",
+    "count": 124
+   },
+   {
+    "term": "BUPIVACAINE AND MELOXICAM",
+    "count": 1
+   },
+   {
+    "term": "MELOXICAM, RIZATRIPTAN",
+    "count": 1
+   }
+  ]
+ }
+}

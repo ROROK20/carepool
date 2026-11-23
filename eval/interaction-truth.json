@@ -1,9 +1,15 @@
 {
-  "version": 1,
-  "checked_on": "2026-11-17",
-  "checked_by": "Claude Code (the build agent), by reading the cached openFDA label text in data/label-cache/. Not a pharmacist. Re-verify before quoting these numbers anywhere.",
-  "frozen_before_scoring": "This list and the matcher were both fixed before the matcher was scored against it. The one known miss (levothyroxine + metoprolol) was found while writing the list and was deliberately NOT patched into the matcher's class table, so the score is not tuned to this list.",
+  "version": 2,
+  "checked_on": "2026-11-22",
+  "checked_by": "Built by a separate Claude Code agent by reading the cached openFDA label text in data/label-cache/ (the sections in INTERACTION_SECTIONS, as parsed by the app), for both labels of every pair. Not a pharmacist. The author of the interaction matcher did not see this list before matcher v2 was frozen. The first 10 pairs are the v1 list, unchanged. Re-verify before quoting these numbers anywhere.",
+  "frozen_before_scoring": "This list was committed before any matcher-v2 code existed, and must never be edited after scores are seen. pairs_sha256 fingerprints the pairs; npm run truth:check fails if any pair changes, and the fingerprint must not change after the commit that froze it.",
   "rule": "A pair is POSITIVE when either drug's label, in its Drug Interactions, Boxed Warning, Contraindications or Warnings/Precautions sections, states an interaction or a caution about using the two together that names the other drug or a class the other drug belongs to. A mention that is not about using the two together (for example, heart-failure dosing advice that says to increase diuretics) is NEGATIVE. Negatives were confirmed by searching both labels with the broad patterns listed, which go wider than the matcher's own terms.",
+  "fields": {
+    "kind": "stated_by_name: a quote stating the interaction or caution contains the other medicine's generic name. stated_by_class_only: the interaction or caution is stated only through a class the other medicine belongs to. mentioned_not_co_use: a label mentions the other medicine or its class, but not as a caution about using the two together (advice, a study finding no clinically important interaction, a no-dose-adjustment statement). never_mentioned: neither label's counted sections mention the other medicine or its class under the broad patterns. The 10 v1 pairs carry no kind field; npm run truth:check derives every pair's kind from its evidence and fails if a stated kind disagrees.",
+    "evidence.role": "Absent: the quote states the interaction, the caution, or (for a negative) the mention. context: background read while making the call, not itself the interaction. membership: the label's own words placing a medicine in the class the other label names.",
+    "searched": "\"x>y\": the counted sections of x's label, searched for y, as /regex/flags with the number of matches. npm run truth:check re-runs every pattern."
+  },
+  "pairs_sha256": "b36970891a34aa8aed27b95117f9afa77647d647e316f6340d0b1c1adcb17216",
   "pairs": [
     {
       "a": "lisinopril",
@@ -103,6 +109,466 @@
         "spironolactone>sertraline": "/sertraline|serotonin|\\bSSRIs?\\b/: 0 hits",
         "sertraline>spironolactone": "/spironolactone|potassium[\\s-]sparing|aldosterone/i: 0 hits"
       }
+    },
+    {
+      "a": "amiodarone",
+      "b": "warfarin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Bleeding risk. Amiodarone's label says it potentiates warfarin's anticoagulant response and to reduce the warfarin dose; warfarin's label lists amiodarone among CYP2C9 inhibitors and says to monitor INR with such drugs.",
+      "evidence": [
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Warfarin Potentiates anticoagulant response and can result in serious or fatal bleeding." },
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Reduce warfarin dose by one-third to one-half and monitor prothrombin times." },
+        { "label": "warfarin", "section": "drug_interactions", "quote": "Closely monitor INR if a concomitant drug is a CYP2C9, 1A2, and/or 3A4 inhibitor or inducer." },
+        { "label": "warfarin", "section": "drug_interactions", "quote": "CYP2C9 amiodarone, capecitabine, cotrimoxazole" }
+      ]
+    },
+    {
+      "a": "amiodarone",
+      "b": "digoxin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Raised digoxin levels. Amiodarone's label says to halve or stop digoxin; digoxin's label lists amiodarone among drugs that raise digoxin concentrations by more than 50% and says to lower the digoxin dose.",
+      "evidence": [
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Digoxin Increased digoxin concentration." },
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Reduce digoxin by half or discontinue." },
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Amiodarone 70% NA Measure serum digoxin concentrations before initiating concomitant drugs." },
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Reduce digoxin concentrations by decreasing dose by approximately 30-50% or by modifying the dosing frequency and continue monitoring." }
+      ]
+    },
+    {
+      "a": "clopidogrel",
+      "b": "omeprazole",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Weaker clopidogrel effect. Both labels say to avoid using them together: omeprazole reduces the antiplatelet activity of clopidogrel.",
+      "evidence": [
+        { "label": "clopidogrel", "section": "drug_interactions", "quote": "Omeprazole or Esomeprazole Avoid concomitant use of clopidogrel with omeprazole or esomeprazole." },
+        { "label": "clopidogrel", "section": "warnings_and_cautions", "quote": "Avoid concomitant use of clopidogrel with omeprazole or esomeprazole because both significantly reduce the antiplatelet activity of clopidogrel" },
+        { "label": "omeprazole", "section": "warnings_and_cautions", "quote": "5.7 Interaction with Clopidogrel Avoid concomitant use of omeprazole with clopidogrel." }
+      ]
+    },
+    {
+      "a": "amlodipine",
+      "b": "simvastatin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Raised simvastatin exposure. Both labels limit simvastatin to 20 mg daily with amlodipine; simvastatin's label ties calcium channel blockers to a higher risk of myopathy and rhabdomyolysis.",
+      "evidence": [
+        { "label": "amlodipine", "section": "drug_interactions", "quote": "Co-administration of simvastatin with amlodipine increases the systemic exposure of simvastatin." },
+        { "label": "amlodipine", "section": "drug_interactions", "quote": "Limit the dose of simvastatin in patients on amlodipine to 20 mg daily" },
+        { "label": "simvastatin", "section": "drug_interactions", "quote": "For patients taking amiodarone, amlodipine, or ranolazine, do not exceed simvastatin 20 mg daily" },
+        { "label": "simvastatin", "section": "drug_interactions", "quote": "The risk of myopathy and rhabdomyolysis is increased by concomitant use of amiodarone, dronedarone, ranolazine, or calcium channel blockers with simvastatin." }
+      ]
+    },
+    {
+      "a": "allopurinol",
+      "b": "warfarin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Stronger warfarin effect. Allopurinol's label says it may inhibit warfarin's metabolism and to check INR often; warfarin's label lists allopurinol among CYP1A2 inhibitors.",
+      "evidence": [
+        { "label": "allopurinol", "section": "drug_interactions", "quote": "Allopurinol may inhibit the metabolism of warfarin, possibly enhancing its anticoagulant effect." },
+        { "label": "allopurinol", "section": "drug_interactions", "quote": "Assess INR frequently and adjust warfarin dosage accordingly when allopurinol is added to warfarin therapy." },
+        { "label": "warfarin", "section": "drug_interactions", "quote": "CYP1A2 acyclovir, allopurinol, caffeine" }
+      ]
+    },
+    {
+      "a": "tamsulosin",
+      "b": "warfarin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Tamsulosin's label states a caution about using it with warfarin, in both its Drug Interactions and its Warnings and Precautions.",
+      "evidence": [
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "Caution should be exercised with concomitant administration of warfarin and tamsulosin hydrochloride capsules" },
+        { "label": "tamsulosin", "section": "warnings_and_cautions", "quote": "Exercise caution with concomitant administration of warfarin" },
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "Results from limited in vitro and in vivo studies are inconclusive.", "role": "context" }
+      ],
+      "note": "Positive although the label calls its own evidence inconclusive: the rule counts a stated caution, and the label states one."
+    },
+    {
+      "a": "spironolactone",
+      "b": "digoxin",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Digoxin's label lists spironolactone among drugs that raise digoxin concentrations (measure digoxin first, lower the dose); spironolactone's label says it interferes with digoxin blood tests and to use an assay it does not affect.",
+      "evidence": [
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Digoxin concentrations increased less than 50%" },
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Spironolactone 25% NA" },
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Reduce digoxin concentrations by decreasing the dose by approximately 15-30% or by modifying the dosing frequency and continue monitoring." },
+        { "label": "spironolactone", "section": "drug_interactions", "quote": "Spironolactone and its metabolites interfere with radioimmunoassays for digoxin and increase the apparent exposure to digoxin." },
+        { "label": "spironolactone", "section": "drug_interactions", "quote": "In patients taking concomitant digoxin, use an assay that does not interact with spironolactone." }
+      ]
+    },
+    {
+      "a": "sertraline",
+      "b": "metoprolol",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Raised metoprolol exposure. Sertraline's label says it may increase exposure to CYP2D6 substrates, lists metoprolol as an example, and says to lower the substrate's dose if needed.",
+      "evidence": [
+        { "label": "sertraline", "section": "drug_interactions", "quote": "The concomitant use of sertraline hydrochloride with a CYP2D6 substrate may increase the exposure of the CYP2D6 substrate." },
+        { "label": "sertraline", "section": "drug_interactions", "quote": "Intervention: Decrease the dosage of a CYP2D6 substrate if needed with concomitant sertraline hydrochloride use." },
+        { "label": "sertraline", "section": "drug_interactions", "quote": "Examples: propafenone, flecainide, atomoxetine, desipramine, dextromethorphan, metoprolol, nebivolol" }
+      ]
+    },
+    {
+      "a": "meloxicam",
+      "b": "furosemide",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Weaker diuretic effect and kidney risk. Meloxicam's label names furosemide and says to watch kidney function and diuretic effect during combined use; furosemide's label reports kidney and potassium changes with NSAIDs.",
+      "evidence": [
+        { "label": "meloxicam", "section": "drug_interactions", "quote": "Diuretics : NSAIDs can reduce natriuretic effect of furosemide and thiazide diuretics." },
+        { "label": "meloxicam", "section": "drug_interactions", "quote": "Intervention: During concomitant use of meloxicam with diuretics, observe patients for signs of worsening renal function, in addition to assuring diuretic efficacy including antihypertensive effects" },
+        { "label": "furosemide", "section": "precautions", "quote": "There are case reports of patients who developed increased BUN, serum creatinine and serum potassium levels, and weight gain when furosemide was used in conjunction with NSAIDs." },
+        { "label": "meloxicam", "section": "drug_interactions", "quote": "However, studies with furosemide agents and meloxicam have not demonstrated a reduction in natriuretic effect.", "role": "context" }
+      ],
+      "note": "The same meloxicam section reports that its own furosemide studies found no reduction in natriuretic effect (context quote). The pair is still POSITIVE: that label also states a caution and an intervention for the combination."
+    },
+    {
+      "a": "apixaban",
+      "b": "clopidogrel",
+      "interacts": true,
+      "kind": "stated_by_name",
+      "why": "Bleeding risk. Apixaban's label says antiplatelet agents increase bleeding risk, and reports a trial in patients on aspirin plus clopidogrel that was stopped early for more bleeding with apixaban.",
+      "evidence": [
+        { "label": "apixaban", "section": "drug_interactions", "quote": "Coadministration of antiplatelet agents, fibrinolytics, heparin, aspirin, and chronic NSAID use increases the risk of bleeding." },
+        { "label": "apixaban", "section": "drug_interactions", "quote": "APPRAISE-2, a placebo-controlled clinical trial of ELIQUIS in high-risk, post-acute coronary syndrome patients treated with aspirin or the combination of aspirin and clopidogrel, was terminated early due to a higher rate of bleeding with ELIQUIS compared to placebo." },
+        { "label": "apixaban", "section": "warnings_and_cautions", "quote": "These include aspirin and other antiplatelet agents, other anticoagulants, heparin, thrombolytic agents, selective serotonin reuptake inhibitors, serotonin norepinephrine reuptake inhibitors, and nonsteroidal anti-inflammatory drugs (NSAIDs)" }
+      ],
+      "note": "The caution itself is worded by class (antiplatelet agents); clopidogrel is named in the trial result in the same section, so the pair counts as stated by name."
+    },
+    {
+      "a": "apixaban",
+      "b": "sertraline",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Bleeding risk, by class: sertraline's label warns about using it with anticoagulants, and apixaban's label lists selective serotonin reuptake inhibitors among drugs that increase bleeding risk.",
+      "evidence": [
+        { "label": "sertraline", "section": "drug_interactions", "quote": "The concurrent use of an antiplatelet agent or anticoagulant with sertraline hydrochloride may potentiate the risk of bleeding." },
+        { "label": "apixaban", "section": "warnings_and_cautions", "quote": "Concomitant use of drugs affecting hemostasis increases the risk of bleeding." },
+        { "label": "apixaban", "section": "warnings_and_cautions", "quote": "These include aspirin and other antiplatelet agents, other anticoagulants, heparin, thrombolytic agents, selective serotonin reuptake inhibitors, serotonin norepinephrine reuptake inhibitors, and nonsteroidal anti-inflammatory drugs (NSAIDs)" }
+      ],
+      "searched": {
+        "sertraline>apixaban": "/apixaban|eliquis/i: 0 hits",
+        "apixaban>sertraline": "/sertraline|zoloft/i: 0 hits"
+      }
+    },
+    {
+      "a": "metoprolol",
+      "b": "digoxin",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Slow heart rate, by class: metoprolol's label says digitalis glycosides used with beta-blockers can increase the risk of bradycardia; digoxin's label says beta-adrenergic blockers add to its effect on AV conduction.",
+      "evidence": [
+        { "label": "metoprolol", "section": "drug_interactions", "quote": "7.4 Negative Chronotropes Digitalis glycosides, clonidine, diltiazem and verapamil slow atrioventricular conduction and decrease heart rate." },
+        { "label": "metoprolol", "section": "drug_interactions", "quote": "Concomitant use with beta-blockers can increase the risk of bradycardia." },
+        { "label": "digoxin", "section": "drug_interactions", "quote": "Beta-adrenergic blockers and calcium channel blockers Additive effects on AV node conduction can result in bradycardia and advanced or complete heart block." }
+      ],
+      "searched": {
+        "metoprolol>digoxin": "/digoxin|lanoxin/i: 0 hits",
+        "digoxin>metoprolol": "/metoprolol|lopressor|toprol/i: 0 hits"
+      }
+    },
+    {
+      "a": "amiodarone",
+      "b": "metoprolol",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Slow heart rate, by class: amiodarone's label lists beta blockers among negative chronotropes that, with amiodarone, can cause bradycardia, sinus arrest and AV block, and says to monitor heart rate.",
+      "evidence": [
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Negative Chronotropes digoxin, beta blockers, verapamil, diltiazem, clonidine, ivabradine Potentiates the electrophysiologic and hemodynamic effects of amiodarone, resulting in bradycardia, sinus arrest, and AV block." },
+        { "label": "amiodarone", "section": "drug_interactions", "quote": "Monitor heart rate." }
+      ],
+      "searched": {
+        "amiodarone>metoprolol": "/metoprolol|lopressor|toprol/i: 0 hits",
+        "metoprolol>amiodarone": "/amiodarone|pacerone|cordarone/i: 0 hits"
+      }
+    },
+    {
+      "a": "glipizide",
+      "b": "metoprolol",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Low blood sugar, by class: glipizide's label lists beta adrenergic blocking agents among drugs that may potentiate its blood-sugar-lowering action, and says hypoglycemia may be hard to recognize in people taking them.",
+      "evidence": [
+        { "label": "glipizide", "section": "precautions", "quote": "The hypoglycemic action of sulfonylureas may be potentiated by certain drugs including nonsteroidal anti-inflammatory agents, some azoles, and other drugs that are highly protein bound, salicylates, sulfonamides, chloramphenicol, probenecid, coumarins, monoamine oxidase inhibitors, quinolones and beta adrenergic blocking agents." },
+        { "label": "glipizide", "section": "precautions", "quote": "When such drugs are administered to a patient receiving glipizide, the patient should be observed closely for hypoglycemia." },
+        { "label": "glipizide", "section": "precautions", "quote": "Hypoglycemia may be difficult to recognize in the elderly, and in people who are taking beta-adrenergic blocking drugs." },
+        { "label": "metoprolol", "section": "warnings_and_cautions", "quote": "Beta-blockers may mask some of the manifestations of hypoglycemia, particularly tachycardia.", "role": "context" }
+      ],
+      "searched": {
+        "glipizide>metoprolol": "/metoprolol|lopressor|toprol/i: 0 hits",
+        "metoprolol>glipizide": "/glipizide|glucotrol/i: 0 hits"
+      }
+    },
+    {
+      "a": "metformin",
+      "b": "glipizide",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Low blood sugar, by class: metformin's label says using it with an insulin secretagogue (e.g., sulfonylurea) may increase the risk of hypoglycemia; glipizide's own label says it is a sulfonylurea, and that hypoglycemia is more likely with more than one glucose-lowering drug.",
+      "evidence": [
+        { "label": "metformin", "section": "drug_interactions", "quote": "Insulin Secretagogues or Insulin Clinical Impact: Co-administration of metformin hydrochloride with an insulin secretagogue (e.g., sulfonylurea) or insulin may increase the risk of hypoglycemia." },
+        { "label": "metformin", "section": "warnings_and_cautions", "quote": "Metformin hydrochloride may increase the risk of hypoglycemia when combined with insulin and/or an insulin secretagogue." },
+        { "label": "glipizide", "section": "precautions", "quote": "Hypoglycemia is more likely to occur when caloric intake is deficient, after severe or prolonged exercise, when alcohol is ingested, or when more than one glucose-lowering drug is used." },
+        { "label": "glipizide", "section": "precautions", "quote": "Because glipizide belongs to the class of sulfonylurea agents", "role": "membership" }
+      ],
+      "searched": {
+        "metformin>glipizide": "/glipizide|glucotrol/i: 0 hits",
+        "glipizide>metformin": "/metformin|glucophage/i: 0 hits"
+      }
+    },
+    {
+      "a": "allopurinol",
+      "b": "hydrochlorothiazide",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Skin rash and hypersensitivity risk, by class: allopurinol's label says thiazide diuretics may increase the risk of skin rash, and to monitor kidney function and lower the allopurinol dose with thiazide use in renal impairment.",
+      "evidence": [
+        { "label": "allopurinol", "section": "drug_interactions", "quote": "Concomitant use of the following drugs may increase the risk of skin rash, which may be severe: bendamustine, thiazide diuretics, ampicillin and amoxicillin." },
+        { "label": "allopurinol", "section": "drug_interactions", "quote": "Monitor kidney function and reduce the dose of allopurinol in patients with concomitant thiazide diuretic use and impaired renal function" }
+      ],
+      "searched": {
+        "allopurinol>hydrochlorothiazide": "/hydrochlorothiazide|HCTZ|microzide/i: 0 hits",
+        "hydrochlorothiazide>allopurinol": "/allopurinol|zyloprim/i: 0 hits"
+      }
+    },
+    {
+      "a": "furosemide",
+      "b": "digoxin",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Low potassium, by class: furosemide's label says it can cause hypokalemia and that digitalis therapy may exaggerate the effects of hypokalemia, especially on the heart.",
+      "evidence": [
+        { "label": "furosemide", "section": "precautions", "quote": "Hypokalemia may develop with furosemide, especially with brisk diuresis, inadequate oral electrolyte intake, when cirrhosis is present, or during concomitant use of corticosteroids, ACTH, licorice in large amounts, or prolonged use of laxatives." },
+        { "label": "furosemide", "section": "precautions", "quote": "Digitalis therapy may exaggerate metabolic effects of hypokalemia, especially myocardial effects." },
+        { "label": "digoxin", "section": "warnings_and_cautions", "quote": "Low body weight, advanced age or impaired renal function, hypokalemia, hypercalcemia, or hypomagnesemia may predispose to digoxin toxicity.", "role": "context" }
+      ],
+      "searched": {
+        "furosemide>digoxin": "/digoxin|lanoxin/i: 0 hits",
+        "digoxin>furosemide": "/furosemide|lasix/i: 0 hits"
+      }
+    },
+    {
+      "a": "levothyroxine",
+      "b": "apixaban",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "By class: levothyroxine's label says it increases the response to oral anticoagulant therapy and the anticoagulant dose may need lowering; apixaban's own boxed warning calls it an oral anticoagulant.",
+      "evidence": [
+        { "label": "levothyroxine", "section": "drug_interactions", "quote": "7.3 Oral Anticoagulants Levothyroxine sodium increases the response to oral anticoagulant therapy." },
+        { "label": "levothyroxine", "section": "drug_interactions", "quote": "Therefore, a decrease in the dose of anticoagulant may be warranted with correction of the hypothyroid state or when the levothyroxine sodium dose is increased." },
+        { "label": "apixaban", "section": "boxed_warning", "quote": "Premature discontinuation of any oral anticoagulant, including ELIQUIS, increases the risk of thrombotic events.", "role": "membership" }
+      ],
+      "searched": {
+        "levothyroxine>apixaban": "/apixaban|eliquis/i: 0 hits",
+        "apixaban>levothyroxine": "/levothyroxine|synthroid|levoxyl|unithroid|euthyrox|thyroid/i: 0 hits"
+      },
+      "note": "Called on the text of the rule: levothyroxine's label names the class 'oral anticoagulants' without limiting it, and apixaban's label places apixaban in that class. The same levothyroxine section goes on to advise monitoring coagulation tests, which reads as written with warfarin-type therapy in mind, and neither label says whether the effect applies to apixaban. A pharmacist could reasonably read this pair differently."
+    },
+    {
+      "a": "losartan",
+      "b": "meloxicam",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Kidney function and blood pressure, by class: losartan's label says NSAIDs may worsen kidney function and blunt its blood-pressure effect; meloxicam's label says to monitor blood pressure with ARBs.",
+      "evidence": [
+        { "label": "losartan", "section": "drug_interactions", "quote": "Monitor renal function periodically in patients receiving losartan and NSAID therapy." },
+        { "label": "losartan", "section": "drug_interactions", "quote": "The antihypertensive effect of angiotensin II receptor antagonists, including losartan, may be attenuated by NSAIDs, including selective COX-2 inhibitors." },
+        { "label": "meloxicam", "section": "drug_interactions", "quote": "During concomitant use of meloxicam and ACE inhibitors, ARBs, or beta-blockers, monitor blood pressure to ensure that the desired blood pressure is obtained." }
+      ],
+      "searched": {
+        "losartan>meloxicam": "/meloxicam|mobic/i: 0 hits",
+        "meloxicam>losartan": "/losartan|cozaar/i: 0 hits"
+      }
+    },
+    {
+      "a": "donepezil",
+      "b": "meloxicam",
+      "interacts": true,
+      "kind": "stated_by_class_only",
+      "why": "Stomach bleeding, by class: donepezil's label says to watch closely for gastrointestinal bleeding, especially in people receiving concurrent NSAIDs.",
+      "evidence": [
+        { "label": "donepezil", "section": "warnings_and_cautions", "quote": "Therefore, patients should be monitored closely for symptoms of active or occult gastrointestinal bleeding, especially those at increased risk for developing ulcers, e.g., those with a history of ulcer disease or those receiving concurrent nonsteroidal anti-inflammatory drugs (NSAIDs)." },
+        { "label": "donepezil", "section": "warnings_and_cautions", "quote": "Clinical studies of donepezil hydrochloride in a dose of 5 mg/day to 10 mg/day have shown no increase, relative to placebo, in the incidence of either peptic ulcer disease or gastrointestinal bleeding.", "role": "context" }
+      ],
+      "searched": {
+        "donepezil>meloxicam": "/meloxicam|mobic/i: 0 hits",
+        "meloxicam>donepezil": "/donepezil|aricept/i: 0 hits"
+      },
+      "note": "The same section reports no increase in GI bleeding versus placebo in donepezil's trials (context quote); the caution about concurrent NSAIDs is still stated, so the pair is POSITIVE."
+    },
+    {
+      "a": "spironolactone",
+      "b": "furosemide",
+      "interacts": false,
+      "kind": "mentioned_not_co_use",
+      "why": "Furosemide's label recommends an aldosterone antagonist (spironolactone's class) as helpful against low potassium: advice, not a caution. Spironolactone's label uses 'diuretics' only to compare itself (lithium clearance) and to say NSAIDs blunt diuretics. Neither label cautions about taking the two together.",
+      "evidence": [
+        { "label": "furosemide", "section": "warnings_and_cautions", "quote": "Supplemental potassium chloride and, if required, an aldosterone antagonist are helpful in preventing hypokalemia and metabolic alkalosis." },
+        { "label": "spironolactone", "section": "drug_interactions", "quote": "Like other diuretics, spironolactone reduces the renal clearance of lithium, thus increasing the risk of lithium toxicity." },
+        { "label": "spironolactone", "section": "drug_interactions", "quote": "In some patients, the administration of an NSAID can reduce the diuretic, natriuretic, and antihypertensive effect of diuretics." }
+      ],
+      "searched": {
+        "spironolactone>furosemide": "/furosemide|lasix|loop diuretic|\\bdiuretics?\\b/i: 5 hits",
+        "furosemide>spironolactone": "/spironolactone|aldactone|aldosterone|potassium[\\s-]*sparing|mineralocorticoid/i: 2 hits"
+      },
+      "note": "All 5 diuretic hits in spironolactone's label are in its lithium and NSAID passages. The second aldosterone hit in furosemide's label is about indomethacin affecting aldosterone excretion. Spironolactone's hyperkalemia and dehydration warnings name ACE inhibitors and ARBs, not other diuretics."
+    },
+    {
+      "a": "sertraline",
+      "b": "digoxin",
+      "interacts": false,
+      "kind": "mentioned_not_co_use",
+      "why": "Sertraline's label lists digoxin under 'Drugs Having No Clinically Important Interactions' (no dosage adjustment required). Digoxin's label never names sertraline or its class (SSRIs).",
+      "evidence": [
+        { "label": "sertraline", "section": "drug_interactions", "quote": "7.2 Drugs Having No Clinically Important Interactions with Sertraline Hydrochloride" },
+        { "label": "sertraline", "section": "drug_interactions", "quote": "Additionally, no dosage adjustment is required for diazepam, lithium, atenolol, tolbutamide, digoxin, and drugs metabolized by CYP3A4, when sertraline hydrochloride is administered concomitantly" }
+      ],
+      "searched": {
+        "sertraline>digoxin": "/digoxin|lanoxin|digitalis|cardiac glycoside/i: 1 hit",
+        "digoxin>sertraline": "/sertraline|zoloft|serotonin|\\bSSRIs?\\b|antidepressant/i: 0 hits"
+      }
+    },
+    {
+      "a": "tamsulosin",
+      "b": "digoxin",
+      "interacts": false,
+      "kind": "mentioned_not_co_use",
+      "why": "Tamsulosin's label says dosage adjustments are not necessary when it is taken with digoxin. Digoxin's label never mentions tamsulosin or alpha blockers.",
+      "evidence": [
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "Dosage adjustments are not necessary when a tamsulosin hydrochloride capsule is administered concomitantly with digoxin or theophylline" }
+      ],
+      "searched": {
+        "tamsulosin>digoxin": "/digoxin|lanoxin|digitalis|cardiac glycoside/i: 2 hits",
+        "digoxin>tamsulosin": "/tamsulosin|flomax|alpha[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 0 hits"
+      }
+    },
+    {
+      "a": "tamsulosin",
+      "b": "furosemide",
+      "interacts": false,
+      "kind": "mentioned_not_co_use",
+      "why": "Tamsulosin's label reports that it had no effect on furosemide's action, and that the small drop furosemide caused in tamsulosin levels is expected to be clinically insignificant, with no dose change. Furosemide's label never mentions tamsulosin or alpha blockers.",
+      "evidence": [
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "Tamsulosin hydrochloride capsules had no effect on the pharmacodynamics (excretion of electrolytes) of furosemide." },
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "While furosemide produced an 11% to 12% reduction in tamsulosin hydrochloride C max and AUC, these changes are expected to be clinically insignificant and do not require adjustment of the tamsulosin hydrochloride capsules dosage" },
+        { "label": "furosemide", "section": "precautions", "quote": "In patients with severe symptoms of urinary retention (because of bladder emptying disorders, prostatic hyperplasia, urethral narrowing), the administration of furosemide can cause acute urinary retention related to increased production and retention of urine.", "role": "context" }
+      ],
+      "searched": {
+        "tamsulosin>furosemide": "/furosemide|lasix|loop diuretic|\\bdiuretics?\\b/i: 3 hits",
+        "furosemide>tamsulosin": "/tamsulosin|flomax|alpha[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 0 hits"
+      },
+      "note": "Furosemide's label warns about acute urinary retention in prostatic hyperplasia (context quote). That names a condition, not tamsulosin or its class, so it does not make the pair positive under the rule."
+    },
+    {
+      "a": "metoprolol",
+      "b": "tamsulosin",
+      "interacts": false,
+      "kind": "mentioned_not_co_use",
+      "why": "Metoprolol's label mentions alpha blockers only as pheochromocytoma advice (give metoprolol with an alpha blocker, after the alpha blocker is started): treatment advice, not a caution about the combination. Tamsulosin's label never mentions metoprolol or beta-blockers; it names atenolol only to say no dose adjustment is needed.",
+      "evidence": [
+        { "label": "metoprolol", "section": "warnings_and_cautions", "quote": "5.4 Pheochromocytoma If metoprolol tartrate is used in the setting of pheochromocytoma, it should be given in combination with an alpha blocker, and only after the alpha blocker has been initiated." },
+        { "label": "tamsulosin", "section": "drug_interactions", "quote": "Dosage adjustments are not necessary when tamsulosin hydrochloride capsules are administered concomitantly with nifedipine, atenolol, or enalapril" }
+      ],
+      "searched": {
+        "metoprolol>tamsulosin": "/tamsulosin|flomax|alpha[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 2 hits",
+        "tamsulosin>metoprolol": "/metoprolol|lopressor|toprol|beta[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 0 hits"
+      },
+      "note": "Judgment call, made the same way as the v1 metoprolol + furosemide pair: advice to use a class together, in one disease setting, is not a caution about combining them. Both alpha-blocker hits are in the quoted pheochromocytoma sentence."
+    },
+    {
+      "a": "memantine",
+      "b": "donepezil",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label's counted sections mention the other medicine or its class.",
+      "evidence": [],
+      "searched": {
+        "memantine>donepezil": "/donepezil|aricept|cholinesterase|cholinergic|cholinomimetic|acetylcholine/i: 0 hits",
+        "donepezil>memantine": "/memantine|namenda|NMDA|N-methyl|glutamat/i: 0 hits"
+      }
+    },
+    {
+      "a": "gabapentin",
+      "b": "metformin",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "gabapentin>metformin": "/metformin|glucophage|biguanide|antidiabet|hypoglycem|insulin|diabet/i: 0 hits",
+        "metformin>gabapentin": "/gabapentin|neurontin|antiepilep|anti-epilep|anticonvuls/i: 0 hits"
+      }
+    },
+    {
+      "a": "atorvastatin",
+      "b": "amlodipine",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class. Amlodipine's label names a different statin, simvastatin, and no statin class word; atorvastatin's label never mentions amlodipine or calcium channel blockers.",
+      "evidence": [],
+      "searched": {
+        "atorvastatin>amlodipine": "/amlodipine|norvasc|calcium[\\s-]*channel|dihydropyridine/i: 0 hits",
+        "amlodipine>atorvastatin": "/atorvastatin|lipitor|\\bstatins?\\b|HMG[\\s-]*CoA/i: 0 hits"
+      }
+    },
+    {
+      "a": "clopidogrel",
+      "b": "atorvastatin",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "clopidogrel>atorvastatin": "/atorvastatin|lipitor|\\bstatins?\\b|HMG[\\s-]*CoA/i: 0 hits",
+        "atorvastatin>clopidogrel": "/clopidogrel|plavix|antiplatelet|P2Y|thienopyridine/i: 0 hits"
+      }
+    },
+    {
+      "a": "apixaban",
+      "b": "metoprolol",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class.",
+      "evidence": [],
+      "searched": {
+        "apixaban>metoprolol": "/metoprolol|lopressor|toprol|beta[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 0 hits",
+        "metoprolol>apixaban": "/apixaban|eliquis|anticoag|factor[\\s-]*Xa|antithrombotic/i: 0 hits"
+      }
+    },
+    {
+      "a": "donepezil",
+      "b": "metoprolol",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class. Donepezil's label warns that it can itself slow the heart, but names no other medicine or class in that warning; metoprolol's label never mentions cholinesterase inhibitors.",
+      "evidence": [
+        { "label": "donepezil", "section": "warnings_and_cautions", "quote": "Because of their pharmacological action, cholinesterase inhibitors may have vagotonic effects on the sinoatrial and atrioventricular nodes.", "role": "context" }
+      ],
+      "searched": {
+        "donepezil>metoprolol": "/metoprolol|lopressor|toprol|beta[\\s-]*(adrenergic|blockers?|blocking|antagonists?)/i: 0 hits",
+        "metoprolol>donepezil": "/donepezil|aricept|cholinesterase|cholinergic|cholinomimetic/i: 0 hits"
+      },
+      "note": "NEGATIVE under the label-text rule only. Like every negative here, it does not mean the combination is safe."
+    },
+    {
+      "a": "gabapentin",
+      "b": "omeprazole",
+      "interacts": false,
+      "kind": "never_mentioned",
+      "why": "Neither label names the other or its class. Gabapentin's label names an antacid (Maalox, aluminum and magnesium hydroxides), which is not omeprazole's class: omeprazole's label calls it a proton pump inhibitor (PPI). Omeprazole's label never mentions gabapentin or antiepileptic drugs.",
+      "evidence": [
+        { "label": "gabapentin", "section": "drug_interactions", "quote": "The mean bioavailability of gabapentin was reduced by about 20% with concomitant use of an antacid", "role": "context" },
+        { "label": "omeprazole", "section": "drug_interactions", "quote": "Increased INR and prothrombin time in patients receiving PPIs, including omeprazole, and warfarin concomitantly.", "role": "membership" }
+      ],
+      "searched": {
+        "gabapentin>omeprazole": "/omeprazole|prilosec|proton[\\s-]*pump|\\bPPIs?\\b/i: 0 hits",
+        "omeprazole>gabapentin": "/gabapentin|neurontin|antiepilep|anti-epilep|anticonvuls/i: 0 hits"
+      },
+      "note": "The antacid mention is recorded as context so the call is visible: an antacid is a different class from a proton pump inhibitor, so under the rule gabapentin's antacid caution does not reach omeprazole."
     }
   ]
 }

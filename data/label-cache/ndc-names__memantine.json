@@ -1,0 +1,67 @@
+{
+ "url": "https://api.fda.gov/drug/ndc.json?search=generic_name:%22memantine%22&count=generic_name.exact&limit=100",
+ "fetched_at": "2026-11-23T03:41:28.217Z",
+ "status": 200,
+ "body": {
+  "meta": {
+   "disclaimer": "Do not rely on openFDA to make decisions regarding medical care. While we make every effort to ensure that data is accurate, you should assume all results are unvalidated. We may limit or otherwise restrict your access to the API in line with our Terms of Service.",
+   "terms": "https://open.fda.gov/terms/",
+   "license": "https://open.fda.gov/license/",
+   "last_updated": "2026-11-20"
+  },
+  "results": [
+   {
+    "term": "Memantine Hydrochloride",
+    "count": 72
+   },
+   {
+    "term": "memantine hydrochloride",
+    "count": 35
+   },
+   {
+    "term": "MEMANTINE HYDROCHLORIDE",
+    "count": 14
+   },
+   {
+    "term": "Memantine hydrochloride",
+    "count": 14
+   },
+   {
+    "term": "memantine hydrochloride and donepezil hydrochloride",
+    "count": 10
+   },
+   {
+    "term": "Memantine",
+    "count": 9
+   },
+   {
+    "term": "memantine",
+    "count": 8
+   },
+   {
+    "term": "Memantine and Donepezil",
+    "count": 7
+   },
+   {
+    "term": "MEMANTINE AND DONEPEZIL HYDROCHLORIDES",
+    "count": 1
+   },
+   {
+    "term": "Memantine Base",
+    "count": 1
+   },
+   {
+    "term": "Memantine HCL",
+    "count": 1
+   },
+   {
+    "term": "Memantine HCl",
+    "count": 1
+   },
+   {
+    "term": "Memantine Hydrochloride Oral",
+    "count": 1
+   }
+  ]
+ }
+}

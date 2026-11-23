@@ -15,6 +15,7 @@
     "labels": "tsx scripts/fetch-labels.ts",
     "live": "tsx scripts/live-run.ts",
     "eval": "tsx scripts/eval.ts",
+    "truth:check": "CAREPOOL_OFFLINE=1 tsx scripts/check-truth.ts",
     "screens": "tsx scripts/screens.ts",
     "record": "tsx scripts/record-demo.ts",
     "lint": "eslint .",
