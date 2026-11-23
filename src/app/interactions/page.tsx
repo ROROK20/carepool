@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Card, PageTitle, Pill, SectionTitle } from "@/components/ui";
-import { interactionsView, type FlagView } from "@/lib/views";
+import { interactionsView, pharmacistQuestion, type FlagView } from "@/lib/views";
 
 export const dynamic = "force-dynamic";
 
@@ -59,7 +59,7 @@ export default function InteractionsPage() {
 
       {flagged.map((p) => {
         const directions = [p.flags.filter((f) => f.a === p.flags[0].a), p.flags.filter((f) => f.a !== p.flags[0].a)].filter((x) => x.length > 0);
-        const explanation = p.flags.map((f) => f.explanation).find((e) => e?.verified);
+        const { explanation } = pharmacistQuestion(p);
         return (
           <Card key={p.key} className="border-l-4 border-l-amber-400">
             <div id={p.key} className="scroll-mt-28" data-testid="flag-pair">

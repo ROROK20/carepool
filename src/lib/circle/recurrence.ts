@@ -52,6 +52,12 @@ export function shortDate(date: string): string {
   return new Date(utcDay(date)).toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" });
 }
 
+/** "November 18, 2026" for a date or timestamp that starts with YYYY-MM-DD. */
+export function longDate(iso: string | null): string {
+  if (!iso) return "unknown date";
+  return new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
+}
+
 export function describeRecurrence(r: Recurrence): string {
   switch (r.type) {
     case "daily":

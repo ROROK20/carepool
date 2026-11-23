@@ -15,7 +15,9 @@
 | **Interaction flags** | Code, not the model, reads each label's Drug Interactions, Boxed Warning, Contraindications and Warnings sections for every other medicine's name, brand or drug class, and quotes the sentence it found. The model may explain a flag in plain words (each sentence with its own checked quote); it cannot create one. |
 | **Schedule from your words** | The schedule builder's only input is what you typed. It never takes a dose from a label, never suggests one, and never picks a time: a medicine with no clock time goes to "no time entered". |
 | **Care circle** | Family members, recurring tasks (morning dose check, weekly pill organizer, refill pickup every 30 days), and a "today" page per person. Dose checks list the doses you typed for that time. "I can't today" puts a task up for grabs; anyone else can tap "I'll take it". |
-| **Safety banner** | On every screen. |
+| **Doctor visit sheet** | A printable sheet to bring to the doctor or pharmacist (**Visit sheet**, then **Print this sheet**): each medicine with the dose and times exactly as you typed them ("not entered" when blank), the label each card used (version, date, DailyMed link), every flagged pair with the label's own words and the section they came from, and the same "ask the pharmacist" questions as the home page. Nothing on it is written for it: every sentence is one the app already shows. Print styles only, no PDF library; a medicine or a pair is never split across pages (the demo household prints on two pages). |
+| **Larger text** | A header button for older readers that enlarges the whole app, remembered on this device. |
+| **Safety banner** | On every screen, and on the printed sheet. |
 
 ## Run it
 

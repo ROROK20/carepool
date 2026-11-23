@@ -4,17 +4,13 @@ import { GenerationPanel } from "@/components/GenerationPanel";
 import { MedForm } from "@/components/MedForm";
 import { Card, PageTitle, Pill, SectionTitle } from "@/components/ui";
 import { labelTitle } from "@/lib/cards/pipeline";
+import { longDate } from "@/lib/circle/recurrence";
 import { isGenerating } from "@/lib/jobs";
 import { CARD_PARTS, CARD_PART_TITLES, sectionTitle } from "@/lib/labels/sections";
 import { formatTime } from "@/lib/schedule/parse";
 import { cardView } from "@/lib/views";
 
 export const dynamic = "force-dynamic";
-
-function longDate(iso: string | null): string {
-  if (!iso) return "unknown date";
-  return new Date(`${iso.slice(0, 10)}T12:00:00Z`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "UTC" });
-}
 
 const REASON_TEXT: Record<string, string> = {
   QUOTE_NOT_FOUND: "its quote is not in the label word for word",

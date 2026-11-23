@@ -1,5 +1,5 @@
 import { isVerbatim } from "./cards/citations";
-import type { CardResult } from "./cards/pipeline";
+import type { CardLabelInfo, CardResult } from "./cards/pipeline";
 import { localToday, isIsoDate } from "./circle/recurrence";
 import { occurrences, todayFor, type TodayTask, type TodayView } from "./circle/today";
 import { getEnv } from "./env";
@@ -8,6 +8,7 @@ import {
   getCard,
   getLabel,
   getMed,
+  getRecipient,
   latestRun,
   listCards,
   listEvents,
@@ -20,6 +21,7 @@ import {
   type Explanation,
   type Med,
   type Member,
+  type Recipient,
   type StoredLabel,
 } from "./repo";
 import { buildSchedule, type Schedule } from "./schedule/build";
@@ -126,6 +128,43 @@ export function interactionsView(): InteractionsView {
     }),
   }));
   return { pairs, meds_without_label: meds.filter((m) => !labels.has(m.id)), checked_meds: withLabel.length };
+}
+
+/**
+ * What Carepool asks the pharmacist about a flagged pair: the first checked
+ * plain-words explanation, or (with none) which label names which term.
+ * The home page, the interaction page and the doctor-visit sheet all use
+ * this, so the same pair always reads the same way.
+ */
+export function pharmacistQuestion(p: PairView): { text: string; explanation: NonNullable<FlagView["explanation"]> | null } {
+  const explanation = p.flags.map((f) => f.explanation).find((e) => e?.verified) ?? null;
+  return {
+    text: explanation ? explanation.sentences.map((x) => x.text).join(" ") : `The ${p.flags[0].a_name} label names ${p.flags[0].matched_text}.`,
+    explanation,
+  };
+}
+
+export interface SheetView {
+  recipient: Recipient | null;
+  /** Every medicine as the family typed it, with the label its card used (null: no card yet). */
+  meds: { med: Med; label: CardLabelInfo | null }[];
+  /** Flagged pairs only. A pair whose only mention is "no meaningful interaction" is not a flag. */
+  questions: (PairView & { question: ReturnType<typeof pharmacistQuestion> })[];
+  meds_without_label: Med[];
+  checked_meds: number;
+}
+
+/** The printable doctor-visit sheet: nothing here is computed except which pairs are flagged. */
+export function sheetView(): SheetView {
+  const cards = listCards();
+  const interactions = interactionsView();
+  return {
+    recipient: getRecipient(),
+    meds: listMeds().map((med) => ({ med, label: cards.get(med.id)?.card?.label ?? null })),
+    questions: interactions.pairs.filter((p) => p.flagged).map((p) => ({ ...p, question: pharmacistQuestion(p) })),
+    meds_without_label: interactions.meds_without_label,
+    checked_meds: interactions.checked_meds,
+  };
 }
 
 export function scheduleView(): { meds: Med[]; schedule: Schedule } {

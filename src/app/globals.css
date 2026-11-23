@@ -23,6 +23,12 @@ html {
   font-size: 17px;
 }
 
+/* Larger text for older readers (the header toggle; src/lib/text-size.ts). Every size is in rem, so this scales the whole app. */
+html.large-text {
+  font-size: 21px;
+  line-height: 1.65;
+}
+
 body {
   background: var(--color-paper);
   color: var(--color-ink);
@@ -51,4 +57,54 @@ details > summary::-webkit-details-marker {
   outline: 3px solid #0f766e;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/*
+ * Paper: black on white, no navigation or buttons (they carry print:hidden),
+ * one fixed size whatever the screen setting, and a medicine or a pair is
+ * never split across two pages. The doctor-visit sheet carries its own
+ * safety line, so the sticky banner is dropped there only.
+ */
+@media print {
+  @page {
+    margin: 12mm;
+  }
+  html,
+  html.large-text {
+    font-size: 9.5pt;
+    line-height: 1.35;
+  }
+  *,
+  *::before,
+  *::after {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+  html,
+  body {
+    background: #fff !important;
+  }
+  a {
+    text-decoration: none;
+  }
+  body:has(#doctor-sheet) [data-testid="safety-banner"] {
+    display: none;
+  }
+  .sheet .divide-line > *,
+  .sheet .border-line {
+    border-color: #9a9a9a !important;
+  }
+  .sheet-block,
+  .sheet-quote {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  /* A section heading travels with its first item. (Not on the h3s: break-after on a grid item propagates to its row and would chain every medicine to the next.) */
+  .sheet-head {
+    break-inside: avoid;
+    break-after: avoid;
+    page-break-after: avoid;
+  }
 }
