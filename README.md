@@ -1,3 +1,5 @@
+<p><img src="docs/brand/logo.png" alt="Carepool" width="360"></p>
+
 # Carepool
 
 **A family care coordinator for an older relative's medicines.** You type the medicine list exactly as the prescription bottles say. Carepool fetches each medicine's real FDA label and turns it into a plain-language card in which **every sentence quotes the label word for word**, and a program deletes any sentence whose quote it cannot find. It flags pairs of medicines that one label names together, quoting that label. It builds a daily schedule **only from the doses and times you typed**. And it lets the family share the work: recurring jobs like refill pickups and dose checks, a "today" page for each person, and a way to ask for, and offer, cover.
@@ -15,7 +17,9 @@
 | **Interaction flags** | Code, not the model, reads each label's Drug Interactions, Boxed Warning, Contraindications and Warnings sections for every other medicine's name, brand or drug class, and quotes the sentence it found. The model may explain a flag in plain words (each sentence with its own checked quote); it cannot create one. |
 | **Schedule from your words** | The schedule builder's only input is what you typed. It never takes a dose from a label, never suggests one, and never picks a time: a medicine with no clock time goes to "no time entered". |
 | **Care circle** | Family members, recurring tasks (morning dose check, weekly pill organizer, refill pickup every 30 days), and a "today" page per person. Dose checks list the doses you typed for that time. "I can't today" puts a task up for grabs; anyone else can tap "I'll take it". |
-| **Safety banner** | On every screen. |
+| **Doctor visit sheet** | A printable sheet to bring to the doctor or pharmacist (**Visit sheet**, then **Print this sheet**): each medicine with the dose and times exactly as you typed them ("not entered" when blank), the label each card used (version, date, DailyMed link), every flagged pair with the label's own words and the section they came from, and the same "ask the pharmacist" questions as the home page. Nothing on it is written for it: every sentence is one the app already shows. Print styles only, no PDF library; a medicine or a pair is never split across pages (the demo household prints on two pages). |
+| **Larger text** | A header button for older readers that enlarges the whole app, remembered on this device. |
+| **Safety banner** | On every screen, and on the printed sheet. |
 
 ## Run it
 
@@ -51,6 +55,7 @@ PORT=3400 npm run dev                             # another port (3300 is the de
 | `npm run lint` / `npm run typecheck` / `npm run build` | ESLint, `tsc --noEmit`, production build. |
 | `npm run screens` | Screenshots into `docs/screens/` (see the script header for the server it expects). |
 | `npm run record` | A silent screen capture of the demo, cut to `DEMO_SCRIPT.md` (needs ffmpeg). |
+| `npm run brand` | Regenerate the logo files (`src/app/icon.svg`, `src/app/apple-icon.png`, `docs/brand/`) from `src/lib/brand.ts`. |
 
 Configuration is optional; see `.env.example` (provider, model aliases, review on/off, repair rounds, concurrency, timeouts, database path, offline mode).
 
@@ -126,6 +131,7 @@ Everything else (label lookup and caching, label parser, interaction matcher, sc
 - Label text and pharmacologic classes: openFDA (U.S. Food and Drug Administration), public domain. Cached copies in `data/label-cache/` keep the request URL and fetch time.
 - Demo data (`data/seed/nana-rosa.json`): fictional people and an example medicine list typed the way a family member would. Not a real prescription and not a recommendation.
 - Code: MIT (`LICENSE`).
+- Logo and wordmark (`docs/brand/`, `src/app/icon.svg`): drawn for Carepool from circles and lines in `src/lib/brand.ts`, no font or third-party artwork; MIT with the code.
 
 ## Credits
 

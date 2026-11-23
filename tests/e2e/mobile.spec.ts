@@ -2,10 +2,22 @@ import { expect, test } from "@playwright/test";
 
 /** Phone-sized pass: the safety banner and the main screens fit without sideways scrolling. */
 
-for (const path of ["/", "/meds", "/interactions", "/schedule", "/circle", "/today/member-ana"]) {
+const PATHS = ["/", "/meds", "/interactions", "/schedule", "/circle", "/today/member-ana", "/sheet"];
+
+for (const path of PATHS) {
   test(`fits a phone screen: ${path}`, async ({ page }) => {
     await page.goto(path);
     await expect(page.getByTestId("safety-banner")).toBeVisible();
+    const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    expect(overflow).toBeLessThanOrEqual(1);
+  });
+}
+
+for (const path of PATHS) {
+  test(`large text still fits a phone screen: ${path}`, async ({ page }) => {
+    await page.addInitScript(() => localStorage.setItem("carepool:large-text", "1"));
+    await page.goto(path);
+    await expect(page.getByRole("button", { name: "Larger text" })).toHaveAttribute("aria-pressed", "true");
     const overflow = await page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     expect(overflow).toBeLessThanOrEqual(1);
   });

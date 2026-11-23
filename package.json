@@ -18,6 +18,7 @@
     "truth:check": "CAREPOOL_OFFLINE=1 tsx scripts/check-truth.ts",
     "screens": "tsx scripts/screens.ts",
     "record": "tsx scripts/record-demo.ts",
+    "brand": "tsx scripts/brand.ts",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",

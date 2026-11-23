@@ -4,7 +4,7 @@ import { Avatar, ButtonLink, Card, PageTitle, Pill, SectionTitle } from "@/compo
 import { shortDate } from "@/lib/circle/recurrence";
 import { isGenerating } from "@/lib/jobs";
 import { getRecipient } from "@/lib/repo";
-import { dashboard, pickDate } from "@/lib/views";
+import { dashboard, pharmacistQuestion, pickDate } from "@/lib/views";
 
 export const dynamic = "force-dynamic";
 
@@ -77,18 +77,22 @@ export default async function Home({ searchParams }: { searchParams: Promise<{ d
         <Card>
           <SectionTitle>Ask the pharmacist about</SectionTitle>
           <ul className="space-y-3">
-            {d.flaggedPairs.map((p) => {
-              const explained = p.flags.find((f) => f.explanation?.verified);
-              return (
-                <li key={p.key} className="flex flex-col gap-1 border-l-4 border-amber-400 pl-3">
-                  <Link href={`/interactions#${p.key}`} className="font-semibold hover:text-accent">
-                    {p.names[0]} + {p.names[1]}
-                  </Link>
-                  <span className="text-sm text-muted">{explained?.explanation?.sentences.map((x) => x.text).join(" ") ?? `The ${p.flags[0].a_name} label names ${p.flags[0].matched_text}.`}</span>
-                </li>
-              );
-            })}
+            {d.flaggedPairs.map((p) => (
+              <li key={p.key} className="flex flex-col gap-1 border-l-4 border-amber-400 pl-3" data-testid="pharmacist-question">
+                <Link href={`/interactions#${p.key}`} className="font-semibold hover:text-accent">
+                  {p.names[0]} + {p.names[1]}
+                </Link>
+                <span className="text-sm text-muted" data-testid="pharmacist-question-text">
+                  {pharmacistQuestion(p).text}
+                </span>
+              </li>
+            ))}
           </ul>
+          <div className="mt-4">
+            <ButtonLink href="/sheet" variant="quiet">
+              Print a sheet for the doctor visit
+            </ButtonLink>
+          </div>
         </Card>
       ) : null}
 
