@@ -81,6 +81,12 @@ export interface ResolvedLabel {
   /** Established pharmacologic classes (no suffix), from the label or the NDC directory. */
   classes: string[];
   class_source: "label" | "ndc" | "none";
+  /**
+   * Every class term from the same source as `classes`, with its openFDA kind kept
+   * ("Adrenergic beta-Antagonists [MoA]", "Biguanides [CS]"). Read by matcher v2.
+   * Absent on labels stored before it existed.
+   */
+  class_terms?: string[];
   /** Release form the typed name or dose asked for, if any. */
   formulation_wanted: "extended" | null;
   /** True when the label's release form differs from what was typed (shown as a warning). */
@@ -265,16 +271,17 @@ export function epcClasses(terms: CountTerm[]): string[] {
 }
 
 /** Classes for a generic base name from the NDC directory (cached like every other response). */
-async function ndcClasses(name: string, files: string[]): Promise<string[]> {
+async function ndcClasses(name: string, files: string[]): Promise<{ epc: string[]; terms: string[] }> {
   const namesFile = `ndc-names__${slug(name)}.json`;
   files.push(namesFile);
   const names = await cachedGet(namesFile, `${NDC}?search=${q("generic_name", name)}&count=generic_name.exact&limit=100`);
   const term = pickTerm(name, countTerms(names));
-  if (!term) return [];
+  if (!term) return { epc: [], terms: [] };
   const classFile = `ndc-classes__${slug(term)}.json`;
   files.push(classFile);
   const classes = await cachedGet(classFile, `${NDC}?search=${q("generic_name.exact", term)}&count=pharm_class.exact&limit=100`);
-  return epcClasses(countTerms(classes));
+  const counted = countTerms(classes);
+  return { epc: epcClasses(counted), terms: [...new Set(counted.map((t) => t.term))] };
 }
 
 function countTerms(res: CachedResponse): CountTerm[] {
@@ -324,10 +331,13 @@ export async function resolveLabel(query: string, opts: { formulationText?: stri
     if (!raw || !res) continue;
     const label = parseLabel(raw);
     let classes = label.pharm_classes;
+    let classTerms = label.pharm_class_terms ?? [];
     let classSource: ResolvedLabel["class_source"] = classes.length > 0 ? "label" : "none";
     if (classes.length === 0) {
       const generic = label.generic_names.find((g) => !isCombination(g)) ?? term;
-      classes = await ndcClasses(baseName(generic), files);
+      const ndc = await ndcClasses(baseName(generic), files);
+      classes = ndc.epc;
+      classTerms = ndc.terms;
       if (classes.length > 0) classSource = "ndc";
     }
     return {
@@ -340,6 +350,7 @@ export async function resolveLabel(query: string, opts: { formulationText?: stri
       fetched_at: res.fetched_at,
       classes,
       class_source: classSource,
+      class_terms: classTerms,
       formulation_wanted: wanted,
       formulation_mismatch: formulationMismatch(wanted, label.formulation),
       route_wanted: route,

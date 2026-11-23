@@ -84,7 +84,7 @@ export async function importRecordedRun(file = RECORDED_RUN_FILE): Promise<{ car
   }
   // Keep only explanations of flags that exist now and whose quote is in the flagged section.
   const labels = listLabels();
-  const drugs = meds.filter((m) => labels.has(m.id)).map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes));
+  const drugs = meds.filter((m) => labels.has(m.id)).map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes, labels.get(m.id)!.class_terms ?? []));
   const flags = new Map(findInteractions(drugs).flatMap((p) => p.flags).map((f) => [f.id, f]));
   const dropped: string[] = [];
   const keep = run.explanations.filter((e) => {

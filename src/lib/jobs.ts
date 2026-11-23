@@ -78,7 +78,7 @@ export async function runGeneration(opts: { medIds?: string[]; provider?: Provid
     const labels = listLabels();
     const drugs: DrugForMatching[] = listMeds()
       .filter((m) => labels.has(m.id))
-      .map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes));
+      .map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes, labels.get(m.id)!.class_terms ?? []));
     const flags = flagsToExplain(findInteractions(drugs));
     log(`Interactions: ${flags.length} flag(s) to explain`);
     const explained = await explainFlags(flags, new Map(drugs.map((d) => [d.key, d])), provider);

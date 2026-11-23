@@ -61,3 +61,60 @@ export const CLASS_PHRASES: Record<string, readonly string[]> = {
 export function classPhrases(epcClass: string): readonly string[] {
   return CLASS_PHRASES[epcClass.toLowerCase().trim()] ?? [epcClass];
 }
+
+// ── Matcher v2: class phrases derived from openFDA's own class terms ───────────
+
+/**
+ * Enzyme and transporter mechanism classes ("Cytochrome P450 3A Inhibitors",
+ * "P-Glycoprotein Inhibitors"). Labels qualify these by strength ("strong
+ * CYP3A4 inhibitors") and then list the drugs they mean by name, which the
+ * name matcher already reads. Matching the class itself would flag every
+ * weak inhibitor, so v2 skips them.
+ */
+const MECHANISM_CLASS = /cytochrome|\bCYP\s?\d|p[\s-]?glycoprotein|transport(?:er|ing)|organic (?:anion|cation)|\bUDP\b|glucuronosyl|breast cancer resistance/i;
+
+/** Trailing nouns openFDA adds to chemical-structure names that label prose leaves off ("Sulfonylurea Compounds"). */
+const STRUCTURE_FILLER = /\s+(?:compounds?|derivatives?)$/i;
+
+function singular(word: string): string {
+  if (/ss$/i.test(word)) return word;
+  if (/ies$/i.test(word)) return `${word.slice(0, -3)}y`;
+  if (/s$/i.test(word) && word.length > 3) return word.slice(0, -1);
+  return word;
+}
+
+/**
+ * The phrases label prose may use for one openFDA class term, derived by rule,
+ * not by hand: suffix removed, head noun made singular (the matcher adds
+ * plurals), "2" also written "II" (openFDA writes "Angiotensin 2 Receptor";
+ * labels write "angiotensin II receptor"), and "<Adjective> <subtype>-<Noun>"
+ * also written "<subtype>-<adjective> <noun>" (openFDA: "Adrenergic
+ * beta-Antagonists"; labels: "beta-adrenergic antagonists").
+ *
+ * Skipped: physiologic-effect terms [PE] (an effect, not a class a label
+ * names), enzyme and transporter mechanisms (see MECHANISM_CLASS), and a
+ * chemical-structure term [CS] that is not plural, because it names one
+ * substance ("Thyroxine") rather than a family ("Thiazides").
+ */
+export function derivedClassPhrases(rawTerm: string): string[] {
+  const m = rawTerm.trim().match(/^(.*?)\s*\[(EPC|MoA|CS|PE|EXT)\]$/i);
+  const kind = (m?.[2] ?? "EPC").toUpperCase();
+  let name = (m ? m[1] : rawTerm).replace(/\s+/g, " ").trim();
+  if (!name || kind === "PE" || kind === "EXT") return [];
+  if (MECHANISM_CLASS.test(name)) return [];
+  if (kind === "CS") {
+    const last = name.split(" ").pop() ?? "";
+    if (!/s$/i.test(last)) return [];
+    name = name.replace(STRUCTURE_FILLER, "");
+  }
+  const words = name.split(" ");
+  words[words.length - 1] = singular(words[words.length - 1]);
+  const base = words.join(" ");
+  const out = new Set<string>([base]);
+  if (/\b2\b/.test(base)) out.add(base.replace(/\b2\b/g, "II"));
+  for (const v of [...out]) {
+    const r = v.match(/^([A-Za-z]+) ([A-Za-z0-9]+)-([A-Za-z]+)$/);
+    if (r) out.add(`${r[2]}-${r[1].toLowerCase()} ${r[3]}`);
+  }
+  return [...out].filter((p) => p.replace(/[^A-Za-z]/g, "").length >= 4);
+}

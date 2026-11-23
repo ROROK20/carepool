@@ -1,7 +1,7 @@
 import { baseName, isCombination } from "../labels/openfda";
 import type { LabelSection } from "../labels/parse";
 import { INTERACTION_SECTIONS, sectionTitle } from "../labels/sections";
-import { classPhrases } from "./classes";
+import { classPhrases, derivedClassPhrases } from "./classes";
 import { isBoundary } from "../labels/sentences";
 
 /**
@@ -26,7 +26,22 @@ import { isBoundary } from "../labels/sentences";
  *    meaningful happened ("did not alter", "no clinically significant
  *    interaction") is kept but marked `no_effect_noted`, and does not count
  *    as a flag.
+ *
+ * Matcher v2 (the default; v1 stays callable so the eval can report it as
+ * the baseline on the same truth list) changes two things, both by rule:
+ *  - Class phrases also come from B's own openFDA class terms (EPC, MoA and
+ *    CS), derived in classes.ts `derivedClassPhrases`, so a label that names
+ *    B's class in the mechanism's words ("beta-adrenergic antagonists") is
+ *    read as well as one that uses the hand table's words ("beta-blockers").
+ *  - A mention that is advice to step up the other therapy ("increase
+ *    diuretics and restore clinical stability") in a sentence with no
+ *    co-use wording is marked `not_co_use` and does not count as a flag.
+ * Neither was tuned to the truth list: the list was frozen in a separate
+ * commit, by a separate agent, before this code existed.
  */
+
+export type MatcherVersion = "v1" | "v2";
+export const MATCHER_VERSION: MatcherVersion = "v2";
 
 export interface DrugForMatching {
   /** Stable key (medication id). */
@@ -37,11 +52,13 @@ export interface DrugForMatching {
   names: string[];
   /** Established pharmacologic classes. */
   classes: string[];
+  /** Every openFDA class term with its kind ("... [MoA]"); read by matcher v2 only. */
+  class_terms?: string[];
   sections: Record<string, LabelSection>;
 }
 
 export type MatchKind = "name" | "class";
-export type Polarity = "caution" | "no_effect_noted";
+export type Polarity = "caution" | "no_effect_noted" | "not_co_use";
 
 export interface InteractionFlag {
   id: string;
@@ -113,14 +130,25 @@ export function identityNames(typed: string, genericNames: string[], brandNames:
   return [...out.values()];
 }
 
-function termsFor(b: DrugForMatching, a: DrugForMatching): Term[] {
-  const aPhrases = new Set(a.classes.flatMap((c) => classPhrases(c)).map((p) => p.toLowerCase()));
-  const terms: Term[] = b.names.map((n) => ({ term: n, kind: "name" as const, class_name: null, re: termRegex(n) }));
-  for (const cls of b.classes) {
-    for (const phrase of classPhrases(cls)) {
-      if (aPhrases.has(phrase.toLowerCase())) continue;
-      terms.push({ term: phrase, kind: "class", class_name: cls, re: termRegex(phrase) });
+/** A drug's class phrases with the class each stands for. v1: the hand table only. v2: also derived from openFDA's terms. */
+export function classPhrasesFor(d: Pick<DrugForMatching, "classes" | "class_terms">, version: MatcherVersion): { phrase: string; class_name: string }[] {
+  const out = new Map<string, { phrase: string; class_name: string }>();
+  for (const cls of d.classes) for (const phrase of classPhrases(cls)) if (!out.has(phrase.toLowerCase())) out.set(phrase.toLowerCase(), { phrase, class_name: cls });
+  if (version === "v2") {
+    for (const term of d.class_terms ?? []) {
+      const name = term.replace(/\s*\[[A-Za-z]+\]\s*$/, "").trim();
+      for (const phrase of derivedClassPhrases(term)) if (!out.has(phrase.toLowerCase())) out.set(phrase.toLowerCase(), { phrase, class_name: name });
     }
+  }
+  return [...out.values()];
+}
+
+function termsFor(b: DrugForMatching, a: DrugForMatching, version: MatcherVersion): Term[] {
+  const aPhrases = new Set(classPhrasesFor(a, version).map((p) => p.phrase.toLowerCase()));
+  const terms: Term[] = b.names.map((n) => ({ term: n, kind: "name" as const, class_name: null, re: termRegex(n) }));
+  for (const { phrase, class_name } of classPhrasesFor(b, version)) {
+    if (aPhrases.has(phrase.toLowerCase())) continue;
+    terms.push({ term: phrase, kind: "class", class_name, re: termRegex(phrase) });
   }
   return terms;
 }
@@ -176,10 +204,20 @@ export function polarityOf(quote: string): Polarity {
   return NO_EFFECT_PATTERNS.some((re) => re.test(quote)) ? "no_effect_noted" : "caution";
 }
 
+/** The mention is the object of advice to step up the other therapy: "increase diuretics", "add a diuretic". */
+const STEP_UP_BEFORE = /\b(?:increase|increasing|raise|raising|add|adding|intensify|intensifying|augment|augmenting)\s+(?:the\s+|a\s+|an\s+)?(?:(?:dose|dosage)\s+of\s+(?:the\s+)?)?$/i;
+/** Wording that makes a sentence about using the two together. */
+const CO_USE_CUE = /\bconcomitant|\bco-?administ|\bcombination|\bcombined\b|\btogether\b|\binteract|\bpotentiat|\bin addition to\b|\bin patients (?:taking|receiving|treated with|on)\b|\bwhen (?:taken|used|given) with\b/i;
+
+/** v2: a mention that is therapy advice, not a caution about co-use. */
+export function isStepUpAdvice(text: string, matchStart: number, quote: string): boolean {
+  return STEP_UP_BEFORE.test(text.slice(Math.max(0, matchStart - 40), matchStart)) && !CO_USE_CUE.test(quote);
+}
+
 /** Flags for one direction: what A's label says about B. At most one flag per section (cautions preferred). */
-export function matchDirection(a: DrugForMatching, b: DrugForMatching): InteractionFlag[] {
+export function matchDirection(a: DrugForMatching, b: DrugForMatching, version: MatcherVersion = MATCHER_VERSION): InteractionFlag[] {
   if (a.key === b.key) return [];
-  const terms = termsFor(b, a);
+  const terms = termsFor(b, a, version);
   const flags: InteractionFlag[] = [];
   for (const sectionKey of INTERACTION_SECTIONS) {
     const section = a.sections[sectionKey];
@@ -210,7 +248,11 @@ export function matchDirection(a: DrugForMatching, b: DrugForMatching): Interact
         quote,
         clipped_start: span.clipped_start,
         clipped_end: span.clipped_end,
-        polarity: polarityOf(quote),
+        polarity: ((): Polarity => {
+          const p = polarityOf(quote);
+          if (p === "caution" && version === "v2" && isStepUpAdvice(section.text, hit.index, quote)) return "not_co_use";
+          return p;
+        })(),
       };
     });
     // Earliest sentence first; within one sentence a direct name beats a class phrase.
@@ -223,13 +265,13 @@ export function matchDirection(a: DrugForMatching, b: DrugForMatching): Interact
   return flags;
 }
 
-/** Every unordered pair that has at least one directional flag (caution or no-effect). */
-export function findInteractions(drugs: DrugForMatching[]): PairFinding[] {
+/** Every unordered pair that has at least one directional flag (caution, no-effect or not-co-use mention). */
+export function findInteractions(drugs: DrugForMatching[], version: MatcherVersion = MATCHER_VERSION): PairFinding[] {
   const out: PairFinding[] = [];
   for (let i = 0; i < drugs.length; i++) {
     for (let j = i + 1; j < drugs.length; j++) {
       const [x, y] = [drugs[i], drugs[j]].sort((p, q) => p.key.localeCompare(q.key));
-      const flags = [...matchDirection(x, y), ...matchDirection(y, x)];
+      const flags = [...matchDirection(x, y, version), ...matchDirection(y, x, version)];
       if (flags.length === 0) continue;
       out.push({ pair: [x.key, y.key], flagged: flags.some((f) => f.polarity === "caution"), flags });
     }
@@ -243,12 +285,14 @@ export function toMatchingDrug(
   typedName: string,
   label: { generic_names: string[]; brand_names: string[]; sections: Record<string, LabelSection> },
   classes: string[],
+  classTerms: string[] = [],
 ): DrugForMatching {
   return {
     key,
     display: typedName,
     names: identityNames(typedName, label.generic_names, label.brand_names),
     classes,
+    class_terms: classTerms,
     sections: label.sections,
   };
 }

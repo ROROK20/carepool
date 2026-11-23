@@ -1,8 +1,12 @@
 import { describe, expect, it } from "vitest";
+import { derivedClassPhrases } from "@/lib/interactions/classes";
 import {
+  MATCHER_VERSION,
+  classPhrasesFor,
   findInteractions,
   identityNames,
   isAdjectivalUse,
+  isStepUpAdvice,
   matchDirection,
   polarityOf,
   sentenceSpan,
@@ -135,5 +139,54 @@ describe("findInteractions on the cached Nana Rosa labels (real label text)", ()
         expect(a.sections[f.section].text.includes(f.quote)).toBe(true);
       }
     }
+  });
+});
+
+describe("matcher v2: class phrases derived from openFDA's own class terms", () => {
+  it("derives the label's word order, singular head nouns and Roman numerals by rule", () => {
+    expect(derivedClassPhrases("Adrenergic beta-Antagonists [MoA]")).toEqual(["Adrenergic beta-Antagonist", "beta-adrenergic Antagonist"]);
+    expect(derivedClassPhrases("Angiotensin 2 Receptor Antagonists [MoA]")).toEqual(["Angiotensin 2 Receptor Antagonist", "Angiotensin II Receptor Antagonist"]);
+    expect(derivedClassPhrases("Biguanides [CS]")).toEqual(["Biguanide"]);
+    expect(derivedClassPhrases("Sulfonylurea Compounds [CS]")).toEqual(["Sulfonylurea"]);
+    expect(derivedClassPhrases("Loop Diuretic [EPC]")).toEqual(["Loop Diuretic"]);
+  });
+
+  it("skips effects, enzyme and transporter mechanisms, and single-substance structure terms", () => {
+    expect(derivedClassPhrases("Decreased Platelet Aggregation [PE]")).toEqual([]);
+    expect(derivedClassPhrases("Cytochrome P450 3A Inhibitors [MoA]")).toEqual([]);
+    expect(derivedClassPhrases("P-Glycoprotein Inhibitors [MoA]")).toEqual([]);
+    expect(derivedClassPhrases("Thyroxine [CS]")).toEqual([]);
+  });
+
+  it("v2 reads a class named in the mechanism's words; v1 does not", () => {
+    const a = drug({ key: "thyrox", sections: section("drug_interactions", "Actions of particular beta-adrenergic antagonists may be impaired when the patient is converted to the euthyroid state.") });
+    const b = drug({ key: "betalol", classes: ["beta-Adrenergic Blocker"], class_terms: ["Adrenergic beta-Antagonists [MoA]", "beta-Adrenergic Blocker [EPC]"] });
+    expect(matchDirection(a, b, "v1")).toEqual([]);
+    const v2 = matchDirection(a, b, "v2");
+    expect(v2).toHaveLength(1);
+    expect(v2[0]).toMatchObject({ kind: "class", matched_text: "beta-adrenergic antagonists", polarity: "caution", class_name: "Adrenergic beta-Antagonists" });
+    expect(classPhrasesFor(b, "v1").map((p) => p.phrase)).not.toContain("beta-adrenergic Antagonist");
+  });
+
+  it("v2 marks advice to step up the other therapy as not about co-use; v1 flags it", () => {
+    const text = "Worsening heart failure may occur. If such symptoms occur, increase diuretics and restore clinical stability before advancing the dose of betalol.";
+    const a = drug({ key: "betalol", sections: section("warnings_and_cautions", text) });
+    const b = drug({ key: "loopa", classes: ["Loop Diuretic"], class_terms: ["Loop Diuretic [EPC]"] });
+    expect(matchDirection(a, b, "v1")[0]?.polarity).toBe("caution");
+    expect(matchDirection(a, b, "v2")[0]?.polarity).toBe("not_co_use");
+    expect(findInteractions([a, b], "v2")[0]).toMatchObject({ flagged: false });
+    expect(findInteractions([a, b], "v1")[0]).toMatchObject({ flagged: true });
+  });
+
+  it("step-up wording inside a co-use caution is still a caution", () => {
+    const text = "When adding a diuretic in patients taking betalol, monitor blood pressure because the combination can lower it further.";
+    expect(isStepUpAdvice(text, text.indexOf("diuretic"), text)).toBe(false);
+    const a = drug({ key: "betalol", sections: section("drug_interactions", text) });
+    const b = drug({ key: "loopa", classes: ["Loop Diuretic"], class_terms: ["Loop Diuretic [EPC]"] });
+    expect(matchDirection(a, b, "v2")[0]?.polarity).toBe("caution");
+  });
+
+  it("the app's default matcher is v2", () => {
+    expect(MATCHER_VERSION).toBe("v2");
   });
 });

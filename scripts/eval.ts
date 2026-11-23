@@ -33,7 +33,7 @@ import { judgeSentences } from "../src/lib/cards/judge";
 import type { CardSentence } from "../src/lib/cards/citations";
 import { buildCard, labelTitle, type CardResult } from "../src/lib/cards/pipeline";
 import { getEnv } from "../src/lib/env";
-import { findInteractions, toMatchingDrug, type DrugForMatching, type PairFinding } from "../src/lib/interactions/match";
+import { MATCHER_VERSION, findInteractions, toMatchingDrug, type DrugForMatching, type MatcherVersion, type PairFinding } from "../src/lib/interactions/match";
 import { readCachedLabelRaw, resolveLabel, type ResolvedLabel } from "../src/lib/labels/openfda";
 import { collapseWhitespace } from "../src/lib/labels/parse";
 import { getProvider } from "../src/lib/model";
@@ -43,7 +43,9 @@ interface TruthPair {
   b: string;
   interacts: boolean;
   why: string;
-  evidence: { label: string; section: string; quote: string }[];
+  /** v2 lists: how the label states it (by name, by class only, mentioned but not co-use, never mentioned). */
+  kind?: string;
+  evidence: { label: string; section: string; quote: string; role?: string }[];
 }
 
 interface DrugRow {
@@ -145,7 +147,14 @@ async function main() {
   const commit = gitCommit();
   const cli = mock ? "n/a (mock)" : cliVersion();
   const meds = (JSON.parse(fs.readFileSync("eval/meds.json", "utf8")) as { meds: string[] }).meds.filter((m) => !only || only.includes(m));
-  const truth = JSON.parse(fs.readFileSync("eval/interaction-truth.json", "utf8")) as { pairs: TruthPair[]; checked_by: string; rule: string };
+  const truth = JSON.parse(fs.readFileSync("eval/interaction-truth.json", "utf8")) as {
+    version?: number;
+    pairs: TruthPair[];
+    checked_by: string;
+    rule: string;
+    frozen_before_scoring?: string;
+    pairs_sha256?: string;
+  };
 
   console.log(`[eval] provider=${provider.name} writer=${provider.modelFor("writer")} review=${provider.modelFor("review")} meds=${meds.length}`);
 
@@ -221,7 +230,7 @@ async function main() {
   // Interaction flags among the medicines evaluated.
   const drugs: DrugForMatching[] = meds.map((m) => {
     const r = resolved.get(m)!;
-    return toMatchingDrug(m, m, r.label, r.classes);
+    return toMatchingDrug(m, m, r.label, r.classes, r.class_terms ?? []);
   });
   const findings = findInteractions(drugs);
   for (const row of rows) {
@@ -237,26 +246,44 @@ async function main() {
   let evidenceTotal = 0;
   let evidenceFound = 0;
   const evidenceMissing: string[] = [];
-  const scored = truth.pairs.map((p) => {
+  for (const p of truth.pairs) {
     for (const e of p.evidence) {
       evidenceTotal++;
       const text = labelFor.get(e.label)?.label.sections[e.section]?.text ?? "";
       if (text.includes(e.quote)) evidenceFound++;
       else evidenceMissing.push(`${e.label}/${e.section}: "${e.quote}"`);
     }
-    const da = labelFor.get(p.a)!;
-    const db = labelFor.get(p.b)!;
-    const pair: PairFinding | undefined = findInteractions([toMatchingDrug(p.a, p.a, da.label, da.classes), toMatchingDrug(p.b, p.b, db.label, db.classes)])[0];
-    const predicted = Boolean(pair?.flagged);
-    const outcome = predicted && p.interacts ? "TP" : predicted && !p.interacts ? "FP" : !predicted && p.interacts ? "FN" : "TN";
-    const top = pair?.flags.find((f) => f.polarity === "caution");
-    return { ...p, predicted, outcome, matcher_evidence: top ? `${top.a} label, ${top.section_title}: "${top.matched_text}"` : "none" };
-  });
-  const count = (o: string) => scored.filter((s) => s.outcome === o).length;
-  const tp = count("TP");
-  const fp = count("FP");
-  const fn = count("FN");
-  const tn = count("TN");
+  }
+  const scoreWith = (version: MatcherVersion) => {
+    const scored = truth.pairs.map((p) => {
+      const da = labelFor.get(p.a)!;
+      const db = labelFor.get(p.b)!;
+      const pair: PairFinding | undefined = findInteractions(
+        [toMatchingDrug(p.a, p.a, da.label, da.classes, da.class_terms ?? []), toMatchingDrug(p.b, p.b, db.label, db.classes, db.class_terms ?? [])],
+        version,
+      )[0];
+      const predicted = Boolean(pair?.flagged);
+      const outcome = predicted && p.interacts ? "TP" : predicted && !p.interacts ? "FP" : !predicted && p.interacts ? "FN" : "TN";
+      const top = pair?.flags.find((f) => f.polarity === "caution");
+      const set = pair?.flags.find((f) => f.polarity !== "caution");
+      const evidence = top
+        ? `${top.a} label, ${top.section_title}: "${top.matched_text}"`
+        : set
+          ? `mention only (${set.polarity === "not_co_use" ? "not about co-use" : "no-effect sentence"}): ${set.a} label, "${set.matched_text}"`
+          : "none";
+      return { ...p, predicted, outcome, matcher_evidence: evidence };
+    });
+    const count = (o: string) => scored.filter((x) => x.outcome === o).length;
+    const tp = count("TP");
+    const fp = count("FP");
+    const fn = count("FN");
+    const tn = count("TN");
+    return { version, scored, tp, fp, fn, tn, precision: tp / Math.max(1, tp + fp), recall: tp / Math.max(1, tp + fn) };
+  };
+  const v2 = scoreWith(MATCHER_VERSION);
+  const v1 = scoreWith("v1");
+  const scored = v2.scored;
+  const { tp, fp, fn, tn } = v2;
 
   const okRows = rows.filter((r) => r.ok && r.card);
   const sum = (f: (r: DrugRow) => number) => okRows.reduce((a, r) => a + f(r), 0);
@@ -336,30 +363,61 @@ async function main() {
     md.push(`- **${f.pair.join(" + ")}**: ${firstCaution.map((x) => `${x.a} label, ${x.section_title}, names "${x.matched_text}"`).join("; ")}`);
   }
   const mentions = findings.filter((f) => !f.flagged);
-  if (mentions.length > 0) md.push(`- Mentioned with a "no meaningful interaction" sentence (not flagged): ${mentions.map((f) => f.pair.join(" + ")).join(", ")}`);
+  if (mentions.length > 0) md.push(`- Mentioned but not flagged (a "no meaningful interaction" sentence, or advice that is not about using them together): ${mentions.map((f) => f.pair.join(" + ")).join(", ")}`);
   md.push("");
   md.push(`${flagged.length} flagged pair(s) out of ${(meds.length * (meds.length - 1)) / 2} possible pairs. These flags are not all checked by hand; Part 3 measures the matcher on a hand-checked subset.`);
   md.push("");
-  md.push("## 3. The matcher against 10 hand-checked pairs");
+  md.push(`## 3. The matcher against ${truth.pairs.length} hand-checked pairs: v1 (baseline) and ${MATCHER_VERSION}`);
   md.push("");
-  md.push(`Ground truth: \`eval/interaction-truth.json\`. ${truth.checked_by}`);
+  md.push(`Ground truth: \`eval/interaction-truth.json\` (version ${truth.version ?? 1}${truth.pairs_sha256 ? `, pairs fingerprint \`${truth.pairs_sha256.slice(0, 16)}…\`, checked by \`npm run truth:check\`` : ""}). ${truth.checked_by}`);
   md.push("");
+  if (truth.frozen_before_scoring) {
+    md.push(`Held out: ${truth.frozen_before_scoring}`);
+    md.push("");
+  }
   md.push(`Rule: ${truth.rule}`);
   md.push("");
   md.push(`Evidence quotes in the truth file found verbatim in the cached labels: **${evidenceFound}/${evidenceTotal}**.${evidenceMissing.length ? ` Missing: ${evidenceMissing.join("; ")}` : ""}`);
   md.push("");
-  md.push("| Pair | Hand-checked | Matcher | Outcome | Matcher's evidence | Note |");
-  md.push("|---|---|---|---|---|---|");
-  for (const s of scored) {
-    md.push(`| ${s.a} + ${s.b} | ${s.interacts ? "interacts" : "no"} | ${s.predicted ? "flagged" : "not flagged"} | **${s.outcome}** | ${s.matcher_evidence} | ${s.why} |`);
+  md.push("| | TP | FP | FN | TN | Precision | Recall |");
+  md.push("|---|---:|---:|---:|---:|---:|---:|");
+  for (const r of [v1, v2]) {
+    md.push(`| Matcher ${r.version}${r.version === "v1" ? " (baseline)" : ""} | ${r.tp} | ${r.fp} | ${r.fn} | ${r.tn} | **${pct(r.tp, r.tp + r.fp)}** (${r.tp}/${r.tp + r.fp}) | **${pct(r.tp, r.tp + r.fn)}** (${r.tp}/${r.tp + r.fn}) |`);
   }
   md.push("");
-  md.push(`TP ${tp} · FP ${fp} · FN ${fn} · TN ${tn}`);
+  const kinds = [...new Set(truth.pairs.map((p) => p.kind).filter((k): k is string => Boolean(k)))];
+  if (kinds.length > 0) {
+    md.push("By how the label states it (the truth file's `kind`):");
+    md.push("");
+    md.push(`| Kind | Pairs | v1 right | ${MATCHER_VERSION} right |`);
+    md.push("|---|---:|---:|---:|");
+    for (const k of kinds) {
+      const idx = truth.pairs.map((p, i) => (p.kind === k ? i : -1)).filter((i) => i >= 0);
+      const right = (r: typeof v1) => idx.filter((i) => r.scored[i].outcome === "TP" || r.scored[i].outcome === "TN").length;
+      md.push(`| ${k} | ${idx.length} | ${right(v1)} | ${right(v2)} |`);
+    }
+    md.push("");
+  }
+  const changed = truth.pairs.map((_, i) => i).filter((i) => v1.scored[i].outcome !== v2.scored[i].outcome);
+  md.push(
+    changed.length
+      ? `Pairs whose outcome changed from v1 to ${MATCHER_VERSION}: ${changed.map((i) => `${truth.pairs[i].a} + ${truth.pairs[i].b} (${v1.scored[i].outcome} → ${v2.scored[i].outcome})`).join("; ")}.`
+      : `No pair's outcome changed from v1 to ${MATCHER_VERSION}.`,
+  );
   md.push("");
-  md.push(`- **Precision** = TP / (TP + FP) = ${tp} / ${tp + fp} = **${pct(tp, tp + fp)}**`);
-  md.push(`- **Recall** = TP / (TP + FN) = ${tp} / ${tp + fn} = **${pct(tp, tp + fn)}**`);
+  md.push(`| Pair | Hand-checked | Kind | v1 | ${MATCHER_VERSION} | ${MATCHER_VERSION}'s evidence | Note |`);
+  md.push("|---|---|---|---|---|---|---|");
+  const cell3 = (t: string) => t.replace(/\|/g, "/").replace(/\s+/g, " ");
+  truth.pairs.forEach((p, i) => {
+    md.push(`| ${p.a} + ${p.b} | ${p.interacts ? "interacts" : "no"} | ${p.kind ?? ""} | ${v1.scored[i].outcome} | **${v2.scored[i].outcome}** | ${cell3(v2.scored[i].matcher_evidence)} | ${cell3(p.why)} |`);
+  });
   md.push("");
-  md.push("Ten pairs is a seed, not a benchmark: one more error moves either number by more than ten points. The misses are listed as they are, not fixed after the fact, so the numbers are not tuned to this list.");
+  md.push(`- **Precision** (${MATCHER_VERSION}) = TP / (TP + FP) = ${tp} / ${tp + fp} = **${pct(tp, tp + fp)}**`);
+  md.push(`- **Recall** (${MATCHER_VERSION}) = TP / (TP + FN) = ${tp} / ${tp + fn} = **${pct(tp, tp + fn)}**`);
+  md.push("");
+  md.push(
+    `${truth.pairs.length} pairs, checked by reading label text, not by a pharmacist. One error moves precision or recall by several points. Misses are listed as they are and were not fixed after the scores were seen.`,
+  );
   md.push("");
 
   const gateRows = okRows.filter((r) => r.card!.gate);
@@ -488,14 +546,18 @@ async function main() {
           meaning_check: r.judge,
         })),
         interactions: findings,
-        matcher_vs_truth: { tp, fp, fn, tn, precision: tp / Math.max(1, tp + fp), recall: tp / Math.max(1, tp + fn), pairs: scored },
+        matcher_version: MATCHER_VERSION,
+        truth_version: truth.version ?? 1,
+        truth_pairs_sha256: truth.pairs_sha256 ?? null,
+        matcher_vs_truth: { tp, fp, fn, tn, precision: v2.precision, recall: v2.recall, pairs: scored },
+        matcher_v1_vs_truth: { tp: v1.tp, fp: v1.fp, fn: v1.fn, tn: v1.tn, precision: v1.precision, recall: v1.recall, pairs: v1.scored },
       },
       null,
       1,
     )}\n`,
   );
   console.log(`[eval] wrote ${path.resolve(`${outBase}.md`)}`);
-  console.log(`[eval] kept ${kept} sentences, verbatim ${verb}/${kept}; matcher precision ${pct(tp, tp + fp)} recall ${pct(tp, tp + fn)}`);
+  console.log(`[eval] kept ${kept} sentences, verbatim ${verb}/${kept}; matcher v1 precision ${pct(v1.tp, v1.tp + v1.fp)} recall ${pct(v1.tp, v1.tp + v1.fn)}; ${MATCHER_VERSION} precision ${pct(tp, tp + fp)} recall ${pct(tp, tp + fn)}`);
   if (rows.some((r) => !r.ok)) process.exitCode = 1;
 }
 

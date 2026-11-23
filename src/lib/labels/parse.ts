@@ -33,6 +33,8 @@ export interface ParsedLabel {
   manufacturer: string | null;
   /** Established pharmacologic classes, without the " [EPC]" suffix. */
   pharm_classes: string[];
+  /** Every pharmacologic class term the label's openFDA fields carry, suffix kept: "... [EPC]", "... [MoA]", "... [CS]". */
+  pharm_class_terms?: string[];
   /** Release form, read from the label's description, indications and package panel. */
   formulation: Formulation;
   /** Routes of administration from openFDA, e.g. ["ORAL"] or ["INTRAMUSCULAR", "INTRAVENOUS"]. */
@@ -106,6 +108,11 @@ export function parseLabel(raw: unknown): ParsedLabel {
     brand_names: uniq(strings(openfda.brand_name)),
     manufacturer: strings(openfda.manufacturer_name)[0] ?? null,
     pharm_classes: uniq(strings(openfda.pharm_class_epc).map(stripClassSuffix)),
+    pharm_class_terms: uniq([
+      ...strings(openfda.pharm_class_epc).map((t) => (/\[EPC\]\s*$/i.test(t) ? t : `${t} [EPC]`)),
+      ...strings(openfda.pharm_class_moa).map((t) => (/\[MoA\]\s*$/i.test(t) ? t : `${t} [MoA]`)),
+      ...strings(openfda.pharm_class_cs).map((t) => (/\[CS\]\s*$/i.test(t) ? t : `${t} [CS]`)),
+    ]),
     formulation: labelFormulation(r),
     routes: uniq(strings(openfda.route)).map((x) => x.toUpperCase()),
     sections,

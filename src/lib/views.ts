@@ -100,7 +100,7 @@ export function interactionsView(): InteractionsView {
   const explanations = listExplanations();
   const name = new Map(meds.map((m) => [m.id, m.name]));
   const withLabel = meds.filter((m) => labels.has(m.id));
-  const drugs = withLabel.map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes));
+  const drugs = withLabel.map((m) => toMatchingDrug(m.id, m.name, labels.get(m.id)!.label, labels.get(m.id)!.classes, labels.get(m.id)!.class_terms ?? []));
   const pairs = findInteractions(drugs).map((p) => ({
     key: p.pair.join("+"),
     names: [name.get(p.pair[0]) ?? p.pair[0], name.get(p.pair[1]) ?? p.pair[1]] as [string, string],
