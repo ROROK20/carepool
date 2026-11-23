@@ -34,7 +34,7 @@ async function main() {
   } catch {
     /* reported below as unknown */
   }
-  console.log(`[live] claude CLI ${version}; writer=${provider.modelFor("writer")} review=${provider.modelFor("review")}`);
+  console.log(`[live] claude CLI ${version}; writer=${provider.modelFor("writer")} review=${provider.modelFor("review")} gate=${provider.modelFor("gate")}`);
   const t0 = Date.now();
   const result = await runGeneration({ provider, log: (l) => console.log(`[live] ${l}`) });
   const seconds = Math.round((Date.now() - t0) / 1000);
@@ -60,7 +60,7 @@ async function main() {
     kept += c.sentences.length;
     verified += ok;
     console.log(
-      `[live] ${m.name}: label ${c.label.term} v${c.label.version} (${c.label.effective_date}); drafted ${c.stats.generated}, kept ${c.stats.kept}, removed ${c.removed.length}, repaired ${c.stats.recovered_by_repair}, review ${c.review.status} (${c.review.changed} reworded, ${c.review.reverted} reverted); quotes verbatim ${ok}/${c.sentences.length}`,
+      `[live] ${m.name}: label ${c.label.term} v${c.label.version} (${c.label.effective_date}); drafted ${c.stats.generated}, kept ${c.stats.kept}, removed ${c.removed.length}, repaired ${c.stats.recovered_by_repair}, review ${c.review.status} (${c.review.changed} reworded, ${c.review.reverted} reverted); meaning gate ${c.gate ? `${c.gate.status} (${c.gate.first.supported}/${c.gate.checked} supported as written, ${c.gate.repaired} rewritten, ${c.gate.removed.partial + c.gate.removed.unsupported + c.gate.removed.unchecked} removed)` : "none"}; quotes verbatim ${ok}/${c.sentences.length}`,
     );
   }
   const view = interactionsView();

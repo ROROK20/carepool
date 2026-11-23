@@ -385,6 +385,27 @@ async function main() {
     md.push(`| Matcher ${r.version}${r.version === "v1" ? " (baseline)" : ""} | ${r.tp} | ${r.fp} | ${r.fn} | ${r.tn} | **${pct(r.tp, r.tp + r.fp)}** (${r.tp}/${r.tp + r.fp}) | **${pct(r.tp, r.tp + r.fn)}** (${r.tp}/${r.tp + r.fn}) |`);
   }
   md.push("");
+  // v2 lists keep the v1 seed pairs (no `kind`) and add new ones (with `kind`). Only the new ones are held out:
+  // matcher v2 was designed knowing the v1 list's two errors.
+  const heldOut = truth.pairs.map((p, i) => (p.kind ? i : -1)).filter((i) => i >= 0);
+  const seedIdx = truth.pairs.map((p, i) => (p.kind ? -1 : i)).filter((i) => i >= 0);
+  if (heldOut.length > 0 && seedIdx.length > 0) {
+    const sub = (r: typeof v1, idx: number[]) => {
+      const c = (o: string) => idx.filter((i) => r.scored[i].outcome === o).length;
+      return { tp: c("TP"), fp: c("FP"), fn: c("FN"), tn: c("TN") };
+    };
+    md.push(`Split: the **${heldOut.length} held-out pairs** (new in this list; the matcher's author never saw them before v2 was frozen) versus the **${seedIdx.length} seed pairs** from the v1 list (not held out: v2 was designed knowing v1's errors on them).`);
+    md.push("");
+    md.push("| Pairs | Matcher | TP | FP | FN | TN | Precision | Recall | Right |");
+    md.push("|---|---|---:|---:|---:|---:|---:|---:|---:|");
+    for (const [label, idx] of [[`Held out (${heldOut.length})`, heldOut], [`Seed, not held out (${seedIdx.length})`, seedIdx]] as const) {
+      for (const r of [v1, v2]) {
+        const x = sub(r, idx);
+        md.push(`| ${label} | ${r.version} | ${x.tp} | ${x.fp} | ${x.fn} | ${x.tn} | ${pct(x.tp, x.tp + x.fp)} | ${pct(x.tp, x.tp + x.fn)} | ${x.tp + x.tn}/${idx.length} |`);
+      }
+    }
+    md.push("");
+  }
   const kinds = [...new Set(truth.pairs.map((p) => p.kind).filter((k): k is string => Boolean(k)))];
   if (kinds.length > 0) {
     md.push("By how the label states it (the truth file's `kind`):");
